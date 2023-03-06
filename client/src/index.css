@@ -10,6 +10,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    background: #eee;
+}
+
 .flex-container {
     display: flex;
     align-items: center;
@@ -17,7 +21,6 @@
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: #eee;
 }
 
 .auth {
@@ -75,6 +78,43 @@
     color: var(--accent-color);
 }
 
-.auth .error-message {
+.error-message,
+.logout {
     color: #df4242;
+}
+
+.dashboard {
+    padding: 20px 20px 20px 300px;
+}
+
+.site-list,
+.plant-list {
+    display: flex;
+}
+
+.site-card,
+.plant-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+    margin: 20px;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    width: 250px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.logout {
+    cursor: pointer;
 }

@@ -33,8 +33,6 @@ export function login(req, res) {
     // check if user exists
     const q = "SELECT * FROM user WHERE username = ?";
 
-    console.log(req.body.username);
-
     db.query(q, [req.body.username], (err, data) => {
         if (err) return res.json(err);
         if (data.length === 0) return res.status(404).json("User not found!");
@@ -52,7 +50,7 @@ export function login(req, res) {
         const token = jwt.sign(
             { id: data[0].user_id },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: "10s" }
         );
         const { password, ...other } = data[0];
 
