@@ -5,12 +5,15 @@ import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import SiteCard from "../components/SiteCard";
 import PlantCard from "../components/PlantCard";
+import PlantDetails from "../components/PlantDetails";
+import Modal from "../components/Modal";
 
 function Dashboard() {
     const { currentUser, logout } = useContext(AuthContext);
     const [userSites, setUserSites] = useState([]);
     const [currentSite, setCurrentSite] = useState(null);
     const [currentSitePlants, setCurrentSitePlants] = useState([]);
+    const [currentPlant, setCurrentPlant] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,6 +47,12 @@ function Dashboard() {
         setCurrentSite(event.currentTarget.id);
     }
 
+    function selectPlant(event) {
+        currentPlant
+            ? setCurrentPlant(null)
+            : setCurrentPlant(event.currentTarget.id);
+    }
+
     const siteList = userSites.map((site) => (
         <SiteCard
             key={site.site_id}
@@ -59,6 +68,7 @@ function Dashboard() {
             key={plant.plant_id}
             plantId={plant.plant_id}
             name={plant.primary_name}
+            handleClick={selectPlant}
         />
     ));
 
@@ -88,6 +98,16 @@ function Dashboard() {
                 )}
 
                 <div className="plant-list">{plants}</div>
+
+                {currentPlant && (
+                    <Modal handleClick={selectPlant}>
+                        <PlantDetails
+                            plant={currentSitePlants.find(
+                                (plant) => plant.plant_id == currentPlant
+                            )}
+                        />
+                    </Modal>
+                )}
             </div>
         </div>
     );
