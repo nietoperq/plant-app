@@ -9,7 +9,7 @@ import PlantDetails from "../components/PlantDetails";
 import Modal from "../components/Modal";
 
 function Dashboard() {
-    const { currentUser, logout } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
     const [userSites, setUserSites] = useState([]);
     const [currentSite, setCurrentSite] = useState(null);
     const [currentSitePlants, setCurrentSitePlants] = useState([]);
@@ -68,6 +68,7 @@ function Dashboard() {
             key={plant.plant_id}
             plantId={plant.plant_id}
             name={plant.primary_name}
+            icon={plant.icon}
             handleClick={selectPlant}
         />
     ));

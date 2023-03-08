@@ -1,4 +1,29 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Environment, OrbitControls } from "@react-three/drei";
+
+import { PlantGLTF } from "./PlantGLTF";
+
+export function Model(props) {
+    const ref = useRef();
+
+    const size = props.size;
+
+    useFrame((state, delta) => (ref.current.rotation.y += 0.2 * delta));
+
+    return (
+        <group
+            ref={ref}
+            {...props}
+            dispose={null}
+            position={props.pos}
+            scale={[size, size, size]}
+        >
+            {props.children}
+            <OrbitControls />
+        </group>
+    );
+}
 
 function PlantDetails(props) {
     console.log(props);
@@ -30,7 +55,14 @@ function PlantDetails(props) {
     } = props.plant;
     return (
         <div className="plant-details">
-            <h1>🪴</h1>
+            <div style={{ width: "100%", height: "350px" }}>
+                <Canvas camera={{ position: [5, 1, 0] }}>
+                    <Model size={0.2} pos={[0, -3, 0]}>
+                        <PlantGLTF filename={icon} />
+                    </Model>
+                    <Environment preset="dawn" />
+                </Canvas>
+            </div>
             <h1>{primary_name}</h1>
             <p>{description}</p>
             <p>Prefered light level: {prefered_light_level}</p>
