@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import axios from "axios";
 
+import { StyledContainer } from "../components/styles/Container.styled";
+import { StyledAuth } from "../components/styles/Auth.styled";
+
 function Register() {
     const [inputs, setInputs] = useState({
         username: "",
@@ -38,8 +41,8 @@ function Register() {
     }
 
     return (
-        <div className="flex-container">
-            <div className="auth">
+        <StyledContainer>
+            <StyledAuth>
                 <h1>Register</h1>
                 <form>
                     <input
@@ -72,8 +75,8 @@ function Register() {
                         </Link>
                     </span>
                 </form>
-            </div>
-        </div>
+            </StyledAuth>
+        </StyledContainer>
     );
 }
 

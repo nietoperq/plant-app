@@ -8,6 +8,11 @@ import PlantCard from "../components/PlantCard";
 import PlantDetails from "../components/PlantDetails";
 import Modal from "../components/Modal";
 
+import {
+    StyledDashboard,
+    DashboardSection,
+} from "../components/styles/Dashboard.styled";
+
 function Dashboard() {
     const { currentUser } = useContext(AuthContext);
     const [userSites, setUserSites] = useState([]);
@@ -74,13 +79,14 @@ function Dashboard() {
     ));
 
     return (
-        <div className="dashboard">
+        <StyledDashboard>
             <Sidebar />
             <div className="dashboard-content">
                 <h1>Hello {currentUser.username}</h1>
                 <h1>Your sites: </h1>
+
                 {userSites.length > 0 ? (
-                    <div className="site-list">{siteList}</div>
+                    <DashboardSection>{siteList}</DashboardSection>
                 ) : (
                     <h2>You haven't created any site yet</h2>
                 )}
@@ -98,7 +104,7 @@ function Dashboard() {
                     <h2>This site is empty</h2>
                 )}
 
-                <div className="plant-list">{plants}</div>
+                <DashboardSection>{plants}</DashboardSection>
 
                 {currentPlant && (
                     <Modal handleClick={selectPlant}>
@@ -110,7 +116,7 @@ function Dashboard() {
                     </Modal>
                 )}
             </div>
-        </div>
+        </StyledDashboard>
     );
 }
 

@@ -2,6 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 
+import { StyledContainer } from "../components/styles/Container.styled";
+import { StyledAuth } from "../components/styles/Auth.styled";
+
 function Login() {
     const [inputs, setInputs] = useState({
         username: "",
@@ -36,8 +39,8 @@ function Login() {
     }
 
     return (
-        <div className="flex-container">
-            <div className="auth">
+        <StyledContainer>
+            <StyledAuth>
                 <h1>Login</h1>
                 <form>
                     <input
@@ -63,8 +66,8 @@ function Login() {
                         </Link>
                     </span>
                 </form>
-            </div>
-        </div>
+            </StyledAuth>
+        </StyledContainer>
     );
 }
 

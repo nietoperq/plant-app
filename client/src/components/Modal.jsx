@@ -1,12 +1,13 @@
 import React from "react";
+import { StyledModal, Overlay } from "./styles/Modal.styled";
 
 function Modal(props) {
     return (
-        <div className="overlay" onClick={props.handleClick}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <Overlay onClick={props.handleClick}>
+            <StyledModal onClick={(e) => e.stopPropagation()}>
                 {props.children}
-            </div>
-        </div>
+            </StyledModal>
+        </Overlay>
     );
 }
 

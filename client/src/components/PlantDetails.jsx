@@ -55,7 +55,7 @@ function PlantDetails(props) {
     } = props.plant;
     return (
         <div className="plant-details">
-            <div style={{ width: "100%", height: "350px" }}>
+            <div style={{ width: "100%", height: "0px" }}>
                 <Canvas camera={{ position: [5, 1, 0] }}>
                     <Model size={0.2} pos={[0, -3, 0]}>
                         <PlantGLTF filename={icon} />

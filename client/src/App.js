@@ -1,13 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import PrivateRoutes from "./utils/PrivateRoutes";
+import GlobalStyles from "./components/styles/Global";
+import { ThemeProvider } from "styled-components";
+
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import PrivateRoutes from "./utils/PrivateRoutes";
+
+const theme = {
+    colors: {
+        green: "#415c4e",
+        body: "#eeeeee",
+    },
+};
 
 function App() {
     return (
-        <div>
+        <ThemeProvider theme={theme}>
+            <GlobalStyles />
             <Router>
                 <Routes>
                     <Route element={<PrivateRoutes />} path="/dashboard">
@@ -18,7 +30,7 @@ function App() {
                     <Route element={<Register />} path="/register" />
                 </Routes>
             </Router>
-        </div>
+        </ThemeProvider>
     );
 }
 

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { StyledSiteCard } from "./styles/SiteCard.styled";
+
 function SiteCard(props) {
     const { siteId, name, icon, handleClick } = props;
 
@@ -19,10 +21,10 @@ function SiteCard(props) {
     const emoji = genIcon(icon);
 
     return (
-        <div className="site-card" id={siteId} onClick={handleClick}>
+        <StyledSiteCard id={siteId} onClick={handleClick}>
             <h1>{emoji}</h1>
             <h1>{name}</h1>
-        </div>
+        </StyledSiteCard>
     );
 }
 

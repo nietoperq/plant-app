@@ -4,6 +4,8 @@ import { Environment } from "@react-three/drei";
 
 import { PlantGLTF } from "./PlantGLTF";
 
+import { StyledPlantCard } from "./styles/PlantCard.styled";
+
 export function Model(props) {
     const [hovered, hover] = useState(false);
     const ref = useRef();
@@ -31,7 +33,7 @@ function PlantCard(props) {
     const { plantId, name, icon, handleClick } = props;
 
     return (
-        <div className="plant-card" id={plantId} onClick={handleClick}>
+        <StyledPlantCard id={plantId} onClick={handleClick}>
             <div style={{ width: "300px", height: "300px" }}>
                 <Canvas camera={{ position: [5, 2, 0] }}>
                     <Model size={0.2} pos={[0, -2, 0]}>
@@ -41,7 +43,7 @@ function PlantCard(props) {
                 </Canvas>
             </div>
             <p>{name}</p>
-        </div>
+        </StyledPlantCard>
     );
 }
 
