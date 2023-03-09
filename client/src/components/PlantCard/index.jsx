@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 
-import { PlantGLTF } from "./PlantGLTF";
+import PlantGLTF from "../PlantGLTF";
 
-import { StyledPlantCard } from "./styles/PlantCard.styled";
+import * as Styled from "./styles";
 
 export function Model(props) {
     const [hovered, hover] = useState(false);
@@ -33,7 +33,7 @@ function PlantCard(props) {
     const { plantId, name, icon, handleClick } = props;
 
     return (
-        <StyledPlantCard id={plantId} onClick={handleClick}>
+        <Styled.PlantCard id={plantId} onClick={handleClick}>
             <div style={{ width: "300px", height: "300px" }}>
                 <Canvas camera={{ position: [5, 2, 0] }}>
                     <Model size={0.2} pos={[0, -2, 0]}>
@@ -43,7 +43,7 @@ function PlantCard(props) {
                 </Canvas>
             </div>
             <p>{name}</p>
-        </StyledPlantCard>
+        </Styled.PlantCard>
     );
 }
 

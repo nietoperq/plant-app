@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledPlantCard = styled.div`
+export const SiteCard = styled.div`
     background: #fff;
     border-radius: 20px;
     padding: 20px;

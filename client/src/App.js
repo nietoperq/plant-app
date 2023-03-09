@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import PrivateRoutes from "./utils/PrivateRoutes";
-import GlobalStyles from "./components/styles/Global";
+import GlobalStyles from "./components/_shared/Global";
 import { ThemeProvider } from "styled-components";
 
 import Dashboard from "./pages/Dashboard";

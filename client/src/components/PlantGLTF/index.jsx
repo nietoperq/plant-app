@@ -1,7 +1,7 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 
-export function PlantGLTF(props) {
+function PlantGLTF(props) {
     const { filename } = props;
     const { nodes, materials } = useGLTF(`./models/${filename}.glb`);
 
@@ -28,3 +28,5 @@ export function PlantGLTF(props) {
         </group>
     );
 }
+
+export default PlantGLTF;

@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 
-import { StyledContainer } from "../components/styles/Container.styled";
-import { StyledAuth } from "../components/styles/Auth.styled";
+import Auth from "../components/Auth";
 
 function Login() {
     const [inputs, setInputs] = useState({
@@ -39,35 +38,33 @@ function Login() {
     }
 
     return (
-        <StyledContainer>
-            <StyledAuth>
-                <h1>Login</h1>
-                <form>
-                    <input
-                        required
-                        type="text"
-                        placeholder="username"
-                        name="username"
-                        onChange={handleChange}
-                    />
-                    <input
-                        required
-                        type="password"
-                        placeholder="password"
-                        name="password"
-                        onChange={handleChange}
-                    />
-                    <button onClick={handleSubmit}>Login</button>
-                    {error && <p className="error-message">{error}</p>}
-                    <span>
-                        Don't have an account?{" "}
-                        <Link className="link" to="/register">
-                            Register
-                        </Link>
-                    </span>
-                </form>
-            </StyledAuth>
-        </StyledContainer>
+        <Auth>
+            <h1>Login</h1>
+            <form>
+                <input
+                    required
+                    type="text"
+                    placeholder="username"
+                    name="username"
+                    onChange={handleChange}
+                />
+                <input
+                    required
+                    type="password"
+                    placeholder="password"
+                    name="password"
+                    onChange={handleChange}
+                />
+                <button onClick={handleSubmit}>Login</button>
+                {error && <p className="error-message">{error}</p>}
+                <span>
+                    Don't have an account?{" "}
+                    <Link className="link" to="/register">
+                        Register
+                    </Link>
+                </span>
+            </form>
+        </Auth>
     );
 }
 

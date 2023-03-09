@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 
-import { PlantGLTF } from "./PlantGLTF";
+import PlantGLTF from "../PlantGLTF";
 
-export function Model(props) {
+function Model(props) {
     const ref = useRef();
 
     const size = props.size;
@@ -55,7 +55,7 @@ function PlantDetails(props) {
     } = props.plant;
     return (
         <div className="plant-details">
-            <div style={{ width: "100%", height: "0px" }}>
+            <div style={{ width: "100%", height: "300px" }}>
                 <Canvas camera={{ position: [5, 1, 0] }}>
                     <Model size={0.2} pos={[0, -3, 0]}>
                         <PlantGLTF filename={icon} />

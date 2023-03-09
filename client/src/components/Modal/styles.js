@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledModal = styled.div`
+export const Modal = styled.div`
     width: 600px;
     max-height: 80vh;
     overflow: auto;

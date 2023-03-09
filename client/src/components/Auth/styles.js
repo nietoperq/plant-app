@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledAuth = styled.div`
+export const Auth = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,4 +53,13 @@ export const StyledAuth = styled.div`
     .link {
         color: ${({ theme }) => theme.colors.green};
     }
+`;
+
+export const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
 `;

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../context/authContext";
-import { StyledSidebar } from "./styles/Sidebar.styled";
+import { AuthContext } from "../../context/authContext";
+import * as Styled from "./styles";
 
 function Sidebar() {
     const { currentUser, logout } = useContext(AuthContext);
     return (
-        <StyledSidebar>
+        <Styled.Sidebar>
             <h1>👻</h1>
             <h2>{currentUser.username}</h2>
             <div className="sidebar-user-lvl">LVL: {currentUser.lvl}</div>
@@ -14,7 +14,7 @@ function Sidebar() {
             <span className="logout" onClick={logout}>
                 Logout
             </span>
-        </StyledSidebar>
+        </Styled.Sidebar>
     );
 }
 
