@@ -20,7 +20,7 @@ export const Auth = styled.div`
 
     h1 {
         font-size: 2rem;
-        color: ${({ theme }) => theme.colors.green};
+        color: ${({ theme }) => theme.colors.primary};
     }
 
     form input {
@@ -38,7 +38,7 @@ export const Auth = styled.div`
     button {
         border: none;
         color: #fff;
-        background: ${({ theme }) => theme.colors.green};
+        background: ${({ theme }) => theme.colors.primary};
         border-radius: 50px;
         padding: 10px;
         width: 50%;
@@ -51,7 +51,7 @@ export const Auth = styled.div`
     }
 
     .link {
-        color: ${({ theme }) => theme.colors.green};
+        color: ${({ theme }) => theme.colors.primary};
     }
 `;
 

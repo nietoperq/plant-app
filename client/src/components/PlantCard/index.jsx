@@ -4,6 +4,8 @@ import { Environment } from "@react-three/drei";
 
 import PlantGLTF from "../PlantGLTF";
 
+import { TbMoodSmileBeam } from "react-icons/tb";
+
 import * as Styled from "./styles";
 
 export function Model(props) {
@@ -34,15 +36,18 @@ function PlantCard(props) {
 
     return (
         <Styled.PlantCard id={plantId} onClick={handleClick}>
-            <div style={{ width: "300px", height: "300px" }}>
-                <Canvas camera={{ position: [5, 2, 0] }}>
-                    <Model size={0.2} pos={[0, -2, 0]}>
+            <Styled.PlantModel>
+                <Canvas camera={{ position: [7, 1, 0] }}>
+                    <Model size={0.3} pos={[0, -4, 0]}>
                         <PlantGLTF filename={icon} />
                     </Model>
                     <Environment preset="dawn" />
                 </Canvas>
-            </div>
-            <p>{name}</p>
+            </Styled.PlantModel>
+            <Styled.PlantInfo>
+                <p>{name}</p>
+                <TbMoodSmileBeam />
+            </Styled.PlantInfo>
         </Styled.PlantCard>
     );
 }

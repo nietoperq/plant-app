@@ -4,6 +4,17 @@ import { Environment, OrbitControls } from "@react-three/drei";
 
 import PlantGLTF from "../PlantGLTF";
 
+import {
+    IoSnowOutline,
+    IoWaterOutline,
+    IoSunnyOutline,
+    IoSkullOutline,
+} from "react-icons/io5";
+import { RiHazeLine } from "react-icons/ri";
+import { TbGrain } from "react-icons/tb";
+
+import * as Styled from "./styles";
+
 function Model(props) {
     const ref = useRef();
 
@@ -54,33 +65,80 @@ function PlantDetails(props) {
         watering_frequency_winter,
     } = props.plant;
     return (
-        <div className="plant-details">
-            <div style={{ width: "100%", height: "300px" }}>
+        <Styled.PlantDetails>
+            <h1>{primary_name}</h1>
+            <Styled.PlantModel>
                 <Canvas camera={{ position: [5, 1, 0] }}>
                     <Model size={0.2} pos={[0, -3, 0]}>
                         <PlantGLTF filename={icon} />
                     </Model>
                     <Environment preset="dawn" />
                 </Canvas>
-            </div>
-            <h1>{primary_name}</h1>
+            </Styled.PlantModel>
             <p>{description}</p>
-            <p>Prefered light level: {prefered_light_level}</p>
-            <p>Prefered Humidity: {prefered_humidity}</p>
-            <p>Is toxic: {is_toxic}</p>
-            <p>Outdoor winter: {outdoor_winter}</p>
-            <p>
-                Temp winter: {min_temp_winter}°C - {max_temp_winter}°C
-            </p>
-            <p>Outdoor summer: {outdoor_summer}</p>
-            <p>
-                Temp summer: {min_temp_summer}°C - {max_temp_summer}°C
-            </p>
-            <p>Fertilized {fertilizing_counter} times</p>
-            <p>Last fertilized: {last_fertilized} </p>
-            <p>Watered {watering_counter} times</p>
-            <p>Last watered: {last_watered} </p>
-        </div>
+
+            <Styled.Grid>
+                <Styled.Cell style={{ gridArea: "l" }}>
+                    <h2>Light</h2>
+                    <IoSunnyOutline />
+                    {prefered_light_level}
+                </Styled.Cell>
+
+                <Styled.Cell style={{ gridArea: "h" }}>
+                    <h2>Humidity</h2>
+                    <IoWaterOutline />
+                    {prefered_humidity}
+                </Styled.Cell>
+
+                <Styled.Cell style={{ gridArea: "m" }}>
+                    <h2>Misting</h2>
+                    <TbGrain />
+                    {likes_misting}
+                </Styled.Cell>
+
+                <Styled.Cell style={{ gridArea: "t" }}>
+                    <h2>Toxic</h2>
+                    <IoSkullOutline />
+                    {is_toxic}
+                </Styled.Cell>
+
+                <Styled.Cell style={{ gridArea: "w" }}>
+                    <h2>Water</h2>
+                    <p>
+                        <RiHazeLine /> Every {watering_frequency_summer}th day
+                        in summer
+                    </p>
+                    <p>
+                        <IoSnowOutline /> Every {watering_frequency_winter}th
+                        day in winter
+                    </p>
+                </Styled.Cell>
+
+                <Styled.Cell style={{ gridArea: "f" }}>
+                    <h2>Fertilizing</h2>
+                    <p>
+                        <RiHazeLine /> Every {fertilizing_frequency_summer}th
+                        day in summer
+                    </p>
+                    <p>
+                        <IoSnowOutline /> Every {fertilizing_frequency_winter}th
+                        day in winter
+                    </p>
+                </Styled.Cell>
+
+                <Styled.Cell style={{ gridArea: "i" }}>
+                    <h2>Ideal temperature</h2>
+                    <p>
+                        <RiHazeLine /> {min_temp_summer}°C - {max_temp_summer}°C
+                        Outdoor: {outdoor_summer}
+                    </p>
+                    <p>
+                        <IoSnowOutline /> {min_temp_winter}°C -{" "}
+                        {max_temp_winter}°C Outdoor: {outdoor_winter}
+                    </p>
+                </Styled.Cell>
+            </Styled.Grid>
+        </Styled.PlantDetails>
     );
 }
 

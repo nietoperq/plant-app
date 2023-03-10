@@ -8,6 +8,8 @@ import PlantCard from "../components/PlantCard";
 import PlantDetails from "../components/PlantDetails";
 import Modal from "../components/Modal";
 
+import { BsFillPlusCircleFill } from "react-icons/bs";
+
 import * as Styled from "../components/_shared/Dashboard";
 
 function Dashboard() {
@@ -79,31 +81,34 @@ function Dashboard() {
         <Styled.Dashboard>
             <Sidebar />
             <div className="dashboard-content">
-                <h1>Hello {currentUser.username}</h1>
-                <h1>Your sites: </h1>
+                <Styled.DashboardSection>
+                    <h2>Your sites: </h2>
+                    {userSites.length > 0 ? (
+                        <Styled.DashboardSectionElements>
+                            {siteList}
+                        </Styled.DashboardSectionElements>
+                    ) : (
+                        <h2>You haven't created any site yet</h2>
+                    )}
+                </Styled.DashboardSection>
 
-                {userSites.length > 0 ? (
+                {currentSite && (
                     <Styled.DashboardSection>
-                        {siteList}
+                        {userSites.length > 0 && (
+                            <h2>
+                                Your plants in {}
+                                <span>{userSites[currentSite - 1]?.name}</span>:
+                            </h2>
+                        )}
+                        <Styled.DashboardSectionElements>
+                            {plants}
+                        </Styled.DashboardSectionElements>
+
+                        {currentSite && currentSitePlants.length === 0 && (
+                            <h2>This site is empty</h2>
+                        )}
                     </Styled.DashboardSection>
-                ) : (
-                    <h2>You haven't created any site yet</h2>
                 )}
-                {userSites.length > 0 && currentSite && (
-                    <h1>
-                        Your plants in{" "}
-                        <span style={{ color: "OliveDrab" }}>
-                            {userSites[currentSite - 1]?.name}
-                        </span>
-                        :
-                    </h1>
-                )}
-
-                {currentSite && currentSitePlants.length === 0 && (
-                    <h2>This site is empty</h2>
-                )}
-
-                <Styled.DashboardSection>{plants}</Styled.DashboardSection>
 
                 {currentPlant && (
                     <Modal handleClick={selectPlant}>

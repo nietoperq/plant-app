@@ -11,7 +11,8 @@ import Register from "./pages/Register";
 
 const theme = {
     colors: {
-        green: "#415c4e",
+        primary: "#b0998f",
+        grey: "#777",
         body: "#eeeeee",
     },
 };

@@ -1,5 +1,14 @@
 import React from "react";
 
+import {
+    MdBalcony,
+    MdOutlineBed,
+    MdOutlineKingBed,
+    MdOutlineKitchen,
+    MdWorkOutline,
+    MdOutlineHome,
+} from "react-icons/md";
+
 import * as Styled from "./styles";
 
 function SiteCard(props) {
@@ -8,13 +17,17 @@ function SiteCard(props) {
     function genIcon(icon) {
         switch (icon) {
             case "bedroom":
-                return "🛏️";
+                return <MdOutlineBed />;
             case "balcony":
-                return "🪟";
+                return <MdBalcony />;
             case "livingroom":
-                return "🛋️";
+                return <MdOutlineKingBed />;
+            case "kitchen":
+                return <MdOutlineKitchen />;
+            case "office":
+                return <MdWorkOutline />;
             default:
-                return "🏡";
+                return <MdOutlineHome />;
         }
     }
 
@@ -22,8 +35,8 @@ function SiteCard(props) {
 
     return (
         <Styled.SiteCard id={siteId} onClick={handleClick}>
-            <h1>{emoji}</h1>
-            <h1>{name}</h1>
+            <Styled.SiteIcon>{emoji}</Styled.SiteIcon>
+            <h3>{name}</h3>
         </Styled.SiteCard>
     );
 }
