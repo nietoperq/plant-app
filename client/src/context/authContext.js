@@ -18,6 +18,15 @@ function AuthContextProvider({ children }) {
         setCurrentUser(null);
     }
 
+    async function refreshAuthContext() {
+        if (currentUser) {
+            const res = await axios.get(
+                `/auth/userdata/${currentUser.user_id}`
+            );
+            setCurrentUser(res.data);
+        }
+    }
+
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
     }, [currentUser]);
@@ -25,7 +34,9 @@ function AuthContextProvider({ children }) {
     //TODO: remove user data from localStorage after jwt expires
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout }}>
+        <AuthContext.Provider
+            value={{ currentUser, login, logout, refreshAuthContext }}
+        >
             {children}
         </AuthContext.Provider>
     );

@@ -227,3 +227,64 @@ INSERT INTO `plantapp`.`plant` ( `primary_name`, `description`, `prefered_humidi
 INSERT INTO `plantapp`.`plant` (`primary_name`, `description`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ('Snake Plant', 'The Snake Plant, also known as Sansevieria or Mother-in-laws tongue, is a hardy, drought-tolerant plant with long, pointed leaves that grow upright. It is a popular houseplant because of its ease of care and ability to purify the air.', '2', '2', '56', '84', '14', '28', '1', '0', '10', '27', '10', '32', '0', '1');
 
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `water_plant`(IN sId INT)
+BEGIN
+DECLARE days_since_last_watered INT DEFAULT (SELECT DATEDIFF(CURDATE(), (SELECT last_watered FROM site_has_plant WHERE site_has_plant_id = sId)));
+DECLARE season varchar(10) DEFAULT (SELECT CASE WHEN MONTH(CURDATE()) IN (10,11,12,1,2,3) THEN 'Winter'
+       ELSE 'Summer' END) ;
+DECLARE frequency INT DEFAULT (SELECT IF( STRCMP(season,'Winter') = 0, (SELECT watering_frequency_winter FROM site_has_plant s JOIN plant p ON s.plant_id = p.plant_id WHERE site_has_plant_id = sID), (SELECT watering_frequency_summer FROM site_has_plant s JOIN plant p ON s.plant_id = p.plant_id WHERE site_has_plant_id = sID)));
+DECLARE points INT DEFAULT (SELECT IF (days_since_last_watered > frequency, frequency, days_since_last_watered));
+DECLARE increment INT DEFAULT (SELECT IF( days_since_last_watered > 0, 1, 0));
+UPDATE plantapp.site_has_plant 
+SET 
+    last_watered = CURDATE(),
+    watering_counter = watering_counter + increment
+WHERE
+    site_has_plant_id = sId;
+UPDATE user 
+SET 
+    xp = xp + (points * 10),
+    currency = currency + (points * 10)
+WHERE
+    user_id = (SELECT 
+            user_id
+        FROM
+            plantapp.site_has_plant p
+                JOIN
+            plantapp.site s ON s.site_id = p.site_id
+        WHERE
+            site_has_plant_id = sId);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fertilize_plant`(IN sId INT)
+BEGIN
+DECLARE days_since_last_fertilized INT DEFAULT (SELECT DATEDIFF(CURDATE(), (SELECT last_fertilized FROM site_has_plant WHERE site_has_plant_id = sId)));
+DECLARE season varchar(10) DEFAULT (SELECT CASE WHEN MONTH(CURDATE()) IN (10,11,12,1,2,3) THEN 'Winter'
+       ELSE 'Summer' END) ;
+DECLARE frequency INT DEFAULT (SELECT IF( STRCMP(season,'Winter') = 0, (SELECT fertilizing_frequency_winter FROM site_has_plant s JOIN plant p ON s.plant_id = p.plant_id WHERE site_has_plant_id = sID), (SELECT fertilizing_frequency_summer FROM site_has_plant s JOIN plant p ON s.plant_id = p.plant_id WHERE site_has_plant_id = sID)));
+DECLARE points INT DEFAULT (SELECT IF (days_since_last_fertilized > frequency, frequency, days_since_last_fertilized));
+DECLARE increment INT DEFAULT (SELECT IF( days_since_last_fertilized > 0, 1, 0));
+UPDATE plantapp.site_has_plant 
+SET 
+    last_fertilized = CURDATE(),
+    fertilizing_counter = watering_counter + increment
+WHERE
+    site_has_plant_id = sId;
+UPDATE user 
+SET 
+    xp = xp + (points * 10),
+    currency = currency + (points * 10)
+WHERE
+    user_id = (SELECT 
+            user_id
+        FROM
+            plantapp.site_has_plant p
+                JOIN
+            plantapp.site s ON s.site_id = p.site_id
+        WHERE
+            site_has_plant_id = sId);
+END$$
+DELIMITER ;

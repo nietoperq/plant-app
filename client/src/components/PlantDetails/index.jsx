@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
+import axios from "axios";
 
 import PlantGLTF from "../PlantGLTF";
 
@@ -37,8 +39,8 @@ function Model(props) {
 }
 
 function PlantDetails(props) {
-    console.log(props);
     const {
+        site_has_plant_id,
         date_added,
         description,
         fertilizing_counter,
@@ -64,6 +66,29 @@ function PlantDetails(props) {
         watering_frequency_summer,
         watering_frequency_winter,
     } = props.plant;
+
+    const { refreshAuthContext } = useContext(AuthContext);
+
+    async function waterPlant(e) {
+        e.preventDefault();
+        try {
+            await axios.get(`/plants/water/${site_has_plant_id}`);
+        } catch (err) {
+            console.log(err);
+        }
+        refreshAuthContext();
+    }
+
+    async function fertilizePlant(e) {
+        e.preventDefault();
+        try {
+            await axios.get(`/plants/fertilize/${site_has_plant_id}`);
+        } catch (err) {
+            console.log(err);
+        }
+        refreshAuthContext();
+    }
+
     return (
         <Styled.PlantDetails>
             <h1>{primary_name}</h1>
@@ -75,8 +100,13 @@ function PlantDetails(props) {
                     <Environment preset="dawn" />
                 </Canvas>
             </Styled.PlantModel>
+            <div>
+                <Styled.Button onClick={waterPlant}>Water Plant</Styled.Button>
+                <Styled.Button onClick={fertilizePlant}>
+                    Fertilize Plant
+                </Styled.Button>
+            </div>
             <p>{description}</p>
-
             <Styled.Grid>
                 <Styled.Cell style={{ gridArea: "l" }}>
                     <h2>Light</h2>

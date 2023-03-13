@@ -29,6 +29,17 @@ export const PlantModel = styled.div`
     // outline: 1px solid grey;
 `;
 
+export const Button = styled.span`
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: ${({ theme }) => theme.colors.primary};
+    font-weight: 500;
+    background: #b0998f22;
+`;
+
 export const Grid = styled.div`
     width: 100%;
     display: grid;

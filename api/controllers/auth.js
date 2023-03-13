@@ -70,3 +70,26 @@ export function logout(req, res) {
         .status(200)
         .json("User has been logged out.");
 }
+
+export function userdata(req, res) {
+    const q = "SELECT * FROM user WHERE user_id = ?";
+
+    db.query(q, [req.params.id], (err, data) => {
+        if (err) return res.json(err);
+        if (data.length === 0) return res.status(404).json("User not found!");
+
+        const { password, ...other } = data[0];
+
+        const token = jwt.sign(
+            { id: data[0].user_id, ...other },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: "10s" }
+        );
+
+        res.cookie("access_token", token, {
+            httpOnly: true,
+        })
+            .status(200)
+            .json(other);
+    });
+}
