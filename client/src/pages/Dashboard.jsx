@@ -57,6 +57,15 @@ function Dashboard() {
             : setCurrentPlant(event.currentTarget.id);
     }
 
+    async function refreshPlantsData() {
+        try {
+            const res = await axios.get(`/plants/siteplants/${currentSite}`);
+            setCurrentSitePlants(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     const siteList = userSites.map((site) => (
         <SiteCard
             key={site.site_id}
@@ -113,6 +122,7 @@ function Dashboard() {
                 {currentPlant && (
                     <Modal handleClick={selectPlant}>
                         <PlantDetails
+                            refreshPlantsData={refreshPlantsData}
                             plant={currentSitePlants.find(
                                 (plant) => plant.plant_id == currentPlant
                             )}

@@ -5,6 +5,7 @@ const db = mysql.createConnection({
     user: "root",
     password: "",
     database: "plantapp",
+    dateStrings: "date",
 });
 
 export default db;
