@@ -4,6 +4,8 @@ import {
     getPlantsInSite,
     waterPlant,
     fertilizePlant,
+    addingSite,
+    deleteSite,
 } from "../controllers/plants.js";
 
 const router = express.Router();
@@ -12,5 +14,7 @@ router.get("/usersites/:userId", getUserSites);
 router.get("/siteplants/:siteId", getPlantsInSite);
 router.get("/water/:siteHasPlantId", waterPlant);
 router.get("/fertilize/:siteHasPlantId", fertilizePlant);
+router.post("/addsite", addingSite);
+router.delete("/deletesite/:siteId", deleteSite);
 
 export default router;

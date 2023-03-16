@@ -6,9 +6,10 @@ import Sidebar from "../components/Sidebar";
 import SiteCard from "../components/SiteCard";
 import PlantCard from "../components/PlantCard";
 import PlantDetails from "../components/PlantDetails";
+import AddSite from "../components/AddSite";
 import Modal from "../components/Modal";
 
-import { BsFillPlusCircleFill } from "react-icons/bs";
+import { HiOutlineTrash } from "react-icons/hi";
 
 import * as Styled from "../components/_shared/Dashboard";
 
@@ -18,6 +19,8 @@ function Dashboard() {
     const [currentSite, setCurrentSite] = useState(null);
     const [currentSitePlants, setCurrentSitePlants] = useState([]);
     const [currentPlant, setCurrentPlant] = useState(null);
+    const [addingSite, setAddingSite] = useState(false);
+    const [deletingSite, setDeletingSite] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,6 +69,28 @@ function Dashboard() {
         }
     }
 
+    async function refreshSitesData() {
+        try {
+            const res = await axios.get(
+                `/plants/usersites/${currentUser.user_id}`
+            );
+            setUserSites(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async function deleteSite() {
+        try {
+            await axios.delete(`/plants/deletesite/${currentSite}`);
+        } catch (err) {
+            console.log(err);
+        }
+        refreshSitesData();
+        setCurrentSite(null);
+        setDeletingSite(false);
+    }
+
     const siteList = userSites.map((site) => (
         <SiteCard
             key={site.site_id}
@@ -99,15 +124,37 @@ function Dashboard() {
                     ) : (
                         <h2>You haven't created any site yet</h2>
                     )}
+                    <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setAddingSite((prev) => !prev)}
+                    >
+                        Add new site...
+                    </span>
                 </Styled.DashboardSection>
 
                 {currentSite && (
                     <Styled.DashboardSection>
                         {userSites.length > 0 && (
-                            <h2>
-                                Your plants in {}
-                                <span>{userSites[currentSite - 1]?.name}</span>:
-                            </h2>
+                            <>
+                                <h2>
+                                    Your plants in {}
+                                    <span>
+                                        {
+                                            userSites.find(
+                                                (site) =>
+                                                    site.site_id == currentSite
+                                            )?.name
+                                        }
+                                    </span>
+                                    :
+                                </h2>
+                                <span
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => setDeletingSite(true)}
+                                >
+                                    Delete site
+                                </span>
+                            </>
                         )}
                         <Styled.DashboardSectionElements>
                             {plants}
@@ -127,6 +174,30 @@ function Dashboard() {
                                 (plant) => plant.plant_id == currentPlant
                             )}
                         />
+                    </Modal>
+                )}
+
+                {addingSite && (
+                    <Modal handleClick={() => setAddingSite((prev) => !prev)}>
+                        <AddSite
+                            refreshSitesData={refreshSitesData}
+                            closeModal={() => setAddingSite(false)}
+                        />
+                    </Modal>
+                )}
+
+                {deletingSite && (
+                    <Modal handleClick={() => setDeletingSite(false)}>
+                        <Styled.DeleteConfirmation>
+                            <HiOutlineTrash />
+                            Are you sure you want to delete this site?
+                            <div>
+                                <span onClick={deleteSite}>Yes</span>
+                                <span onClick={() => setDeletingSite(false)}>
+                                    Cancel
+                                </span>
+                            </div>
+                        </Styled.DeleteConfirmation>
                     </Modal>
                 )}
             </div>
