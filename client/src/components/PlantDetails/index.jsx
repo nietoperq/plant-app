@@ -5,6 +5,7 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import axios from "axios";
 
 import PlantGLTF from "../PlantGLTF";
+import Modal from "../Modal";
 
 import {
     IoSnowOutline,
@@ -69,10 +70,12 @@ function PlantDetails(props) {
         watering_frequency_winter,
     } = props.plant;
 
+    const { closeModal, refreshPlantsData } = props;
+
     const { refreshAuthContext } = useContext(AuthContext);
 
     const date_w = new Date(last_watered);
-    const date_f = new Date(last_watered);
+    const date_f = new Date(last_fertilized);
     const present_date = new Date();
     present_date.setHours(0, 0, 0, 0);
 
@@ -94,7 +97,7 @@ function PlantDetails(props) {
             console.log(err);
         }
         refreshAuthContext();
-        props.refreshPlantsData();
+        refreshPlantsData();
     }
 
     async function fertilizePlant(e) {
@@ -105,7 +108,11 @@ function PlantDetails(props) {
             console.log(err);
         }
         refreshAuthContext();
-        props.refreshPlantsData();
+        refreshPlantsData();
+    }
+
+    function deletePlant() {
+        props.delete();
     }
 
     function changeSection(event) {
@@ -128,6 +135,9 @@ function PlantDetails(props) {
                 <Styled.Button onClick={waterPlant}>Water Plant</Styled.Button>
                 <Styled.Button onClick={fertilizePlant}>
                     Fertilize Plant
+                </Styled.Button>
+                <Styled.Button onClick={deletePlant}>
+                    Delete Plant
                 </Styled.Button>
             </div>
             <div>

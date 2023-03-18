@@ -1,5 +1,14 @@
 import db from "../db.js";
 
+export function getAllPlants(req, res) {
+    const q = "SELECT * FROM plant";
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.status(200).json(data);
+    });
+}
+
 export function getUserSites(req, res) {
     // if (req.user.id == req.params.userId) {
     const q = "SELECT * FROM site WHERE user_id = ?";
@@ -68,5 +77,32 @@ export function deleteSite(req, res) {
     db.query(q, [req.params.siteId], (err, data) => {
         if (err) return res.json(err);
         return res.status(200).json("Site has been deleted");
+    });
+}
+
+export function addPlantToSite(req, res) {
+    const q =
+        "INSERT INTO site_has_plant (site_id, plant_id, date_added, last_watered, last_fertilized, note) VALUES (?)";
+    const values = [
+        req.body.site_id,
+        req.body.plant_id,
+        req.body.date_added,
+        req.body.last_watered,
+        req.body.last_fertilized,
+        req.body.note,
+    ];
+
+    db.query(q, [values], (err, data) => {
+        if (err) return res.json(err);
+        return res.status(200).json("Plant has been added");
+    });
+}
+
+export function deletePlantFromSite(req, res) {
+    const q = "DELETE FROM site_has_plant WHERE site_has_plant_id = ?";
+
+    db.query(q, [req.params.siteHasPlantId], (err, data) => {
+        if (err) return res.json(err);
+        return res.status(200).json("Plant has been deleted");
     });
 }

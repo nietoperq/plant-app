@@ -11,7 +11,6 @@ import * as Styled from "./styles";
 export function Model(props) {
     const [hovered, hover] = useState(false);
     const ref = useRef();
-    console.log("hovered: " + hovered);
 
     const size = (hovered ? 1.1 : 1) * props.size;
 
@@ -32,10 +31,10 @@ export function Model(props) {
 }
 
 function PlantCard(props) {
-    const { plantId, name, icon, handleClick } = props;
+    const { siteHasPlantId, name, icon, handleClick } = props;
 
     return (
-        <Styled.PlantCard id={plantId} onClick={handleClick}>
+        <Styled.PlantCard id={siteHasPlantId} onClick={handleClick}>
             <Styled.PlantModel>
                 <Canvas camera={{ position: [7, 1, 0] }}>
                     <Model size={0.3} pos={[0, -4, 0]}>

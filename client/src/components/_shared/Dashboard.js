@@ -12,6 +12,8 @@ export const DashboardSection = styled.div`
 
     span {
         color: ${({ theme }) => theme.colors.primary};
+        cursor: pointer;
+        margin-right: 10px;
     }
 `;
 

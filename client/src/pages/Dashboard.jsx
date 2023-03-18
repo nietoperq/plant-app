@@ -7,6 +7,7 @@ import SiteCard from "../components/SiteCard";
 import PlantCard from "../components/PlantCard";
 import PlantDetails from "../components/PlantDetails";
 import AddSite from "../components/AddSite";
+import AddPlant from "../components/AddPlant";
 import Modal from "../components/Modal";
 
 import { HiOutlineTrash } from "react-icons/hi";
@@ -21,6 +22,8 @@ function Dashboard() {
     const [currentPlant, setCurrentPlant] = useState(null);
     const [addingSite, setAddingSite] = useState(false);
     const [deletingSite, setDeletingSite] = useState(false);
+    const [addingPlant, setAddingPlant] = useState(false);
+    const [deletingPlant, setDeletingPlant] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,6 +58,8 @@ function Dashboard() {
     }
 
     function selectPlant(event) {
+        console.log("event:");
+        console.log(event.currentTarget);
         currentPlant
             ? setCurrentPlant(null)
             : setCurrentPlant(event.currentTarget.id);
@@ -91,6 +96,19 @@ function Dashboard() {
         setDeletingSite(false);
     }
 
+    async function deletePlant() {
+        console.log("deleting");
+        console.log(currentPlant);
+        try {
+            await axios.delete(`/plants/deleteplantfromsite/${currentPlant}`);
+            setCurrentPlant(null);
+            setDeletingPlant(false);
+            refreshPlantsData();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     const siteList = userSites.map((site) => (
         <SiteCard
             key={site.site_id}
@@ -101,10 +119,12 @@ function Dashboard() {
         />
     ));
 
+    console.log(currentSitePlants);
+
     const plants = currentSitePlants.map((plant) => (
         <PlantCard
-            key={plant.plant_id}
-            plantId={plant.plant_id}
+            key={plant.site_has_plant_id}
+            siteHasPlantId={plant.site_has_plant_id}
             name={plant.primary_name}
             icon={plant.icon}
             handleClick={selectPlant}
@@ -148,11 +168,11 @@ function Dashboard() {
                                     </span>
                                     :
                                 </h2>
-                                <span
-                                    style={{ cursor: "pointer" }}
-                                    onClick={() => setDeletingSite(true)}
-                                >
+                                <span onClick={() => setDeletingSite(true)}>
                                     Delete site
+                                </span>
+                                <span onClick={() => setAddingPlant(true)}>
+                                    Add new plant
                                 </span>
                             </>
                         )}
@@ -171,8 +191,11 @@ function Dashboard() {
                         <PlantDetails
                             refreshPlantsData={refreshPlantsData}
                             plant={currentSitePlants.find(
-                                (plant) => plant.plant_id == currentPlant
+                                (plant) =>
+                                    plant.site_has_plant_id == currentPlant
                             )}
+                            closeModal={() => setCurrentPlant(null)}
+                            delete={() => setDeletingPlant(true)}
                         />
                     </Modal>
                 )}
@@ -194,6 +217,31 @@ function Dashboard() {
                             <div>
                                 <span onClick={deleteSite}>Yes</span>
                                 <span onClick={() => setDeletingSite(false)}>
+                                    Cancel
+                                </span>
+                            </div>
+                        </Styled.DeleteConfirmation>
+                    </Modal>
+                )}
+
+                {addingPlant && (
+                    <Modal handleClick={() => setAddingPlant(false)}>
+                        <AddPlant
+                            siteId={currentSite}
+                            refreshPlantsData={refreshPlantsData}
+                            closeModal={() => setAddingPlant(false)}
+                        />
+                    </Modal>
+                )}
+
+                {deletingPlant && (
+                    <Modal handleClick={() => setDeletingPlant(false)}>
+                        <Styled.DeleteConfirmation>
+                            <HiOutlineTrash />
+                            Are you sure you want to delete this plant?
+                            <div>
+                                <span onClick={deletePlant}>Yes</span>
+                                <span onClick={() => setDeletingPlant(false)}>
                                     Cancel
                                 </span>
                             </div>
