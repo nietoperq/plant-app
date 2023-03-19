@@ -270,7 +270,7 @@ DECLARE increment INT DEFAULT (SELECT IF( days_since_last_fertilized > 0, 1, 0))
 UPDATE plantapp.site_has_plant 
 SET 
     last_fertilized = CURDATE(),
-    fertilizing_counter = watering_counter + increment
+    fertilizing_counter = fertilizing_counter + increment
 WHERE
     site_has_plant_id = sId;
 UPDATE user 
