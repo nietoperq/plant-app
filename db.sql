@@ -215,16 +215,19 @@ CREATE INDEX `fk_site_has_plant_flowerpot1_idx` ON `plantapp`.`site_has_plant` (
 
 
 INSERT INTO `plantapp`.`plant` ( `primary_name`, `description`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ( 'Aloe Vera', 'A succulent plant with fleshy, green leaves that can grow up to 2 feet tall. The gel inside the leaves is commonly used for medicinal purposes and skincare.', '1', '2', '28', '56', '14', '28', '1', '0', '10', '21', '16', '29', '0', '1');
-
 INSERT INTO `plantapp`.`plant` ( `primary_name`, `description`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ( 'Echeveria', 'A succulent plant with rosettes of fleshy, colorful leaves that can range in size from a few inches to over a foot in diameter.', '1', '2', '28', '56', '14', '28', '1', '0', '10', '21', '16', '29', '0', '0');
-
 INSERT INTO `plantapp`.`plant` ( `primary_name`, `description`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ('Cactus', 'A type of succulent plant with a distinct, prickly appearance and various shapes and sizes.', '1', '3', '28', '84', '14', '28', '1', '0', '10', '21', '16', '32', '0', '0');
-
 INSERT INTO `plantapp`.`plant` ( `primary_name`, `description`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ('Monstera', 'Monstera is a popular houseplant that is native to the tropical rainforests of Central and South America. It has large, glossy, heart-shaped leaves that are deeply lobed and can grow up to several feet long. Monstera plants are commonly grown for their attractive foliage and easy-to-care-for nature', '3', '2', '14', '28', '7', '14', '1', '0', '12', '29', '16', '32', '1', '1');
-
 INSERT INTO `plantapp`.`plant` ( `primary_name`, `description`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ('Sweetheart plant', 'The Sweetheart plant, also known as the Hoya kerrii, is a small, slow-growing tropical succulent native to Southeast Asia. It is commonly grown as a houseplant for its heart-shaped leaves that have a glossy, waxy appearance and a distinctive green color.', '2', '2', '28', '56', '7', '21', '1', '0', '16', '27', '16', '29', '1', '0');
-
 INSERT INTO `plantapp`.`plant` (`primary_name`, `description`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ('Snake Plant', 'The Snake Plant, also known as Sansevieria or Mother-in-laws tongue, is a hardy, drought-tolerant plant with long, pointed leaves that grow upright. It is a popular houseplant because of its ease of care and ability to purify the air.', '2', '2', '56', '84', '14', '28', '1', '0', '10', '27', '10', '32', '0', '1');
+
+
+INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Waterbender I', 'Water your first plant.');
+INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Waterbender II', 'Water plants 5 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Waterbender III', 'Water plants 25 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Earthbender I', 'Fertilize your first plant.');
+INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Earthbender II', 'Fertilize plants 5 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Earthbender III', 'Fertilize plant 25 times.');
 
 
 DELIMITER $$
@@ -286,5 +289,15 @@ WHERE
             plantapp.site s ON s.site_id = p.site_id
         WHERE
             site_has_plant_id = sId);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_achievements`(userID INT)
+BEGIN
+SELECT a.achievement_id AS achievement_id, a.name, a.description, uha.unlocked_on
+FROM achievement a
+LEFT JOIN user_has_achievement uha ON a.achievement_id = uha.achievement_id AND uha.user_id = userID
+ORDER BY a.achievement_id;
 END$$
 DELIMITER ;

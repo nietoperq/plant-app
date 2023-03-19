@@ -7,25 +7,128 @@ function AuthContextProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(
         JSON.parse(localStorage.getItem("user")) || null
     );
+    const [userAchievements, setUserAchievements] = useState([]);
 
     async function login(inputs) {
         const res = await axios.post("/auth/login", inputs);
         setCurrentUser(res.data);
+        checkAchievements();
     }
 
     async function logout() {
         await axios.post("/auth/logout");
         setCurrentUser(null);
+        setUserAchievements(null);
     }
 
+    console.log(userAchievements);
+
     async function refreshAuthContext() {
+        checkAchievements();
+
         if (currentUser) {
-            const res = await axios.get(
+            const user = await axios.get(
                 `/auth/userdata/${currentUser.user_id}`
             );
-            setCurrentUser(res.data);
+            setCurrentUser(user.data);
+            const achievements = await axios.get(
+                `/user/getachievements/${currentUser.user_id}`
+            );
+            setUserAchievements(achievements.data);
         }
     }
+
+    async function checkAchievements() {
+        let usersPlants = [];
+
+        try {
+            const res = await axios.get(
+                `/user/getallplants/${currentUser.user_id}`
+            );
+            usersPlants = res.data;
+        } catch (err) {
+            console.log(err);
+        }
+
+        // check for water plants achievements
+
+        const totalWateringCounter = usersPlants.reduce(
+            (acc, obj) => acc + obj.watering_counter,
+            0
+        );
+
+        if (totalWateringCounter >= 1) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Waterbender I"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalWateringCounter >= 5) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Waterbender II"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalWateringCounter >= 25) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Waterbender III"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+
+        // check for fertilize plant achievements
+
+        const totalFertilizingCounter = usersPlants.reduce(
+            (acc, obj) => acc + obj.fertilizing_counter,
+            0
+        );
+
+        if (totalFertilizingCounter >= 1) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Earthbender I"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalFertilizingCounter >= 5) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Earthbender II"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalFertilizingCounter >= 25) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Earthbender III"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+    }
+
+    async function earnAchievement(achievement_id) {
+        // check if achievement was already unlocked
+        const unlocked_on = userAchievements.find(
+            (achievement) => achievement.achievement_id === achievement_id
+        ).unlocked_on;
+
+        if (!unlocked_on) {
+            await axios.post("/user/earnAchievement", {
+                user_id: currentUser.user_id,
+                achievement_id,
+            });
+        }
+    }
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(
+                    `/user/getachievements/${currentUser.user_id}`
+                );
+                setUserAchievements(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchData();
+    }, [currentUser]);
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
@@ -35,7 +138,13 @@ function AuthContextProvider({ children }) {
 
     return (
         <AuthContext.Provider
-            value={{ currentUser, login, logout, refreshAuthContext }}
+            value={{
+                currentUser,
+                userAchievements,
+                login,
+                logout,
+                refreshAuthContext,
+            }}
         >
             {children}
         </AuthContext.Provider>

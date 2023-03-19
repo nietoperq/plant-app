@@ -58,8 +58,6 @@ function Dashboard() {
     }
 
     function selectPlant(event) {
-        console.log("event:");
-        console.log(event.currentTarget);
         currentPlant
             ? setCurrentPlant(null)
             : setCurrentPlant(event.currentTarget.id);
@@ -97,8 +95,6 @@ function Dashboard() {
     }
 
     async function deletePlant() {
-        console.log("deleting");
-        console.log(currentPlant);
         try {
             await axios.delete(`/plants/deleteplantfromsite/${currentPlant}`);
             setCurrentPlant(null);
@@ -118,8 +114,6 @@ function Dashboard() {
             handleClick={selectSite}
         />
     ));
-
-    console.log(currentSitePlants);
 
     const plants = currentSitePlants.map((plant) => (
         <PlantCard
