@@ -4,10 +4,14 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import GlobalStyles from "./components/_shared/Global";
 import { ThemeProvider } from "styled-components";
 
-import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import Achievements from "./pages/Achievements";
+import Store from "./pages/Store";
+import Settings from "./pages/Settings";
 
 const theme = {
     colors: {
@@ -23,8 +27,15 @@ function App() {
             <GlobalStyles />
             <Router>
                 <Routes>
-                    <Route element={<PrivateRoutes />} path="/dashboard">
+                    <Route element={<PrivateRoutes />} path="/">
                         <Route element={<Dashboard />} path="/dashboard" />
+                        <Route element={<Profile />} path="/profile" />
+                        <Route
+                            element={<Achievements />}
+                            path="/achievements"
+                        />
+                        <Route element={<Store />} path="/store" />
+                        <Route element={<Settings />} path="/settings" />
                     </Route>
                     <Route element={<Home />} path="/" exact />
                     <Route element={<Login />} path="/login" />

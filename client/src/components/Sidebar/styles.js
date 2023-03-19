@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Sidebar = styled.div`
     position: fixed;
@@ -13,7 +14,7 @@ export const Sidebar = styled.div`
     padding: 20px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-    & div:last-child {
+    & a:last-child {
         margin-top: auto;
     }
 `;
@@ -43,7 +44,9 @@ export const User = styled.div`
     }
 `;
 
-export const SidebarLink = styled.div`
+export const SidebarLink = styled(Link)`
+    color: #000;
+    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 10px;

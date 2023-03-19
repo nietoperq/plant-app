@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { RiLeafFill } from "react-icons/ri";
 
@@ -39,23 +40,23 @@ function Sidebar() {
                 </div>
             </Styled.User>
 
-            <Styled.SidebarLink>
+            <Styled.SidebarLink to="/dashboard">
                 <BiHomeHeart />
                 Dashboard
             </Styled.SidebarLink>
-            <Styled.SidebarLink>
+            <Styled.SidebarLink to="/profile">
                 <BiUser />
                 Profile
             </Styled.SidebarLink>
-            <Styled.SidebarLink>
+            <Styled.SidebarLink to="/achievements">
                 <BiTrophy />
                 Achievements
             </Styled.SidebarLink>
-            <Styled.SidebarLink>
+            <Styled.SidebarLink to="/store">
                 <BiStore />
                 Store
             </Styled.SidebarLink>
-            <Styled.SidebarLink>
+            <Styled.SidebarLink to="/settings">
                 <BiSliderAlt />
                 Settings
             </Styled.SidebarLink>
