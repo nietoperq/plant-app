@@ -1,18 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 
-import Sidebar from "../components/Sidebar";
-import SiteCard from "../components/SiteCard";
-import PlantCard from "../components/PlantCard";
-import PlantDetails from "../components/PlantDetails";
-import AddSite from "../components/AddSite";
-import AddPlant from "../components/AddPlant";
-import Modal from "../components/Modal";
+import Sidebar from "../../components/Sidebar";
+import SiteCard from "../../components/SiteCard";
+import PlantCard from "../../components/PlantCard";
+import PlantDetails from "../../components/PlantDetails";
+import AddSite from "../../components/AddSite";
+import AddPlant from "../../components/AddPlant";
+import Modal from "../../components/Modal";
 
 import { HiOutlineTrash } from "react-icons/hi";
 
-import * as Styled from "../components/_shared/Dashboard";
+import * as Pages from "../../shared_styles/Pages";
+import * as Styled from "./styles";
 
 function Dashboard() {
     const { currentUser } = useContext(AuthContext);
@@ -126,7 +127,7 @@ function Dashboard() {
     ));
 
     return (
-        <Styled.Dashboard>
+        <Pages.Container>
             <Sidebar />
             <div className="dashboard-content">
                 <Styled.DashboardSection>
@@ -243,7 +244,7 @@ function Dashboard() {
                     </Modal>
                 )}
             </div>
-        </Styled.Dashboard>
+        </Pages.Container>
     );
 }
 

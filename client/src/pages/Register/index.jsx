@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../../context/authContext";
+import axios from "axios";
 
-import Auth from "../components/Auth";
+import Auth from "../../components/Auth";
 
-function Login() {
+function Register() {
     const [inputs, setInputs] = useState({
         username: "",
+        email: "",
         password: "",
     });
 
@@ -14,7 +16,7 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const { currentUser, login } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
 
     useEffect(() => {
         if (currentUser) navigate("/dashboard");
@@ -30,8 +32,8 @@ function Login() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await login(inputs);
-            navigate("/dashboard");
+            await axios.post("/auth/register", inputs);
+            navigate("/login");
         } catch (err) {
             setError(err.response.data);
         }
@@ -39,7 +41,7 @@ function Login() {
 
     return (
         <Auth>
-            <h1>Login</h1>
+            <h1>Register</h1>
             <form>
                 <input
                     required
@@ -50,17 +52,24 @@ function Login() {
                 />
                 <input
                     required
+                    type="email"
+                    placeholder="email"
+                    name="email"
+                    onChange={handleChange}
+                />
+                <input
+                    required
                     type="password"
                     placeholder="password"
                     name="password"
                     onChange={handleChange}
                 />
-                <button onClick={handleSubmit}>Login</button>
+                <button onClick={handleSubmit}>Register</button>
                 {error && <p className="error-message">{error}</p>}
                 <span>
-                    Don't have an account?{" "}
-                    <Link className="link" to="/register">
-                        Register
+                    Do you have an account?{" "}
+                    <Link className="link" to="/login">
+                        Login
                     </Link>
                 </span>
             </form>
@@ -68,4 +77,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;

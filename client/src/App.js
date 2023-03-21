@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import PrivateRoutes from "./utils/PrivateRoutes";
-import GlobalStyles from "./components/_shared/Global";
+import GlobalStyles from "./shared_styles/Global";
 import { ThemeProvider } from "styled-components";
 
 import Home from "./pages/Home";
@@ -27,7 +27,7 @@ function App() {
             <GlobalStyles />
             <Router>
                 <Routes>
-                    <Route element={<PrivateRoutes />} path="/">
+                    <Route element={<PrivateRoutes />}>
                         <Route element={<Dashboard />} path="/dashboard" />
                         <Route element={<Profile />} path="/profile" />
                         <Route

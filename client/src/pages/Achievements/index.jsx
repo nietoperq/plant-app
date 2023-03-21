@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../context/authContext";
-import Sidebar from "../components/Sidebar";
+import { AuthContext } from "../../context/authContext";
+import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+
+import * as Pages from "../../shared_styles/Pages";
 
 function Achievements() {
     const { userAchievements } = useContext(AuthContext);
@@ -19,11 +21,11 @@ function Achievements() {
     ));
 
     return (
-        <div>
+        <Pages.Container>
             <Sidebar />
             <div>Achievements</div>
             {achievementList}
-        </div>
+        </Pages.Container>
     );
 }
 
