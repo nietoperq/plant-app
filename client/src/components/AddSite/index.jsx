@@ -52,9 +52,9 @@ function AddSite(props) {
 
     return (
         <Styled.AddSite>
-            <h1>Add site</h1>
+            <h1>Add new site</h1>
             <form>
-                <p>Name</p>
+                <p>Name and description</p>
                 <input
                     required
                     type="text"
@@ -63,7 +63,6 @@ function AddSite(props) {
                     onChange={handleChange}
                 />
 
-                <p>Description</p>
                 <textarea
                     placeholder="description"
                     name="description"
@@ -71,154 +70,174 @@ function AddSite(props) {
                     onChange={handleChange}
                 />
 
-                <p>Icon</p>
+                <p>Choose icon</p>
                 <Styled.RadioGroup>
-                    <input
-                        type="radio"
-                        name="icon"
-                        value="bedroom"
-                        id="bedroom"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="bedroom">
-                        <MdOutlineBed />
-                    </label>
-
-                    <input
-                        type="radio"
-                        name="icon"
-                        value="balcony"
-                        id="balcony"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="balcony">
-                        <MdBalcony />
-                    </label>
-
-                    <input
-                        type="radio"
-                        name="icon"
-                        value="livingroom"
-                        id="livingroom"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="livingroom">
-                        <MdOutlineKingBed />
-                    </label>
-
-                    <input
-                        type="radio"
-                        name="icon"
-                        value="kitchen"
-                        id="kitchen"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="kitchen">
-                        <MdOutlineKitchen />
-                    </label>
-
-                    <input
-                        type="radio"
-                        name="icon"
-                        value="office"
-                        id="office"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="office">
-                        <MdWorkOutline />
-                    </label>
-
-                    <input
-                        type="radio"
-                        name="icon"
-                        value="home"
-                        id="home"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="home">
-                        <MdOutlineHome />
-                    </label>
+                    <Styled.IconRadio>
+                        <input
+                            type="radio"
+                            name="icon"
+                            value="bedroom"
+                            id="bedroom"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="bedroom">
+                            <MdOutlineBed />
+                        </label>
+                    </Styled.IconRadio>
+                    <Styled.IconRadio>
+                        <input
+                            type="radio"
+                            name="icon"
+                            value="balcony"
+                            id="balcony"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="balcony">
+                            <MdBalcony />
+                        </label>
+                    </Styled.IconRadio>
+                    <Styled.IconRadio>
+                        <input
+                            type="radio"
+                            name="icon"
+                            value="livingroom"
+                            id="livingroom"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="livingroom">
+                            <MdOutlineKingBed />
+                        </label>
+                    </Styled.IconRadio>
+                    <Styled.IconRadio>
+                        <input
+                            type="radio"
+                            name="icon"
+                            value="kitchen"
+                            id="kitchen"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="kitchen">
+                            <MdOutlineKitchen />
+                        </label>
+                    </Styled.IconRadio>
+                    <Styled.IconRadio>
+                        <input
+                            type="radio"
+                            name="icon"
+                            value="office"
+                            id="office"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="office">
+                            <MdWorkOutline />
+                        </label>
+                    </Styled.IconRadio>
+                    <Styled.IconRadio>
+                        <input
+                            type="radio"
+                            name="icon"
+                            value="home"
+                            id="home"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="home">
+                            <MdOutlineHome />
+                        </label>
+                    </Styled.IconRadio>
                 </Styled.RadioGroup>
 
-                <p>Is indoor</p>
+                <p>Where is your site?</p>
                 <Styled.RadioGroup>
-                    <input
-                        type="radio"
-                        name="is_indoor"
-                        value="1"
-                        id="is_indoor"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="is_indoor">Indoor</label>
-
-                    <input
-                        type="radio"
-                        name="is_indoor"
-                        value="0"
-                        id="is_indoor"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="is_indoor">Outdoor</label>
+                    <Styled.TextRadio>
+                        <input
+                            type="radio"
+                            name="is_indoor"
+                            value="1"
+                            id="indoor"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="indoor">Indoor</label>
+                    </Styled.TextRadio>
+                    <Styled.TextRadio>
+                        <input
+                            type="radio"
+                            name="is_indoor"
+                            value="0"
+                            id="outdoor"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="outdoor">Outdoor</label>
+                    </Styled.TextRadio>
                 </Styled.RadioGroup>
 
-                <p>Humidity level</p>
+                <p>What is the humidity level?</p>
                 <Styled.RadioGroup>
-                    <input
-                        type="radio"
-                        name="humidity_level"
-                        value="1"
-                        id="humidity_level"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="humidity_level">Low</label>
+                    <Styled.TextRadio>
+                        <input
+                            type="radio"
+                            name="humidity_level"
+                            value="1"
+                            id="humidity_low"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="humidity_low">Low</label>
+                    </Styled.TextRadio>
 
-                    <input
-                        type="radio"
-                        name="humidity_level"
-                        value="2"
-                        id="humidity_level"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="humidity_level">Medium</label>
-
-                    <input
-                        type="radio"
-                        name="humidity_level"
-                        value="3"
-                        id="humidity_level"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="humidity_level">High</label>
+                    <Styled.TextRadio>
+                        {" "}
+                        <input
+                            type="radio"
+                            name="humidity_level"
+                            value="2"
+                            id="humidity_medium"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="humidity_medium">Medium</label>
+                    </Styled.TextRadio>
+                    <Styled.TextRadio>
+                        <input
+                            type="radio"
+                            name="humidity_level"
+                            value="3"
+                            id="humidity_high"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="humidity_high">High</label>
+                    </Styled.TextRadio>
                 </Styled.RadioGroup>
 
-                <p>Light level</p>
+                <p>What is the light level?</p>
                 <Styled.RadioGroup>
-                    <input
-                        type="radio"
-                        name="light_level"
-                        value="1"
-                        id="light_level"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="light_level">Low</label>
-
-                    <input
-                        type="radio"
-                        name="light_level"
-                        value="2"
-                        id="light_level"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="light_level">Medium</label>
-
-                    <input
-                        type="radio"
-                        name="light_level"
-                        value="3"
-                        id="light_level"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="light_level">High</label>
+                    <Styled.TextRadio>
+                        <input
+                            type="radio"
+                            name="light_level"
+                            value="1"
+                            id="light_low"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="light_low">Low</label>
+                    </Styled.TextRadio>
+                    <Styled.TextRadio>
+                        <input
+                            type="radio"
+                            name="light_level"
+                            value="2"
+                            id="light_medium"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="light_medium">Medium</label>
+                    </Styled.TextRadio>
+                    <Styled.TextRadio>
+                        <input
+                            type="radio"
+                            name="light_level"
+                            value="3"
+                            id="light_high"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="light_high">High</label>
+                    </Styled.TextRadio>
                 </Styled.RadioGroup>
 
                 <button onClick={handleSubmit}>Add site</button>
