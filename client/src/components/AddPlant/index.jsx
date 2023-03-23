@@ -55,13 +55,14 @@ function AddPlant(props) {
         )
         .map((plant) => (
             <div>
-                <label htmlFor={plant.plant_id}> {plant.primary_name}</label>
                 <input
                     type="radio"
                     name="plant_id"
                     value={plant.plant_id}
+                    id={plant.plant_id}
                     onChange={handleChange}
                 />
+                <label htmlFor={plant.plant_id}> {plant.primary_name}</label>
             </div>
         ));
 
@@ -69,12 +70,13 @@ function AddPlant(props) {
         <Styled.AddPlant>
             <h1>Add plant</h1>
             <form>
+                <p>Choose plant</p>
                 <input
                     type="text"
                     placeholder="Search..."
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                {plantsList}
+                <Styled.SearchList>{plantsList}</Styled.SearchList>
                 <p>When did you last water the plant?</p>
                 <input
                     type="date"
