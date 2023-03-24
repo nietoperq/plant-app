@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 
 import PlantGLTF from "../PlantGLTF";
 
-import { TbMoodSmileBeam } from "react-icons/tb";
+import { TbHeart, TbDroplet, TbPaperBag } from "react-icons/tb";
 
 import * as Styled from "./styles";
 
@@ -31,10 +31,55 @@ export function Model(props) {
 }
 
 function PlantCard(props) {
-    const { siteHasPlantId, name, icon, handleClick } = props;
+    const {
+        site_has_plant_id,
+        primary_name,
+        icon,
+        last_watered,
+        last_fertilized,
+        watering_frequency_winter,
+        fertilizing_frequency_winter,
+    } = props.plant;
+
+    const { handleClick } = props;
+
+    const [status, setStatus] = useState("");
+
+    useEffect(() => {
+        const date_w = new Date(last_watered);
+        const date_f = new Date(last_fertilized);
+        const present_date = new Date();
+        present_date.setHours(0, 0, 0, 0);
+
+        const water_next =
+            Math.round(
+                (date_w.getTime() - present_date.getTime()) / (1000 * 3600 * 24)
+            ) + watering_frequency_winter;
+
+        const fertilize_next =
+            Math.round(
+                (date_f.getTime() - present_date.getTime()) / (1000 * 3600 * 24)
+            ) + fertilizing_frequency_winter;
+
+        if (water_next <= 0) {
+            setStatus(
+                <Styled.Icon color="#61B1D4">
+                    <TbDroplet />
+                </Styled.Icon>
+            );
+        } else if (fertilize_next <= 0) {
+            setStatus(
+                <Styled.Icon color="#C76B8D">
+                    <TbPaperBag />
+                </Styled.Icon>
+            );
+        } else {
+            setStatus("");
+        }
+    }, [props.plant]);
 
     return (
-        <Styled.PlantCard id={siteHasPlantId} onClick={handleClick}>
+        <Styled.PlantCard id={site_has_plant_id} onClick={handleClick}>
             <Styled.PlantModel>
                 <Canvas camera={{ position: [7, 1, 0] }}>
                     <Model size={0.3} pos={[0, -4, 0]}>
@@ -44,8 +89,9 @@ function PlantCard(props) {
                 </Canvas>
             </Styled.PlantModel>
             <Styled.PlantInfo>
-                <p>{name}</p>
-                <TbMoodSmileBeam />
+                <p>{primary_name}</p>
+
+                {status}
             </Styled.PlantInfo>
         </Styled.PlantCard>
     );

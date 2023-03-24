@@ -135,9 +135,7 @@ function Dashboard() {
     const plants = currentSitePlants.map((plant) => (
         <PlantCard
             key={plant.site_has_plant_id}
-            siteHasPlantId={plant.site_has_plant_id}
-            name={plant.primary_name}
-            icon={plant.icon}
+            plant={plant}
             handleClick={selectPlant}
         />
     ));

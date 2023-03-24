@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 export const PlantCard = styled.div`
     position: relative;
@@ -22,13 +22,21 @@ export const PlantModel = styled.div`
 `;
 
 export const PlantInfo = styled.div`
-    position: absolute;
     left: 0;
     bottom: 20px;
-
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: flex-end;
     width: 100%;
+    height: 100%;
 
     font-weight: 600;
+`;
+
+export const Icon = styled.div`
+    svg {
+        color: ${(props) => props.color || props.theme.colors.primary};
+        width: 20px;
+        height: 20px;
+    }
 `;
