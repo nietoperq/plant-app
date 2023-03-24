@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 
@@ -9,14 +10,17 @@ import PlantDetails from "../../components/PlantDetails";
 import AddSite from "../../components/AddSite";
 import AddPlant from "../../components/AddPlant";
 import Modal from "../../components/Modal";
+import Notification from "../../components/Notification";
 
 import { HiOutlineTrash } from "react-icons/hi";
+import { TbAward } from "react-icons/tb";
 
 import * as Pages from "../../shared_styles/Pages";
 import * as Styled from "./styles";
 
 function Dashboard() {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, userAchievements, newAchievement } =
+        useContext(AuthContext);
     const [userSites, setUserSites] = useState([]);
     const [currentSite, setCurrentSite] = useState(null);
     const [currentSitePlants, setCurrentSitePlants] = useState([]);
@@ -25,6 +29,7 @@ function Dashboard() {
     const [deletingSite, setDeletingSite] = useState(false);
     const [addingPlant, setAddingPlant] = useState(false);
     const [deletingPlant, setDeletingPlant] = useState(false);
+    const [achievementName, setAchievementName] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,6 +58,17 @@ function Dashboard() {
         };
         fetchData();
     }, [currentSite]);
+
+    useEffect(() => {
+        if (newAchievement) {
+            setAchievementName(
+                userAchievements?.find(
+                    (achievement) =>
+                        achievement.achievement_id == newAchievement
+                ).name
+            );
+        }
+    }, [newAchievement]);
 
     function selectSite(event) {
         setCurrentSite(event.currentTarget.id);
@@ -244,6 +260,18 @@ function Dashboard() {
                     </Modal>
                 )}
             </div>
+            <Notification show={newAchievement}>
+                <Styled.AchievementNotification>
+                    <TbAward />
+                    <div>
+                        <p>Achievement unlocked!</p>
+                        <p>
+                            <em>{achievementName}</em>
+                        </p>
+                        <Link to="/achievements">See all achievements</Link>
+                    </div>
+                </Styled.AchievementNotification>
+            </Notification>
         </Pages.Container>
     );
 }

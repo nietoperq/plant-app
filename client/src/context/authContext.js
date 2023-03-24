@@ -8,6 +8,7 @@ function AuthContextProvider({ children }) {
         JSON.parse(localStorage.getItem("user")) || null
     );
     const [userAchievements, setUserAchievements] = useState([]);
+    const [newAchievement, setNewAchievement] = useState(null);
 
     async function login(inputs) {
         const res = await axios.post("/auth/login", inputs);
@@ -22,6 +23,10 @@ function AuthContextProvider({ children }) {
     }
 
     console.log(userAchievements);
+
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
 
     async function refreshAuthContext() {
         checkAchievements();
@@ -110,12 +115,14 @@ function AuthContextProvider({ children }) {
         ).unlocked_on;
 
         if (!unlocked_on) {
+            setNewAchievement(achievement_id);
             await axios.post("/user/earnAchievement", {
                 user_id: currentUser.user_id,
                 achievement_id,
             });
         }
     }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -128,11 +135,16 @@ function AuthContextProvider({ children }) {
             }
         };
         fetchData();
+        localStorage.setItem("user", JSON.stringify(currentUser));
     }, [currentUser]);
 
     useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(currentUser));
-    }, [currentUser]);
+        if (newAchievement) {
+            sleep(5000).then(() => {
+                setNewAchievement(false);
+            });
+        }
+    }, [newAchievement]);
 
     //TODO: remove user data from localStorage after jwt expires
 
@@ -141,6 +153,7 @@ function AuthContextProvider({ children }) {
             value={{
                 currentUser,
                 userAchievements,
+                newAchievement,
                 login,
                 logout,
                 refreshAuthContext,
