@@ -1,11 +1,8 @@
 import React, { useRef, useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment, OrbitControls, Gltf } from "@react-three/drei";
 import axios from "axios";
-
-import PlantGLTF from "../PlantGLTF";
-import Modal from "../Modal";
 
 import {
     IoSnowOutline,
@@ -21,20 +18,11 @@ import * as Styled from "./styles";
 function Model(props) {
     const ref = useRef();
 
-    const size = props.size;
-
     useFrame((state, delta) => (ref.current.rotation.y += 0.2 * delta));
 
     return (
-        <group
-            ref={ref}
-            {...props}
-            dispose={null}
-            position={props.pos}
-            scale={[size, size, size]}
-        >
+        <group ref={ref} {...props} dispose={null}>
             {props.children}
-            <OrbitControls />
         </group>
     );
 }
@@ -70,9 +58,11 @@ function PlantDetails(props) {
         watering_frequency_winter,
     } = props.plant;
 
-    const { closeModal, refreshPlantsData } = props;
+    const { refreshPlantsData } = props;
 
     const { refreshAuthContext } = useContext(AuthContext);
+
+    const model = `./models/${icon}.glb`;
 
     const date_w = new Date(last_watered);
     const date_f = new Date(last_fertilized);
@@ -125,10 +115,11 @@ function PlantDetails(props) {
             <h1>{primary_name}</h1>
             <Styled.PlantModel>
                 <Canvas camera={{ position: [5, 1, 0] }}>
-                    <Model size={0.2} pos={[0, -3, 0]}>
-                        <PlantGLTF filename={icon} />
+                    <Model>
+                        <Gltf src={model} scale={0.2} position={[0, -3, 0]} />
                     </Model>
                     <Environment preset="dawn" />
+                    <OrbitControls />
                 </Canvas>
             </Styled.PlantModel>
             <div>

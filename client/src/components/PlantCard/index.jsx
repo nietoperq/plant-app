@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Environment, Gltf } from "@react-three/drei";
 
-import PlantGLTF from "../PlantGLTF";
-
-import { TbHeart, TbDroplet, TbPaperBag } from "react-icons/tb";
+import { TbDroplet, TbPaperBag } from "react-icons/tb";
 
 import * as Styled from "./styles";
 
@@ -45,6 +43,8 @@ function PlantCard(props) {
 
     const [status, setStatus] = useState("");
 
+    const model = `./models/${icon}.glb`;
+
     useEffect(() => {
         const date_w = new Date(last_watered);
         const date_f = new Date(last_fertilized);
@@ -83,7 +83,7 @@ function PlantCard(props) {
             <Styled.PlantModel>
                 <Canvas camera={{ position: [7, 1, 0] }}>
                     <Model size={0.3} pos={[0, -4, 0]}>
-                        <PlantGLTF filename={icon} />
+                        <Gltf src={model} />
                     </Model>
                     <Environment preset="dawn" />
                 </Canvas>
