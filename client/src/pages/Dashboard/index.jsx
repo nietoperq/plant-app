@@ -175,7 +175,6 @@ function Dashboard() {
                                             )?.name
                                         }
                                     </span>
-                                    :
                                 </h2>
                                 <span onClick={() => setDeletingSite(true)}>
                                     Delete site
