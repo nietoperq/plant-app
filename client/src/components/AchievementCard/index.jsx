@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Gltf } from "@react-three/drei";
+import { Environment, Gltf, Light } from "@react-three/drei";
 import * as Styled from "./styles";
 
 function AchievementCard(props) {
-    const { name, description, unlocked_on } = props.achievement;
+    const { name, description, icon, unlocked_on } = props.achievement;
+
+    const filename = unlocked_on ? icon : "locked";
+    const model = `./models/achievements/${filename}.glb`;
 
     const ref = useRef();
     return (
@@ -14,7 +17,7 @@ function AchievementCard(props) {
                     <mesh>
                         <Gltf
                             ref={ref}
-                            src="./models/achievements/preview.glb"
+                            src={model}
                             position={[-0.6, -0.8, 0]}
                         />
                     </mesh>

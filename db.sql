@@ -10,6 +10,7 @@ USE `plantapp` ;
 CREATE TABLE IF NOT EXISTS `plantapp`.`achievement` (
   `achievement_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
+  `icon` VARCHAR(50) NOT NULL,
   `description` VARCHAR(200) NULL,
   PRIMARY KEY (`achievement_id`))
 ;
@@ -222,12 +223,16 @@ INSERT INTO `plantapp`.`plant` (`primary_name`, `description`, `icon`, `prefered
 INSERT INTO `plantapp`.`plant` (`primary_name`, `description`, `icon`, `prefered_humidity`, `prefered_light_level`, `fertilizing_frequency_summer`, `fertilizing_frequency_winter`, `watering_frequency_summer`, `watering_frequency_winter`, `outdoor_summer`, `outdoor_winter`, `min_temp_winter`, `max_temp_winter`, `min_temp_summer`, `max_temp_summer`, `likes_misting`, `is_toxic`) VALUES ('Snake Plant', 'The Snake Plant, also known as Sansevieria or Mother-in-laws tongue, is a hardy, drought-tolerant plant with long, pointed leaves that grow upright. It is a popular houseplant because of its ease of care and ability to purify the air.', 'snake_plant', '2', '2', '56', '84', '14', '28', '1', '0', '10', '27', '10', '32', '0', '1');
 
 
-INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Waterbender I', 'Water your first plant.');
-INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Waterbender II', 'Water plants 5 times.');
-INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Waterbender III', 'Water plants 25 times.');
-INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Earthbender I', 'Fertilize your first plant.');
-INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Earthbender II', 'Fertilize plants 5 times.');
-INSERT INTO `plantapp`.`achievement` (`name`, `description`) VALUES ('Earthbender III', 'Fertilize plant 25 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Waterbender I', 'waterbender_1', 'Water your first plant.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Waterbender II', 'waterbender_2', 'Water plants 10 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Waterbender III', 'waterbender_3', 'Water plants 50 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Waterbender IV', 'waterbender_4', 'Water plants 100 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Waterbender V', 'waterbender_5', 'Water plants 500 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender I', 'earthbender_1', 'Fertilize your first plant.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender II', 'earthbender_2', 'Fertilize plants 5 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender III', 'earthbender_3', 'Fertilize plant 25 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender IV', 'earthbender_4', 'Fertilize plant 50 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender V', 'earthbender_5', 'Fertilize plant 100 times.');
 
 
 DELIMITER $$
@@ -295,9 +300,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_achievements`(userID INT)
 BEGIN
-SELECT a.achievement_id AS achievement_id, a.name, a.description, uha.unlocked_on
+SELECT a.achievement_id AS achievement_id, a.name, a.description, a.icon, uha.unlocked_on
 FROM achievement a
 LEFT JOIN user_has_achievement uha ON a.achievement_id = uha.achievement_id AND uha.user_id = userID
-ORDER BY a.achievement_id;
+ORDER BY uha.unlocked_on, a.name;
 END$$
 DELIMITER ;
