@@ -11,6 +11,7 @@ import AddSite from "../../components/AddSite";
 import AddPlant from "../../components/AddPlant";
 import Modal from "../../components/Modal";
 import Notification from "../../components/Notification";
+import Confetti from "react-confetti";
 
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbAward } from "react-icons/tb";
@@ -269,6 +270,13 @@ function Dashboard() {
                     </div>
                 </Styled.AchievementNotification>
             </Notification>
+            {newAchievement && (
+                <Confetti
+                    numberOfPieces={500}
+                    recycle={false}
+                    colors={["#FF8787", "#F8C4B4", "#E5EBB2", "#BCE29E"]}
+                />
+            )}
         </Pages.Container>
     );
 }
