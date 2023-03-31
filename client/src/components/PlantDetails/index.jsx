@@ -83,22 +83,22 @@ function PlantDetails(props) {
         e.preventDefault();
         try {
             await axios.get(`/plants/water/${site_has_plant_id}`);
+            refreshAuthContext();
+            refreshPlantsData();
         } catch (err) {
             console.log(err);
         }
-        refreshAuthContext();
-        refreshPlantsData();
     }
 
     async function fertilizePlant(e) {
         e.preventDefault();
         try {
             await axios.get(`/plants/fertilize/${site_has_plant_id}`);
+            refreshAuthContext();
+            refreshPlantsData();
         } catch (err) {
             console.log(err);
         }
-        refreshAuthContext();
-        refreshPlantsData();
     }
 
     function deletePlant() {

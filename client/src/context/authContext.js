@@ -13,16 +13,13 @@ function AuthContextProvider({ children }) {
     async function login(inputs) {
         const res = await axios.post("/auth/login", inputs);
         setCurrentUser(res.data);
-        checkAchievements();
     }
 
     async function logout() {
         await axios.post("/auth/logout");
         setCurrentUser(null);
-        setUserAchievements(null);
+        setUserAchievements([]);
     }
-
-    console.log(userAchievements);
 
     function sleep(time) {
         return new Promise((resolve) => setTimeout(resolve, time));
@@ -40,6 +37,25 @@ function AuthContextProvider({ children }) {
                 `/user/getachievements/${currentUser.user_id}`
             );
             setUserAchievements(achievements.data);
+        }
+    }
+
+    async function calculateLevel() {
+        const x = 0.07;
+        const y = 2;
+        const level = currentUser.xp
+            ? Math.floor(x * Math.pow(currentUser.xp, 1 / y))
+            : 0;
+
+        if (level > currentUser.lvl) {
+            await axios.put("/user/updatelevel", {
+                level,
+                user_id: currentUser.user_id,
+            });
+            const user = await axios.get(
+                `/auth/userdata/${currentUser.user_id}`
+            );
+            setCurrentUser(user.data);
         }
     }
 
@@ -125,13 +141,15 @@ function AuthContextProvider({ children }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const res = await axios.get(
-                    `/user/getachievements/${currentUser.user_id}`
-                );
-                setUserAchievements(res.data);
-            } catch (err) {
-                console.log(err);
+            if (currentUser) {
+                try {
+                    const res = await axios.get(
+                        `/user/getachievements/${currentUser.user_id}`
+                    );
+                    setUserAchievements(res.data);
+                } catch (err) {
+                    console.log(err);
+                }
             }
         };
         fetchData();
@@ -145,6 +163,12 @@ function AuthContextProvider({ children }) {
             });
         }
     }, [newAchievement]);
+
+    useEffect(() => {
+        if (currentUser) {
+            calculateLevel();
+        }
+    }, [currentUser]);
 
     //TODO: remove user data from localStorage after jwt expires
 

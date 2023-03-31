@@ -32,3 +32,14 @@ export function earnAchievement(req, res) {
         return res.status(200).json("Achievement has been added");
     });
 }
+
+export function updateLevel(req, res) {
+    const q = "UPDATE user SET lvl = ? WHERE user_id = ?";
+
+    const values = [req.body.level, req.body.user_id];
+
+    db.query(q, values, (err, data) => {
+        if (err) return res.json(err);
+        return res.status(200).json("Level updated");
+    });
+}
