@@ -142,122 +142,138 @@ function Dashboard() {
     ));
 
     return (
-        <Pages.Container>
-            <Sidebar />
-            <div className="dashboard-content">
-                <Styled.DashboardSection>
-                    <h2>Your sites: </h2>
-                    {userSites.length > 0 ? (
-                        <Styled.DashboardSectionElements>
-                            {siteList}
-                        </Styled.DashboardSectionElements>
-                    ) : (
-                        <h2>You haven't created any site yet</h2>
-                    )}
-                    <span
-                        style={{ cursor: "pointer" }}
-                        onClick={() => setAddingSite((prev) => !prev)}
-                    >
-                        Add new site...
-                    </span>
-                </Styled.DashboardSection>
-
-                {currentSite && (
-                    <Styled.DashboardSection>
-                        {userSites.length > 0 && (
-                            <>
-                                <h2>
-                                    Your plants in {}
-                                    <span>
-                                        {
-                                            userSites.find(
-                                                (site) =>
-                                                    site.site_id == currentSite
-                                            )?.name
-                                        }
-                                    </span>
-                                </h2>
-                                <span onClick={() => setDeletingSite(true)}>
-                                    Delete site
-                                </span>
-                                <span onClick={() => setAddingPlant(true)}>
-                                    Add new plant
-                                </span>
-                            </>
+        <>
+            <Pages.Container>
+                <Sidebar />
+                <div className="dashboard-content">
+                    <Pages.Section>
+                        <h2>Your sites </h2>
+                        {userSites.length > 0 ? (
+                            <Styled.DashboardSectionElements>
+                                {siteList}
+                            </Styled.DashboardSectionElements>
+                        ) : (
+                            <h3 style={{ padding: "20px 0" }}>
+                                You haven't created any site yet
+                            </h3>
                         )}
-                        <Styled.DashboardSectionElements>
-                            {plants}
-                        </Styled.DashboardSectionElements>
+                        <Styled.ClickableSpan
+                            onClick={() => setAddingSite((prev) => !prev)}
+                        >
+                            Add new site
+                        </Styled.ClickableSpan>
+                    </Pages.Section>
 
-                        {currentSite && currentSitePlants.length === 0 && (
-                            <h2>This site is empty</h2>
-                        )}
-                    </Styled.DashboardSection>
-                )}
-
-                {currentPlant && (
-                    <Modal handleClick={selectPlant}>
-                        <PlantDetails
-                            refreshPlantsData={refreshPlantsData}
-                            plant={currentSitePlants.find(
-                                (plant) =>
-                                    plant.site_has_plant_id == currentPlant
+                    {currentSite && (
+                        <Pages.Section>
+                            {userSites.length > 0 && (
+                                <>
+                                    <h2>
+                                        Your plants in {}
+                                        <span>
+                                            {
+                                                userSites.find(
+                                                    (site) =>
+                                                        site.site_id ==
+                                                        currentSite
+                                                )?.name
+                                            }
+                                        </span>
+                                    </h2>
+                                    <Styled.ClickableSpan
+                                        onClick={() => setDeletingSite(true)}
+                                    >
+                                        Delete site
+                                    </Styled.ClickableSpan>
+                                    <Styled.ClickableSpan
+                                        onClick={() => setAddingPlant(true)}
+                                    >
+                                        Add new plant
+                                    </Styled.ClickableSpan>
+                                </>
                             )}
-                            closeModal={() => setCurrentPlant(null)}
-                            delete={() => setDeletingPlant(true)}
-                        />
-                    </Modal>
-                )}
+                            <Styled.DashboardSectionElements>
+                                {plants}
+                            </Styled.DashboardSectionElements>
 
-                {addingSite && (
-                    <Modal handleClick={() => setAddingSite((prev) => !prev)}>
-                        <AddSite
-                            refreshSitesData={refreshSitesData}
-                            closeModal={() => setAddingSite(false)}
-                        />
-                    </Modal>
-                )}
+                            {currentSite && currentSitePlants.length === 0 && (
+                                <h3 style={{ padding: "20px 0 40px" }}>
+                                    This site is empty
+                                </h3>
+                            )}
+                        </Pages.Section>
+                    )}
 
-                {deletingSite && (
-                    <Modal handleClick={() => setDeletingSite(false)}>
-                        <Styled.DeleteConfirmation>
-                            <HiOutlineTrash />
-                            Are you sure you want to delete this site?
-                            <div>
-                                <span onClick={deleteSite}>Yes</span>
-                                <span onClick={() => setDeletingSite(false)}>
-                                    Cancel
-                                </span>
-                            </div>
-                        </Styled.DeleteConfirmation>
-                    </Modal>
-                )}
+                    {currentPlant && (
+                        <Modal handleClick={selectPlant}>
+                            <PlantDetails
+                                refreshPlantsData={refreshPlantsData}
+                                plant={currentSitePlants.find(
+                                    (plant) =>
+                                        plant.site_has_plant_id == currentPlant
+                                )}
+                                closeModal={() => setCurrentPlant(null)}
+                                delete={() => setDeletingPlant(true)}
+                            />
+                        </Modal>
+                    )}
 
-                {addingPlant && (
-                    <Modal handleClick={() => setAddingPlant(false)}>
-                        <AddPlant
-                            siteId={currentSite}
-                            refreshPlantsData={refreshPlantsData}
-                            closeModal={() => setAddingPlant(false)}
-                        />
-                    </Modal>
-                )}
+                    {addingSite && (
+                        <Modal
+                            handleClick={() => setAddingSite((prev) => !prev)}
+                        >
+                            <AddSite
+                                refreshSitesData={refreshSitesData}
+                                closeModal={() => setAddingSite(false)}
+                            />
+                        </Modal>
+                    )}
 
-                {deletingPlant && (
-                    <Modal handleClick={() => setDeletingPlant(false)}>
-                        <Styled.DeleteConfirmation>
-                            <HiOutlineTrash />
-                            Are you sure you want to delete this plant?
-                            <div>
-                                <span onClick={deletePlant}>Yes</span>
-                                <span onClick={() => setDeletingPlant(false)}>
-                                    Cancel
-                                </span>
-                            </div>
-                        </Styled.DeleteConfirmation>
-                    </Modal>
-                )}
-            </div>
+                    {deletingSite && (
+                        <Modal handleClick={() => setDeletingSite(false)}>
+                            <Styled.DeleteConfirmation>
+                                <HiOutlineTrash />
+                                Are you sure you want to delete this site?
+                                <div>
+                                    <span onClick={deleteSite}>Yes</span>
+                                    <span
+                                        onClick={() => setDeletingSite(false)}
+                                    >
+                                        Cancel
+                                    </span>
+                                </div>
+                            </Styled.DeleteConfirmation>
+                        </Modal>
+                    )}
+
+                    {addingPlant && (
+                        <Modal handleClick={() => setAddingPlant(false)}>
+                            <AddPlant
+                                siteId={currentSite}
+                                refreshPlantsData={refreshPlantsData}
+                                closeModal={() => setAddingPlant(false)}
+                            />
+                        </Modal>
+                    )}
+
+                    {deletingPlant && (
+                        <Modal handleClick={() => setDeletingPlant(false)}>
+                            <Styled.DeleteConfirmation>
+                                <HiOutlineTrash />
+                                Are you sure you want to delete this plant?
+                                <div>
+                                    <span onClick={deletePlant}>Yes</span>
+                                    <span
+                                        onClick={() => setDeletingPlant(false)}
+                                    >
+                                        Cancel
+                                    </span>
+                                </div>
+                            </Styled.DeleteConfirmation>
+                        </Modal>
+                    )}
+                </div>
+            </Pages.Container>
             <Notification show={newAchievement}>
                 <Styled.AchievementNotification>
                     <TbAward />
@@ -277,7 +293,7 @@ function Dashboard() {
                     colors={["#FF8787", "#F8C4B4", "#E5EBB2", "#BCE29E"]}
                 />
             )}
-        </Pages.Container>
+        </>
     );
 }
 

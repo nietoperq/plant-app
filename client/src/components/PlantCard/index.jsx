@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Gltf } from "@react-three/drei";
+import { useSpring, animated, config } from "@react-spring/three";
 
 import { TbDroplet, TbPaperBag } from "react-icons/tb";
 
@@ -8,23 +9,25 @@ import * as Styled from "./styles";
 
 export function Model(props) {
     const [hovered, hover] = useState(false);
-    const ref = useRef();
+    const mesh = useRef();
+    const { scale } = useSpring({
+        scale: hovered ? props.size : 0.9 * props.size,
+        config: config.wobbly,
+    });
 
-    const size = (hovered ? 1.1 : 1) * props.size;
-
-    useFrame((state, delta) => (ref.current.rotation.y += 0.2 * delta));
+    useFrame((state, delta) => (mesh.current.rotation.y += 0.2 * delta));
     return (
-        <group
-            ref={ref}
+        <animated.mesh
+            ref={mesh}
             {...props}
             dispose={null}
             position={props.pos}
-            scale={[size, size, size]}
+            scale={scale}
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}
         >
             {props.children}
-        </group>
+        </animated.mesh>
     );
 }
 
@@ -35,8 +38,8 @@ function PlantCard(props) {
         icon,
         last_watered,
         last_fertilized,
-        watering_frequency_winter,
-        fertilizing_frequency_winter,
+        watering_frequency_summer,
+        fertilizing_frequency_summer,
     } = props.plant;
 
     const { handleClick } = props;
@@ -54,12 +57,12 @@ function PlantCard(props) {
         const water_next =
             Math.round(
                 (date_w.getTime() - present_date.getTime()) / (1000 * 3600 * 24)
-            ) + watering_frequency_winter;
+            ) + watering_frequency_summer;
 
         const fertilize_next =
             Math.round(
                 (date_f.getTime() - present_date.getTime()) / (1000 * 3600 * 24)
-            ) + fertilizing_frequency_winter;
+            ) + fertilizing_frequency_summer;
 
         if (water_next <= 0) {
             setStatus(
@@ -69,7 +72,7 @@ function PlantCard(props) {
             );
         } else if (fertilize_next <= 0) {
             setStatus(
-                <Styled.Icon color="#C76B8D">
+                <Styled.Icon color="#B2C182">
                     <TbPaperBag />
                 </Styled.Icon>
             );

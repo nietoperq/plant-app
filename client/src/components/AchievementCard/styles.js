@@ -11,13 +11,14 @@ export const AchievementCard = styled.div`
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
-export const AchievementModel = styled.div`
+export const AchievementIcon = styled.img`
     //outline: 1px solid grey;
     position: absolute;
-    right: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
     bottom: 100px;
-    width: 250px;
-    height: 200px;
+    width: 200px;
+    margin: auto;
 `;
 
 export const AchievementInfo = styled.div`

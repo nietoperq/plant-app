@@ -14,7 +14,6 @@ export const AddSite = styled.div`
     p {
         color: #333;
         font-size: 16px;
-        font-weight: 600;
         margin: 20px 0 0px 0;
         color: ${({ theme }) => theme.colors.primary};
     }

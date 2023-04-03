@@ -13,14 +13,6 @@ function Profile() {
     const { currentUser, userAchievements } = useContext(AuthContext);
     const [usersSites, setUsersSites] = useState([]);
     const [usersPlants, setUsersPlants] = useState([]);
-    console.log("🐱 current user");
-    console.log(currentUser);
-
-    //number of unlocked achievements out of total ✅
-    //current number of sites ✅
-    //current number of plants ✅
-    //total watering counter of plants ✅
-    //total fertilizing counter of plants ✅
 
     useEffect(() => {
         const fetchData = async () => {
@@ -71,30 +63,32 @@ function Profile() {
                     <Styled.HeaderStats>
                         <div>
                             <p>
-                                {currentUser.xp}
-                                <span>XP</span>
+                                <span>{currentUser.xp}</span>
+                                XP
                             </p>
                             <p>
-                                {currentUser.lvl}
-                                <span>LVL</span>
+                                <span>{currentUser.lvl}</span>
+                                LVL
                             </p>
                             <p>
-                                {currentUser.currency}
-                                <span>coins</span>
+                                <span>{currentUser.currency}</span>
+                                coins
                             </p>
                         </div>
                         <div>
-                            <p>{currentUser.username}</p>
-                            <span>{currentUser.email}</span>
+                            <p>
+                                <span>{currentUser.username}</span>
+                                {currentUser.email}
+                            </p>
                         </div>
                         <div>
                             <p>
-                                {currentUser.site_slots}
-                                <span>Site slots</span>
+                                <span>{currentUser.site_slots}</span>
+                                Site slots
                             </p>
                             <p>
-                                {currentUser.plant_slots}
-                                <span>Plant slots</span>
+                                <span>{currentUser.plant_slots}</span>
+                                Plant slots
                             </p>
                         </div>
                     </Styled.HeaderStats>

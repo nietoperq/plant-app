@@ -10,6 +10,7 @@ export const ProfileHeader = styled.div`
         width: 200px;
         height: 200px;
         border-radius: 50%;
+        margin: 20px;
     }
 `;
 
@@ -22,13 +23,10 @@ export const HeaderStats = styled.div`
     max-width: 1200px;
     text-align: center;
 
-    p {
-        color: ${({ theme }) => theme.colors.primary};
-        font-size: 20px;
-    }
-
     span {
-        color: #999;
+        color: ${({ theme }) => theme.colors.primary};
+        display: block;
+        font-size: 20px;
     }
 
     & div:nth-child(1),
@@ -40,14 +38,11 @@ export const HeaderStats = styled.div`
         p {
             display: block;
             width: 100%;
-            font-size: 20px;
             font-weight: 500;
         }
 
         span {
             display: block;
-            color: #999;
-            font-size: 16px;
             font-weight: 500;
         }
 
@@ -63,7 +58,6 @@ export const ProfileCard = styled(Card)`
     min-width: 200px;
     margin: 20px;
     p {
-        color: #999;
         font-size: 16px;
         font-weight: 500;
     }

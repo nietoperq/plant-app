@@ -11,7 +11,7 @@ import {
     IoSkullOutline,
 } from "react-icons/io5";
 import { RiHazeLine } from "react-icons/ri";
-import { TbGrain } from "react-icons/tb";
+import { TbGrain, TbDroplet, TbPaperBag } from "react-icons/tb";
 
 import * as Styled from "./styles";
 
@@ -72,12 +72,12 @@ function PlantDetails(props) {
     const water_next =
         Math.round(
             (date_w.getTime() - present_date.getTime()) / (1000 * 3600 * 24)
-        ) + watering_frequency_winter;
+        ) + watering_frequency_summer;
 
     const fertilize_next =
         Math.round(
             (date_f.getTime() - present_date.getTime()) / (1000 * 3600 * 24)
-        ) + fertilizing_frequency_winter;
+        ) + fertilizing_frequency_summer;
 
     async function waterPlant(e) {
         e.preventDefault();
@@ -107,7 +107,6 @@ function PlantDetails(props) {
 
     function changeSection(event) {
         setSection(event.currentTarget.id);
-        console.log(section);
     }
 
     return (
@@ -123,13 +122,14 @@ function PlantDetails(props) {
                 </Canvas>
             </Styled.PlantModel>
             <div>
-                <Styled.Button onClick={waterPlant}>Water Plant</Styled.Button>
-                <Styled.Button onClick={fertilizePlant}>
-                    Fertilize Plant
-                </Styled.Button>
-                <Styled.Button onClick={deletePlant}>
-                    Delete Plant
-                </Styled.Button>
+                <Styled.WaterButton onClick={waterPlant}>
+                    <TbDroplet />
+                    Water
+                </Styled.WaterButton>
+                <Styled.FertilizeButton onClick={fertilizePlant}>
+                    <TbPaperBag />
+                    Fertilize
+                </Styled.FertilizeButton>
             </div>
             <div>
                 <Styled.Button onClick={changeSection} id={1}>
@@ -200,6 +200,12 @@ function PlantDetails(props) {
                             </p>
                         </Styled.Cell>
                     </Styled.Grid>
+                    <Styled.DeleteButton
+                        className="delete"
+                        onClick={deletePlant}
+                    >
+                        Delete plant
+                    </Styled.DeleteButton>
                 </>
             )}
             {section == 2 && <p>{description}</p>}

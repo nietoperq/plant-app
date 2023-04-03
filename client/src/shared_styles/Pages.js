@@ -1,7 +1,32 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    padding: 20px 20px 20px 300px;
+    position: absolute;
+    left: 300px;
+    right: 20px;
+    top: 20px;
+    bottom: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #eee;
+    overflow: auto;
+
+    h2 {
+        font-weight: 500;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 5px;
+    }
 `;
 
 export const Section = styled.div`
@@ -9,6 +34,10 @@ export const Section = styled.div`
     margin-bottom: 30px;
     padding: 20px;
     border-radius: 20px;
+
+    span {
+        color: ${({ theme }) => theme.colors.primary};
+    }
 `;
 
 export const WrapSectionElements = styled.div`

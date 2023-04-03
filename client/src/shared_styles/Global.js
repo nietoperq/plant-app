@@ -9,7 +9,15 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body {
-    background: ${({ theme }) => theme.colors.body};
+    color: ${({ theme }) => theme.colors.font};
+}
+
+h1, h2, h3{
+    font-weight: 600;
+
+}
+
+h3 {
 }
 
 img {

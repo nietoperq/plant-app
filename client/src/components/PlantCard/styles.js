@@ -6,7 +6,7 @@ export const PlantCard = styled.div`
     height: 200px;
     background: #fff;
     border-radius: 20px;
-    margin: 70px 20px 20px 20px;
+    margin: 100px 20px 20px 20px;
     padding: 20px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
@@ -15,10 +15,11 @@ export const PlantCard = styled.div`
 export const PlantModel = styled.div`
     //outline: 1px solid grey;
     position: absolute;
-    right: 0;
-    bottom: 50px;
-    width: 200px;
-    height: 200px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 40px;
+    width: 250px;
+    height: 250px;
 `;
 
 export const PlantInfo = styled.div`
@@ -34,6 +35,7 @@ export const PlantInfo = styled.div`
 `;
 
 export const Icon = styled.div`
+    position: relative;
     svg {
         color: ${(props) => props.color || props.theme.colors.primary};
         width: 20px;

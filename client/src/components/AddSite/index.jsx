@@ -48,8 +48,6 @@ function AddSite(props) {
         }
     }
 
-    console.log(inputs);
-
     return (
         <Styled.AddSite>
             <h1>Add new site</h1>

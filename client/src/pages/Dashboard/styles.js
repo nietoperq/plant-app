@@ -1,17 +1,5 @@
 import styled from "styled-components";
-
-export const DashboardSection = styled.div`
-    background: #ffffffdd;
-    margin-bottom: 30px;
-    padding: 20px;
-    border-radius: 20px;
-
-    span {
-        color: ${({ theme }) => theme.colors.primary};
-        cursor: pointer;
-        margin-right: 10px;
-    }
-`;
+import { Section } from "../../shared_styles/Pages";
 
 export const DashboardSectionElements = styled.div`
     display: flex;
@@ -21,6 +9,11 @@ export const DashboardSectionElements = styled.div`
 export const ClickableSpan = styled.span`
     color: ${({ theme }) => theme.colors.primary};
     cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+        font-weight: 500;
+    }
 `;
 
 export const DeleteConfirmation = styled.div`

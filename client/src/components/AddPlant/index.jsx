@@ -62,7 +62,7 @@ function AddPlant(props) {
                     id={plant.plant_id}
                     onChange={handleChange}
                 />
-                <label htmlFor={plant.plant_id}> {plant.primary_name}</label>
+                <label htmlFor={plant.plant_id}>{plant.primary_name}</label>
             </div>
         ));
 
@@ -73,6 +73,7 @@ function AddPlant(props) {
                 <p>Choose plant</p>
                 <input
                     type="text"
+                    id="search"
                     placeholder="Search..."
                     onChange={(e) => setSearch(e.target.value)}
                 />

@@ -28,11 +28,9 @@ function Sidebar() {
             </Styled.Logo>
             <Styled.User>
                 <img src={avatar} alt="" />
-                <h3>{currentUser.username}</h3>
+
                 <div>
-                    <span>
-                        <RiStarLine /> {currentUser.xp}
-                    </span>
+                    <h3>{currentUser.username}</h3>
                     <span>LVL {currentUser.lvl}</span>
                     <span>
                         <RiCopperDiamondLine /> {currentUser.currency}
@@ -40,28 +38,43 @@ function Sidebar() {
                 </div>
             </Styled.User>
 
-            <Styled.SidebarLink to="/dashboard">
+            <Styled.SidebarLink
+                to="/dashboard"
+                className={({ isActive }) => (isActive ? "active" : "none")}
+            >
                 <BiHomeHeart />
                 Dashboard
             </Styled.SidebarLink>
-            <Styled.SidebarLink to="/profile">
+            <Styled.SidebarLink
+                to="/profile"
+                className={({ isActive }) => (isActive ? "active" : "none")}
+            >
                 <BiUser />
                 Profile
             </Styled.SidebarLink>
-            <Styled.SidebarLink to="/achievements">
+            <Styled.SidebarLink
+                to="/achievements"
+                className={({ isActive }) => (isActive ? "active" : "none")}
+            >
                 <BiTrophy />
                 Achievements
             </Styled.SidebarLink>
-            <Styled.SidebarLink to="/store">
+            <Styled.SidebarLink
+                to="/store"
+                className={({ isActive }) => (isActive ? "active" : "none")}
+            >
                 <BiStore />
                 Store
             </Styled.SidebarLink>
-            <Styled.SidebarLink to="/settings">
+            <Styled.SidebarLink
+                to="/settings"
+                className={({ isActive }) => (isActive ? "active" : "none")}
+            >
                 <BiSliderAlt />
                 Settings
             </Styled.SidebarLink>
 
-            <Styled.SidebarLink onClick={logout}>
+            <Styled.SidebarLink to=" " onClick={logout}>
                 <BiDoorOpen /> Logout
             </Styled.SidebarLink>
         </Styled.Sidebar>

@@ -15,7 +15,6 @@ export const AddPlant = styled.div`
     p {
         color: #333;
         font-size: 16px;
-        font-weight: 600;
         margin: 20px 0 0px 0;
         color: ${({ theme }) => theme.colors.primary};
     }
@@ -76,9 +75,23 @@ export const SearchList = styled.div`
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 0 10px;
+    accent-color: #9a7961;
+
+    input {
+        display: none;
+    }
+
+    input:hover + label {
+        color: ${({ theme }) => theme.colors.primary};
+    }
+
+    input:checked + label {
+        color: ${({ theme }) => theme.colors.primary};
+        font-weight: 700;
+    }
 
     ::-webkit-scrollbar {
-        width: 10px;
+        width: 8px;
     }
 
     ::-webkit-scrollbar-track {
@@ -86,7 +99,7 @@ export const SearchList = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-        background: ${({ theme }) => theme.colors.primary};
-        border-radius: 5px;
+        background: #ddd;
+        border-radius: 4px;
     }
 `;

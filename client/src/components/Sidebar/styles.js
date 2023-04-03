@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Sidebar = styled.div`
     position: fixed;
@@ -9,10 +9,7 @@ export const Sidebar = styled.div`
     display: flex;
     flex-direction: column;
     width: 250px;
-    background: #fff;
-    border-radius: 20px;
     padding: 20px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     & a:last-child {
         margin-top: auto;
@@ -21,8 +18,8 @@ export const Sidebar = styled.div`
 
 export const Logo = styled.div`
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     font-size: 20px;
     font-weight: 700;
@@ -30,32 +27,44 @@ export const Logo = styled.div`
 
 export const User = styled.div`
     display: flex;
-    flex-direction: column;
+    gap: 20px;
     align-items: center;
     margin: 70px 0;
+    font-weight: 500;
 
     img {
         border-radius: 50%;
-        width: 50%;
+        width: 60px;
     }
 
     span {
-        margin: 0 10px;
+        margin-right: 10px;
     }
 `;
 
-export const SidebarLink = styled(Link)`
-    color: #000;
+export const SidebarLink = styled(NavLink)`
+    color: #888;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 15px;
+    gap: 15px;
+    margin: 5px 0;
+    padding: 10px;
     font-weight: 500;
+    border-radius: 20px;
     cursor: pointer;
     transition: 0.1s ease;
 
+    svg {
+        font-size: 20px;
+    }
+
     &:hover {
-        color: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.font};
+    }
+
+    &.active {
+        color: ${({ theme }) => theme.colors.font};
+        background-color: #f1f1f1;
     }
 `;
