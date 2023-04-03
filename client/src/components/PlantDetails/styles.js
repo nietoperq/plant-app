@@ -8,7 +8,6 @@ export const PlantDetails = styled.div`
     align-items: center;
     padding: 30px 50px;
     h1 {
-        position: absolute;
         font-size: 1.5rem;
         color: ${({ theme }) => theme.colors.primary};
     }
@@ -21,6 +20,7 @@ export const PlantDetails = styled.div`
 export const PlantModel = styled.div`
     width: 100%;
     height: 250px;
+    margin: 10px 0 0 0;
     cursor: grab;
 
     &:active {

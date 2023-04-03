@@ -3,33 +3,11 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Gltf } from "@react-three/drei";
 import { useSpring, animated, config } from "@react-spring/three";
 
+import PlantModel from "../PlantModel";
+
 import { TbDroplet, TbPaperBag } from "react-icons/tb";
 
 import * as Styled from "./styles";
-
-export function Model(props) {
-    const [hovered, hover] = useState(false);
-    const mesh = useRef();
-    const { scale } = useSpring({
-        scale: hovered ? props.size : 0.9 * props.size,
-        config: config.wobbly,
-    });
-
-    useFrame((state, delta) => (mesh.current.rotation.y += 0.2 * delta));
-    return (
-        <animated.mesh
-            ref={mesh}
-            {...props}
-            dispose={null}
-            position={props.pos}
-            scale={scale}
-            onPointerOver={(event) => hover(true)}
-            onPointerOut={(event) => hover(false)}
-        >
-            {props.children}
-        </animated.mesh>
-    );
-}
 
 function PlantCard(props) {
     const {
@@ -41,12 +19,8 @@ function PlantCard(props) {
         watering_frequency_summer,
         fertilizing_frequency_summer,
     } = props.plant;
-
     const { handleClick } = props;
-
     const [status, setStatus] = useState("");
-
-    const model = `./models/${icon}.glb`;
 
     useEffect(() => {
         const date_w = new Date(last_watered);
@@ -85,9 +59,13 @@ function PlantCard(props) {
         <Styled.PlantCard id={site_has_plant_id} onClick={handleClick}>
             <Styled.PlantModel>
                 <Canvas camera={{ position: [7, 1, 0] }}>
-                    <Model size={0.3} pos={[0, -4, 0]}>
-                        <Gltf src={model} />
-                    </Model>
+                    <PlantModel
+                        plant={icon}
+                        pot="default"
+                        size={0.3}
+                        pos={[0, -4, 0]}
+                        hoverAnimation
+                    />
                     <Environment preset="dawn" />
                 </Canvas>
             </Styled.PlantModel>

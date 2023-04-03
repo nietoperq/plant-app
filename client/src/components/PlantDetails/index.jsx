@@ -4,6 +4,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls, Gltf } from "@react-three/drei";
 import axios from "axios";
 
+import PlantModel from "../PlantModel";
+
 import {
     IoSnowOutline,
     IoWaterOutline,
@@ -14,18 +16,6 @@ import { RiHazeLine } from "react-icons/ri";
 import { TbGrain, TbDroplet, TbPaperBag } from "react-icons/tb";
 
 import * as Styled from "./styles";
-
-function Model(props) {
-    const ref = useRef();
-
-    useFrame((state, delta) => (ref.current.rotation.y += 0.2 * delta));
-
-    return (
-        <group ref={ref} {...props} dispose={null}>
-            {props.children}
-        </group>
-    );
-}
 
 function PlantDetails(props) {
     const [section, setSection] = useState(1);
@@ -59,10 +49,7 @@ function PlantDetails(props) {
     } = props.plant;
 
     const { refreshPlantsData } = props;
-
     const { refreshAuthContext } = useContext(AuthContext);
-
-    const model = `./models/${icon}.glb`;
 
     const date_w = new Date(last_watered);
     const date_f = new Date(last_fertilized);
@@ -113,10 +100,13 @@ function PlantDetails(props) {
         <Styled.PlantDetails>
             <h1>{primary_name}</h1>
             <Styled.PlantModel>
-                <Canvas camera={{ position: [5, 1, 0] }}>
-                    <Model>
-                        <Gltf src={model} scale={0.2} position={[0, -3, 0]} />
-                    </Model>
+                <Canvas camera={{ position: [7, 1, 0] }}>
+                    <PlantModel
+                        plant={icon}
+                        pot="default"
+                        size={0.3}
+                        pos={[0, -4, 0]}
+                    />
                     <Environment preset="dawn" />
                     <OrbitControls />
                 </Canvas>
