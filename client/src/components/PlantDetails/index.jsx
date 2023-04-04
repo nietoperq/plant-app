@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/authContext";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls, Gltf } from "@react-three/drei";
@@ -19,6 +19,7 @@ import * as Styled from "./styles";
 
 function PlantDetails(props) {
     const [section, setSection] = useState(1);
+    const [flowerpots, setFlowerpots] = useState([]);
 
     const {
         site_has_plant_id,
@@ -49,7 +50,13 @@ function PlantDetails(props) {
     } = props.plant;
 
     const { refreshPlantsData } = props;
-    const { refreshAuthContext } = useContext(AuthContext);
+    const { currentUser, refreshAuthContext } = useContext(AuthContext);
+
+    useEffect(() => {
+        getFlowerpots();
+    }, []);
+
+    const flowerpot = flowerpot_id ? "flowerpot_" + flowerpot_id : "default";
 
     const date_w = new Date(last_watered);
     const date_f = new Date(last_fertilized);
@@ -65,6 +72,17 @@ function PlantDetails(props) {
         Math.round(
             (date_f.getTime() - present_date.getTime()) / (1000 * 3600 * 24)
         ) + fertilizing_frequency_summer;
+
+    async function getFlowerpots() {
+        try {
+            const res = await axios.get(
+                `/user/getflowerpots/${currentUser.user_id}`
+            );
+            setFlowerpots(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     async function waterPlant(e) {
         e.preventDefault();
@@ -88,6 +106,21 @@ function PlantDetails(props) {
         }
     }
 
+    async function setFlowerpot(e) {
+        e.preventDefault();
+        const flowerpot_id = e.currentTarget.id;
+        try {
+            await axios.put("/plants/setflowerpot", {
+                site_has_plant_id,
+                flowerpot_id,
+            });
+            refreshAuthContext();
+            refreshPlantsData();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     function deletePlant() {
         props.delete();
     }
@@ -96,6 +129,19 @@ function PlantDetails(props) {
         setSection(event.currentTarget.id);
     }
 
+    const flowerpotList = flowerpots?.length
+        ? flowerpots.map((flowerpot) => (
+              <span
+                  style={{ cursor: "pointer" }}
+                  key={flowerpot.flowerpot_id}
+                  id={flowerpot.flowerpot_id}
+                  onClick={setFlowerpot}
+              >
+                  {flowerpot.name}
+              </span>
+          ))
+        : "Empty";
+
     return (
         <Styled.PlantDetails>
             <h1>{primary_name}</h1>
@@ -103,7 +149,7 @@ function PlantDetails(props) {
                 <Canvas camera={{ position: [7, 1, 0] }}>
                     <PlantModel
                         plant={icon}
-                        pot="default"
+                        pot={flowerpot}
                         size={0.3}
                         pos={[0, -4, 0]}
                     />
@@ -126,7 +172,7 @@ function PlantDetails(props) {
                     Overview
                 </Styled.Button>
                 <Styled.Button onClick={changeSection} id={2}>
-                    Description
+                    Customize
                 </Styled.Button>
                 <Styled.Button onClick={changeSection} id={3}>
                     Plant info
@@ -198,7 +244,7 @@ function PlantDetails(props) {
                     </Styled.DeleteButton>
                 </>
             )}
-            {section == 2 && <p>{description}</p>}
+            {section == 2 && flowerpotList}
             {section == 3 && (
                 <>
                     <Styled.Grid

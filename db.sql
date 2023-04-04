@@ -156,24 +156,24 @@ CREATE INDEX `fk_user_has_achievement1_user_idx` ON `plantapp`.`user_has_achieve
 -- Table `plantapp`.`user_has_flowerpot`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `plantapp`.`user_has_flowerpot` (
-  `user_user_id` INT NOT NULL,
-  `flowerpot_flowerpot_id` INT NOT NULL,
-  PRIMARY KEY (`user_user_id`, `flowerpot_flowerpot_id`),
+  `user_id` INT NOT NULL,
+  `flowerpot_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `flowerpot_id`),
   CONSTRAINT `fk_user_has_flowerpot_user1`
-    FOREIGN KEY (`user_user_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `plantapp`.`user` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_user_has_flowerpot_flowerpot1`
-    FOREIGN KEY (`flowerpot_flowerpot_id`)
+    FOREIGN KEY (`flowerpot_id`)
     REFERENCES `plantapp`.`flowerpot` (`flowerpot_id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ;
 
-CREATE INDEX `fk_user_has_flowerpot_flowerpot1_idx` ON `plantapp`.`user_has_flowerpot` (`flowerpot_flowerpot_id` ASC) ;
+CREATE INDEX `fk_user_has_flowerpot_flowerpot1_idx` ON `plantapp`.`user_has_flowerpot` (`flowerpot_id` ASC) ;
 
-CREATE INDEX `fk_user_has_flowerpot_user1_idx` ON `plantapp`.`user_has_flowerpot` (`user_user_id` ASC) ;
+CREATE INDEX `fk_user_has_flowerpot_user1_idx` ON `plantapp`.`user_has_flowerpot` (`user_id` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -233,6 +233,10 @@ INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Ea
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender III', 'earthbender_3', 'Fertilize plant 25 times.');
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender IV', 'earthbender_4', 'Fertilize plant 50 times.');
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender V', 'earthbender_5', 'Fertilize plant 100 times.');
+
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round white', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round black', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round brown', 300);
 
 
 DELIMITER $$
@@ -303,6 +307,20 @@ BEGIN
 SELECT a.achievement_id AS achievement_id, a.name, a.description, a.icon, uha.unlocked_on
 FROM achievement a
 LEFT JOIN user_has_achievement uha ON a.achievement_id = uha.achievement_id AND uha.user_id = userID
-ORDER BY uha.unlocked_on, a.name;
+ORDER BY uha.unlocked_on DESC, a.name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_flowerpots`(userID INT)
+BEGIN
+SELECT f.flowerpot_id, f.name FROM user u JOIN user_has_flowerpot uhf ON u.user_id=uhf.user_id JOIN flowerpot f ON f.flowerpot_id=uhf.flowerpot_id WHERE uhf.user_id = userID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `set_flowerpot`(plantID INT, flowerpotID INT)
+BEGIN
+UPDATE site_has_plant SET flowerpot_id = flowerpotID WHERE site_has_plant_id = plantID;
 END$$
 DELIMITER ;

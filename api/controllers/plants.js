@@ -52,6 +52,15 @@ export function fertilizePlant(req, res) {
     });
 }
 
+export function setFlowerpot(req, res) {
+    const q = "CALL set_flowerpot(?)";
+    const values = [req.body.site_has_plant_id, req.body.flowerpot_id];
+    db.query(q, [values], (err, data) => {
+        if (err) return res.json(err);
+        res.status(200).json("Plant flowerpot changed");
+    });
+}
+
 export function addingSite(req, res) {
     const q =
         "INSERT INTO site(user_id, name, description, icon, is_indoor, humidity_level, light_level) VALUES (?)";

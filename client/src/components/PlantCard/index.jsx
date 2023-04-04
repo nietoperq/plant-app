@@ -18,9 +18,12 @@ function PlantCard(props) {
         last_fertilized,
         watering_frequency_summer,
         fertilizing_frequency_summer,
+        flowerpot_id,
     } = props.plant;
     const { handleClick } = props;
     const [status, setStatus] = useState("");
+
+    const flowerpot = flowerpot_id ? "flowerpot_" + flowerpot_id : "default";
 
     useEffect(() => {
         const date_w = new Date(last_watered);
@@ -61,7 +64,7 @@ function PlantCard(props) {
                 <Canvas camera={{ position: [7, 1, 0] }}>
                     <PlantModel
                         plant={icon}
-                        pot="default"
+                        pot={flowerpot}
                         size={0.3}
                         pos={[0, -4, 0]}
                         hoverAnimation
