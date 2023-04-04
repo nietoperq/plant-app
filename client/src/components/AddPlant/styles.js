@@ -79,15 +79,20 @@ export const SearchList = styled.div`
 
     input {
         display: none;
-    }
 
-    input:hover + label {
-        color: ${({ theme }) => theme.colors.primary};
-    }
+        & + label {
+            display: block;
+            line-height: 24px;
+        }
 
-    input:checked + label {
-        color: ${({ theme }) => theme.colors.primary};
-        font-weight: 700;
+        &:hover + label {
+            color: ${({ theme }) => theme.colors.primary};
+        }
+
+        &:checked + label {
+            color: ${({ theme }) => theme.colors.primary};
+            font-weight: 700;
+        }
     }
 
     ::-webkit-scrollbar {

@@ -54,16 +54,18 @@ function AddPlant(props) {
             plant.primary_name.toLowerCase().includes(search.toLowerCase())
         )
         .map((plant) => (
-            <div>
+            <>
                 <input
                     type="radio"
                     name="plant_id"
                     value={plant.plant_id}
-                    id={plant.plant_id}
+                    id={"plant-" + plant.plant_id}
                     onChange={handleChange}
                 />
-                <label htmlFor={plant.plant_id}>{plant.primary_name}</label>
-            </div>
+                <label htmlFor={"plant-" + plant.plant_id}>
+                    {plant.primary_name}
+                </label>
+            </>
         ));
 
     return (
