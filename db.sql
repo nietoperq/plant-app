@@ -324,3 +324,34 @@ BEGIN
 UPDATE site_has_plant SET flowerpot_id = flowerpotID WHERE site_has_plant_id = plantID;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_flowerpots`(userID INT)
+BEGIN
+ SELECT f.flowerpot_id, f.name, f.price, 
+    IF(uhf.user_id IS NULL, 0, 1) AS is_purchased
+  FROM flowerpot f
+  LEFT JOIN user_has_flowerpot uhf ON f.flowerpot_id = uhf.flowerpot_id 
+    AND uhf.user_id = userID
+  ORDER BY f.price;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buy_flowerpot`(IN userID INT, IN flowerpotID INT)
+BEGIN
+  DECLARE v_price INT;
+  DECLARE v_currency INT;
+  
+  SELECT price INTO v_price FROM flowerpot WHERE flowerpot_id = flowerpotID;
+  SELECT currency INTO v_currency FROM user WHERE user_id = userID;
+  
+  IF v_currency >= v_price THEN
+    UPDATE user SET currency = v_currency - v_price WHERE user_id = userID;
+    INSERT INTO user_has_flowerpot (user_id, flowerpot_id) VALUES (userID, flowerpotID);
+    SELECT 'SUCCESS' AS result;
+  ELSE
+    SELECT 'NOT_ENOUGH_CURRENCY' AS result;
+  END IF;
+END$$
+DELIMITER ;

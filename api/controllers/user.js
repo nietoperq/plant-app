@@ -31,6 +31,26 @@ export function getFlowerpots(req, res) {
     });
 }
 
+export function getAllFlowerpots(req, res) {
+    const q = "CALL get_all_flowerpots(?)";
+
+    db.query(q, [req.params.userId], (err, data) => {
+        if (err) return res.json(err);
+
+        res.status(200).json(data[0]);
+    });
+}
+
+export function buyFlowerpot(req, res) {
+    const q = "CALL buy_flowerpot(?)";
+
+    const values = [req.body.user_id, req.body.flowerpot_id];
+    db.query(q, [values], (err, data) => {
+        if (err) return res.json(err);
+        res.status(200).json(data[0]);
+    });
+}
+
 export function earnAchievement(req, res) {
     const q =
         "INSERT INTO user_has_achievement (user_id, achievement_id, unlocked_on) VALUES (?) ";
