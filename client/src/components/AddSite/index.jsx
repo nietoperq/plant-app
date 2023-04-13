@@ -40,7 +40,11 @@ function AddSite(props) {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await axios.post("/plants/addsite", inputs);
+            const res = await axios.post("/plants/addsite", inputs);
+            if (res.data.sqlMessage) {
+                setError(res.data.sqlMessage);
+                return;
+            }
             refreshSitesData();
             closeModal();
         } catch (err) {
@@ -239,7 +243,7 @@ function AddSite(props) {
                 </Styled.RadioGroup>
 
                 <button onClick={handleSubmit}>Add site</button>
-                {error && <p className="error-message">{error}</p>}
+                {error && <span className="error-message">{error}</span>}
             </form>
         </Styled.AddSite>
     );

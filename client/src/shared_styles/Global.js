@@ -24,6 +24,13 @@ img {
     max-width: 100%;
 }
 
+span.error-message {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+
+}
+
 `;
 
 export default GlobalStyles;

@@ -6,7 +6,7 @@ import {
     waterPlant,
     fertilizePlant,
     setFlowerpot,
-    addingSite,
+    addSite,
     deleteSite,
     addPlantToSite,
     deletePlantFromSite,
@@ -20,7 +20,7 @@ router.get("/siteplants/:siteId", getPlantsInSite);
 router.get("/water/:siteHasPlantId", waterPlant);
 router.get("/fertilize/:siteHasPlantId", fertilizePlant);
 router.put("/setflowerpot", setFlowerpot);
-router.post("/addsite", addingSite);
+router.post("/addsite", addSite);
 router.delete("/deletesite/:siteId", deleteSite);
 router.post("/addplanttosite", addPlantToSite);
 router.delete("/deleteplantfromsite/:siteHasPlantId", deletePlantFromSite);

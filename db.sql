@@ -355,3 +355,66 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_site`(
+IN p_user_id INT,
+IN p_name VARCHAR(100),
+IN p_description VARCHAR(500),
+IN p_icon VARCHAR(50),
+IN p_is_indoor TINYINT(4),
+IN p_humidity_level TINYINT(4),
+IN p_light_level TINYINT(4)
+)
+BEGIN
+DECLARE v_site_count INT;
+
+-- Check if user has exceeded maximum site slots
+SELECT COUNT(*) INTO v_site_count FROM site WHERE user_id = p_user_id;
+
+IF v_site_count >= (SELECT site_slots FROM user WHERE user_id = p_user_id) THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = 'Maximum number of sites was exceeded.';
+ELSE
+-- Insert new site
+INSERT INTO site(user_id, name, description, icon, is_indoor, humidity_level, light_level)
+VALUES (p_user_id, p_name, p_description, p_icon, p_is_indoor, p_humidity_level, p_light_level);
+END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_plant`(
+  IN p_site_id INT,
+  IN p_plant_id INT,
+  IN p_date_added DATE,
+  IN p_last_watered DATE,
+  IN p_last_fertilized DATE,
+  IN p_note VARCHAR(500)
+)
+BEGIN
+  DECLARE v_user_id INT;
+  DECLARE v_plant_count INT; 
+  DECLARE v_max_plants INT;
+ 
+  -- Get user id from the site
+  SELECT user_id INTO v_user_id FROM site WHERE site_id = p_site_id;
+  
+  -- Get the number of plants added by the user
+  SELECT COUNT(*) INTO v_plant_count FROM site_has_plant sp 
+  JOIN site s ON s.site_id = sp.site_id 
+  WHERE s.user_id = v_user_id;
+  
+  -- Get the maximum number of plants allowed for the user
+ SELECT plant_slots INTO v_max_plants FROM user WHERE user_id = v_user_id;
+  
+  -- Check if the user has reached the maximum number of allowed plants
+  IF v_plant_count >= v_max_plants THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Maximum number of plants exceeded.';
+  ELSE
+    -- Insert the plant into the site_has_plant table
+    INSERT INTO site_has_plant (site_id, plant_id, date_added, last_watered, last_fertilized, note) 
+    VALUES (p_site_id, p_plant_id, p_date_added, p_last_watered, p_last_fertilized, p_note);
+  END IF;
+END$$
+DELIMITER ;

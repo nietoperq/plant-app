@@ -61,9 +61,8 @@ export function setFlowerpot(req, res) {
     });
 }
 
-export function addingSite(req, res) {
-    const q =
-        "INSERT INTO site(user_id, name, description, icon, is_indoor, humidity_level, light_level) VALUES (?)";
+export function addSite(req, res) {
+    const q = "CALL insert_site(?)";
     const values = [
         req.body.user_id,
         req.body.name,
@@ -90,8 +89,7 @@ export function deleteSite(req, res) {
 }
 
 export function addPlantToSite(req, res) {
-    const q =
-        "INSERT INTO site_has_plant (site_id, plant_id, date_added, last_watered, last_fertilized, note) VALUES (?)";
+    const q = "CALL insert_plant (?)";
     const values = [
         req.body.site_id,
         req.body.plant_id,

@@ -41,7 +41,11 @@ function AddPlant(props) {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await axios.post("/plants/addplanttosite", inputs);
+            const res = await axios.post("/plants/addplanttosite", inputs);
+            if (res.data.sqlMessage) {
+                setError(res.data.sqlMessage);
+                return;
+            }
             refreshPlantsData();
             closeModal();
         } catch (err) {
@@ -104,7 +108,7 @@ function AddPlant(props) {
                     onChange={handleChange}
                 />
                 <button onClick={handleSubmit}>Add plant</button>
-                {error && <p className="error-message">{error}</p>}
+                {error && <span className="error-message">{error}</span>}
             </form>
         </Styled.AddPlant>
     );
