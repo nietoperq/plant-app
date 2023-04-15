@@ -73,3 +73,14 @@ export function updateLevel(req, res) {
         return res.status(200).json("Level updated");
     });
 }
+
+export function updateProfilePicture(req, res) {
+    const q = "UPDATE user SET icon = ? WHERE user_id = ?";
+
+    const values = [req.body.icon, req.body.user_id];
+
+    db.query(q, values, (err, data) => {
+        if (err) return res.json(err);
+        return res.status(200).json("Profile picture updated");
+    });
+}

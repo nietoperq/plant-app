@@ -7,6 +7,7 @@ import {
     buyFlowerpot,
     earnAchievement,
     updateLevel,
+    updateProfilePicture,
 } from "../controllers/user.js";
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.get("/getallflowerpots/:userId", getAllFlowerpots);
 router.post("/buyflowerpot", buyFlowerpot);
 router.post("/earnachievement", earnAchievement);
 router.put("/updatelevel", updateLevel);
+router.put("/updatepfp", updateProfilePicture);
 
 export default router;

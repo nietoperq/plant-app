@@ -14,12 +14,14 @@ import {
 
 import { RiStarLine, RiCopperDiamondLine } from "react-icons/ri";
 
-import avatar from "../../img/pfp.jpg";
-
 import * as Styled from "./styles";
 
 function Sidebar() {
     const { currentUser, logout } = useContext(AuthContext);
+    const img_src = currentUser.icon
+        ? "/img/profile_pictures/" + currentUser.icon
+        : "/img/profile_pictures/default.jpg";
+
     return (
         <Styled.Sidebar>
             <Styled.Logo>
@@ -27,7 +29,7 @@ function Sidebar() {
                 CatLeaf
             </Styled.Logo>
             <Styled.User>
-                <img src={avatar} alt="" />
+                <img src={img_src} alt="" />
 
                 <div>
                     <h3>{currentUser.username}</h3>

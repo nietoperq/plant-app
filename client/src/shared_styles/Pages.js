@@ -54,3 +54,13 @@ export const Card = styled.div`
     padding: 20px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
+
+export const ClickableSpan = styled.span`
+    color: ${({ theme }) => theme.colors.primary};
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+        font-weight: 500;
+    }
+`;

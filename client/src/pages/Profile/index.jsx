@@ -14,6 +14,10 @@ function Profile() {
     const [usersSites, setUsersSites] = useState([]);
     const [usersPlants, setUsersPlants] = useState([]);
 
+    const img_src = currentUser.icon
+        ? "/img/profile_pictures/" + currentUser.icon
+        : "/img/profile_pictures/default.jpg";
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -59,7 +63,7 @@ function Profile() {
             <Sidebar />
             <Pages.Section>
                 <Styled.ProfileHeader>
-                    <img src={avatar} alt="" />
+                    <img src={img_src} alt="" />
                     <Styled.HeaderStats>
                         <div>
                             <p>
