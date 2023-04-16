@@ -93,3 +93,42 @@ export function userdata(req, res) {
             .json(other);
     });
 }
+
+export function updatePassword(req, res) {
+    const select = "SELECT * FROM user WHERE user_id = ?";
+
+    db.query(select, [req.body.user_id], (err, data) => {
+        if (err) return res.json(err);
+
+        // check old password
+        const isPasswordCorrect = bcrypt.compareSync(
+            req.body.old_password,
+            data[0].password
+        );
+
+        if (!isPasswordCorrect)
+            return res.status(400).json("Wrong old password");
+
+        //check if both new passwords are the same
+        const isConfirmPasswordCorrect =
+            req.body.new_password == req.body.confirm_new_password;
+
+        if (!isConfirmPasswordCorrect) {
+            return res.status(400).json("Passwords don't match");
+        }
+
+        // change password
+        const update = "UPDATE user SET password = ? WHERE user_id = ?";
+
+        // hash new password
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(req.body.new_password, salt);
+
+        const values = [hash, req.body.user_id];
+
+        db.query(update, values, (err, data) => {
+            if (err) return res.json(err);
+            return res.status(200).json("Password updated");
+        });
+    });
+}
