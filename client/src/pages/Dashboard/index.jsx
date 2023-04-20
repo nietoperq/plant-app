@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 
 import Sidebar from "../../components/Sidebar";
+import Weather from "../../components/Weather";
 import SiteCard from "../../components/SiteCard";
 import PlantCard from "../../components/PlantCard";
 import PlantDetails from "../../components/PlantDetails";
@@ -146,6 +147,9 @@ function Dashboard() {
             <Pages.Container>
                 <Sidebar />
                 <div className="dashboard-content">
+                    <Pages.Section>
+                        <Weather />
+                    </Pages.Section>
                     <Pages.Section>
                         <h2>Your sites </h2>
                         {userSites.length > 0 ? (
