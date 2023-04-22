@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import { Section } from "../../shared_styles/Pages";
 
+export const DashboardGrid = styled.div`
+    display: grid;
+    grid-template-areas:
+        "s w"
+        "p p";
+    grid-gap: 20px;
+`;
+
 export const DashboardSectionElements = styled.div`
     display: flex;
     flex-wrap: wrap;

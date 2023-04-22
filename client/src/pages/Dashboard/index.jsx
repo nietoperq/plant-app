@@ -146,11 +146,11 @@ function Dashboard() {
         <>
             <Pages.Container>
                 <Sidebar />
-                <div className="dashboard-content">
-                    <Pages.Section>
+                <Styled.DashboardGrid>
+                    <Pages.Section style={{ gridArea: "w" }}>
                         <Weather />
                     </Pages.Section>
-                    <Pages.Section>
+                    <Pages.Section style={{ gridArea: "s" }}>
                         <h2>Your sites </h2>
                         {userSites.length > 0 ? (
                             <Styled.DashboardSectionElements>
@@ -169,7 +169,7 @@ function Dashboard() {
                     </Pages.Section>
 
                     {currentSite && (
-                        <Pages.Section>
+                        <Pages.Section style={{ gridArea: "p" }}>
                             {userSites.length > 0 && (
                                 <>
                                     <h2>
@@ -276,7 +276,7 @@ function Dashboard() {
                             </Styled.DeleteConfirmation>
                         </Modal>
                     )}
-                </div>
+                </Styled.DashboardGrid>
             </Pages.Container>
             <Notification show={newAchievement}>
                 <Styled.AchievementNotification>

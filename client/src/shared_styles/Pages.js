@@ -31,7 +31,6 @@ export const Container = styled.div`
 
 export const Section = styled.div`
     background: #ffffffdd;
-    margin-bottom: 30px;
     padding: 20px;
     border-radius: 20px;
 

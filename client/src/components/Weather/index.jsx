@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import * as Styled from "./styles";
+
 function Weather() {
     const [data, setData] = useState({});
     const [error, setError] = useState(null);
@@ -35,20 +37,24 @@ function Weather() {
     }, []);
 
     return (
-        <div>
+        <>
             <h2>Weather</h2>
+
             {data.current ? (
-                <>
+                <Styled.Weather>
                     <img src={data.current.condition.icon} />
-                    <p>
-                        Location: {data.location.name}, {data.location.country}
-                    </p>
-                    <p>{data.current.condition.text}</p>
-                    <p>{data.current.temp_c}°C</p>
-                    <p>Humidity: {data.current.humidity}%</p>
-                    <p>Cloud cover: {data.current.cloud}%</p>
-                    <p>Precipitation amount: {data.current.precip_mm}mm</p>
-                </>
+                    <div>
+                        <p>
+                            Location: {data.location.name},{" "}
+                            {data.location.country}
+                        </p>
+                        <p>{data.current.condition.text}</p>
+                        <p>{data.current.temp_c}°C</p>
+                        <p>Humidity: {data.current.humidity}%</p>
+                        <p>Cloud cover: {data.current.cloud}%</p>
+                        <p>Precipitation amount: {data.current.precip_mm}mm</p>
+                    </div>
+                </Styled.Weather>
             ) : (
                 <>
                     {error ? (
@@ -66,7 +72,7 @@ function Weather() {
                     </p>
                 </>
             )}
-        </div>
+        </>
     );
 }
 

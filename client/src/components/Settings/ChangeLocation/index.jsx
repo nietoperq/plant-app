@@ -14,20 +14,19 @@ function ChangeLocation() {
     }
 
     return (
-        <>
-            <h2>Change your location</h2>
-            <form onSubmit={handleLocationSubmit}>
-                <label htmlFor="location">Location:</label>
-                <input
-                    id="location"
-                    type="text"
-                    value={location}
-                    onChange={handleLocationChange}
-                />
+        <form onSubmit={handleLocationSubmit}>
+            <label htmlFor="location">Location</label>
+            <input
+                id="location"
+                type="text"
+                value={location}
+                onChange={handleLocationChange}
+            />
+            <div>
                 <button type="submit">Save</button>
                 <button onClick={() => setLocation("")}>Reset</button>
-            </form>
-        </>
+            </div>
+        </form>
     );
 }
 

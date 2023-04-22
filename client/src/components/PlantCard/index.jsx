@@ -74,7 +74,6 @@ function PlantCard(props) {
             </Styled.PlantModel>
             <Styled.PlantInfo>
                 <p>{primary_name}</p>
-
                 {status}
             </Styled.PlantInfo>
         </Styled.PlantCard>

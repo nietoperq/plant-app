@@ -20,7 +20,7 @@ function Achievements() {
         <Pages.Container>
             <Sidebar />
             <Pages.Section>
-                <h2>Your achievements:</h2>
+                <h2>Your achievements</h2>
                 <Pages.WrapSectionElements>
                     {achievementList}
                 </Pages.WrapSectionElements>
