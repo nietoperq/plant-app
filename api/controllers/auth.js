@@ -2,6 +2,7 @@ import db from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import passwordValidator from "password-validator";
 
 dotenv.config();
 
@@ -13,7 +14,30 @@ export function register(req, res) {
         if (err) return res.json(err);
         if (data.length) return res.status(409).json("User already exists!");
 
-        //TODO: validate password
+        // validate password
+        const schema = new passwordValidator();
+        schema
+            .is()
+            .min(8)
+            .has()
+            .uppercase()
+            .has()
+            .lowercase()
+            .has()
+            .digits()
+            .has()
+            .symbols()
+            .has()
+            .not()
+            .spaces();
+
+        if (!schema.validate(req.body.password)) {
+            return res
+                .status(400)
+                .json(
+                    "Password must be minimum 8 characters long, contain letters, numbers, and special characters"
+                );
+        }
 
         // hash the password and create a user
         const salt = bcrypt.genSaltSync(10);
@@ -115,6 +139,31 @@ export function updatePassword(req, res) {
 
         if (!isConfirmPasswordCorrect) {
             return res.status(400).json("Passwords don't match");
+        }
+
+        // validate password
+        const schema = new passwordValidator();
+        schema
+            .is()
+            .min(8)
+            .has()
+            .uppercase()
+            .has()
+            .lowercase()
+            .has()
+            .digits()
+            .has()
+            .symbols()
+            .has()
+            .not()
+            .spaces();
+
+        if (!schema.validate(req.body.new_password)) {
+            return res
+                .status(400)
+                .json(
+                    "Password must be minimum 8 characters long, contain letters, numbers, and special characters"
+                );
         }
 
         // change password
