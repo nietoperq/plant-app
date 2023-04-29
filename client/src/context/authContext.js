@@ -84,15 +84,27 @@ function AuthContextProvider({ children }) {
             ).achievement_id;
             earnAchievement(achievementId);
         }
-        if (totalWateringCounter >= 5) {
+        if (totalWateringCounter >= 10) {
             const achievementId = userAchievements.find(
                 (achievement) => achievement.name === "Waterbender II"
             ).achievement_id;
             earnAchievement(achievementId);
         }
-        if (totalWateringCounter >= 25) {
+        if (totalWateringCounter >= 50) {
             const achievementId = userAchievements.find(
                 (achievement) => achievement.name === "Waterbender III"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalWateringCounter >= 100) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Waterbender IV"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalWateringCounter >= 500) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Waterbender V"
             ).achievement_id;
             earnAchievement(achievementId);
         }
@@ -119,6 +131,64 @@ function AuthContextProvider({ children }) {
         if (totalFertilizingCounter >= 25) {
             const achievementId = userAchievements.find(
                 (achievement) => achievement.name === "Earthbender III"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalFertilizingCounter >= 50) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Earthbender IV"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (totalFertilizingCounter >= 100) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Earthbender V"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+
+        // check for flowerpots achievements
+
+        //"/getflowerpots/:userId"
+
+        let flowerpotsCount = 0;
+
+        try {
+            const res = await axios.get(
+                `/user/getflowerpots/${currentUser.user_id}`
+            );
+            flowerpotsCount = res.data.length;
+        } catch (err) {
+            console.log(err);
+        }
+
+        if (flowerpotsCount >= 1) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Collector I"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (flowerpotsCount >= 5) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Collector II"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (flowerpotsCount >= 10) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Collector IV"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (flowerpotsCount >= 20) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Collector V"
+            ).achievement_id;
+            earnAchievement(achievementId);
+        }
+        if (flowerpotsCount >= 30) {
+            const achievementId = userAchievements.find(
+                (achievement) => achievement.name === "Collector III"
             ).achievement_id;
             earnAchievement(achievementId);
         }

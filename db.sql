@@ -233,6 +233,11 @@ INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Ea
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender III', 'earthbender_3', 'Fertilize plant 25 times.');
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender IV', 'earthbender_4', 'Fertilize plant 50 times.');
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Earthbender V', 'earthbender_5', 'Fertilize plant 100 times.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Collector I', 'flowerpot_collector_1', 'Buy your first flowerpot.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Collector II', 'flowerpot_collector_2', 'Buy 5 flowerpots.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Collector III', 'flowerpot_collector_3', 'Buy 10 flowerpots.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Collector IV', 'flowerpot_collector_4', 'Buy 20 flowerpots.');
+INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Collector V', 'flowerpot_collector_5', 'Buy 30 flowerpots.');
 
 INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round white', 300);
 INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round black', 300);
