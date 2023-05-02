@@ -43,13 +43,19 @@ function PlantCard(props) {
 
         if (water_next <= 0) {
             setStatus(
-                <Styled.Icon color="#61B1D4">
+                <Styled.Icon
+                    color="#61B1D4"
+                    tooltip="This plant needs watering!"
+                >
                     <TbDroplet />
                 </Styled.Icon>
             );
         } else if (fertilize_next <= 0) {
             setStatus(
-                <Styled.Icon color="#B2C182">
+                <Styled.Icon
+                    color="#B2C182"
+                    tooltip="This plant needs fertilizing!"
+                >
                     <TbPaperBag />
                 </Styled.Icon>
             );

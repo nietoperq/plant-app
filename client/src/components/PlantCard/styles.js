@@ -35,10 +35,38 @@ export const PlantInfo = styled.div`
 `;
 
 export const Icon = styled.div`
-    position: relative;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    padding: 15px;
     svg {
         color: ${(props) => props.color || props.theme.colors.primary};
         width: 20px;
         height: 20px;
+    }
+
+    // tooltip
+    &:after {
+        content: "${(props) => props.tooltip}";
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 190px;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        background-color: ${(props) =>
+            props.color || props.theme.colors.primary};
+        border-radius: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    &:hover:after {
+        opacity: 1;
     }
 `;
