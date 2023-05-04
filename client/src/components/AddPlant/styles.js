@@ -94,17 +94,4 @@ export const SearchList = styled.div`
             font-weight: 700;
         }
     }
-
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #ddd;
-        border-radius: 4px;
-    }
 `;

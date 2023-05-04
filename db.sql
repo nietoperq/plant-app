@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `plantapp`.`user` (
   `currency` INT UNSIGNED NOT NULL DEFAULT 0,
   `plant_slots` TINYINT UNSIGNED NOT NULL DEFAULT 10,
   `site_slots` TINYINT UNSIGNED NOT NULL DEFAULT 2,
+  `claimed_rewards` tinyint(4) unsigned NOT NULL DEFAULT 0,
   `email_notifications` TINYINT NOT NULL DEFAULT 1,
   `interface_theme` CHAR(1) NOT NULL DEFAULT 'L',
   PRIMARY KEY (`user_id`))
@@ -423,3 +424,34 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `claim_rewards`(IN p_user_id INT)
+BEGIN
+  DECLARE user_lvl INT;
+  DECLARE user_claimed_rewards INT;
+  DECLARE plant_slots_reward INT;
+  DECLARE site_slots_reward INT;
+
+  -- Get user's current level
+  SELECT lvl INTO user_lvl FROM user WHERE user_id = p_user_id;
+  SELECT claimed_rewards INTO user_claimed_rewards FROM user WHERE user_id = p_user_id;
+  
+  -- Calculate rewards
+  SET plant_slots_reward = (FLOOR(user_lvl/5) - user_claimed_rewards) * 5 ;
+  SET site_slots_reward = FLOOR(user_lvl/10) - FLOOR(user_claimed_rewards/2);
+
+  
+  -- Check if rewards have already been claimed
+  IF user_claimed_rewards >= (FLOOR(user_lvl/5)) THEN
+    SELECT 'Rewards have already been claimed.' AS message;
+  ELSE
+    -- Update user's rewards 
+    UPDATE user SET plant_slots = plant_slots + plant_slots_reward, site_slots = site_slots + site_slots_reward, claimed_rewards = FLOOR(user_lvl/5) WHERE user_id = p_user_id;
+    SELECT CONCAT('Rewards claimed! Plant slots: +', plant_slots_reward, ', Site slots: +', site_slots_reward) AS message;
+  END IF;
+END$$
+DELIMITER ;
+

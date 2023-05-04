@@ -14,19 +14,6 @@ export const Container = styled.div`
     h2 {
         font-weight: 500;
     }
-
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #ddd;
-        border-radius: 5px;
-    }
 `;
 
 export const Section = styled.div`

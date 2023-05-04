@@ -12,7 +12,7 @@ import {
     BiDoorOpen,
 } from "react-icons/bi";
 
-import { RiStarLine, RiCopperDiamondLine } from "react-icons/ri";
+import { RiShieldStarLine, RiCopperDiamondLine } from "react-icons/ri";
 
 import * as Styled from "./styles";
 
@@ -33,7 +33,9 @@ function Sidebar() {
 
                 <div>
                     <h3>{currentUser.username}</h3>
-                    <span>LVL {currentUser.lvl}</span>
+                    <span>
+                        <RiShieldStarLine /> {currentUser.lvl}
+                    </span>
                     <span>
                         <RiCopperDiamondLine /> {currentUser.currency}
                     </span>

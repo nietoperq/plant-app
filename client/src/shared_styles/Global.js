@@ -31,6 +31,19 @@ span.error-message {
 
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 5px;
+}
+
 `;
 
 export default GlobalStyles;

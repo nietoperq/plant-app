@@ -84,3 +84,14 @@ export function updateProfilePicture(req, res) {
         return res.status(200).json("Profile picture updated");
     });
 }
+
+export function claimRewards(req, res) {
+    const q = "CALL claim_rewards(?)";
+
+    const values = [req.body.user_id];
+
+    db.query(q, values, (err, data) => {
+        if (err) return res.json(err);
+        return res.status(200).json("Rewards claimed");
+    });
+}
