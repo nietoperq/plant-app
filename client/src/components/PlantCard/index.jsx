@@ -19,11 +19,16 @@ function PlantCard(props) {
         watering_frequency_summer,
         fertilizing_frequency_summer,
         flowerpot_id,
+        name,
     } = props.plant;
     const { handleClick } = props;
     const [status, setStatus] = useState("");
 
-    const flowerpot = flowerpot_id ? "flowerpot_" + flowerpot_id : "default";
+    const flowerpot = flowerpot_id
+        ? name.toLowerCase().replace(/ /g, "_")
+        : "default";
+
+    console.log(flowerpot);
 
     useEffect(() => {
         const date_w = new Date(last_watered);

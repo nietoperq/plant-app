@@ -47,6 +47,7 @@ function PlantDetails(props) {
         watering_counter,
         watering_frequency_summer,
         watering_frequency_winter,
+        name,
     } = props.plant;
 
     const { refreshPlantsData } = props;
@@ -56,7 +57,9 @@ function PlantDetails(props) {
         getFlowerpots();
     }, []);
 
-    const flowerpot = flowerpot_id ? "flowerpot_" + flowerpot_id : "default";
+    const flowerpot = flowerpot_id
+        ? name.toLowerCase().replace(/ /g, "_")
+        : "default";
 
     const date_w = new Date(last_watered);
     const date_f = new Date(last_fertilized);

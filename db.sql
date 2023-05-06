@@ -260,9 +260,32 @@ INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Co
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Collector IV', 'flowerpot_collector_4', 'Buy 20 flowerpots.');
 INSERT INTO `plantapp`.`achievement` (`name`, `icon`, `description`) VALUES ('Collector V', 'flowerpot_collector_5', 'Buy 30 flowerpots.');
 
-INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round white', 300);
-INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round black', 300);
-INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round brown', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic white', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic grey', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic black', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic brown', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic blue', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic red', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic green', 300);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Basic purple', 300);
+
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round white', 500);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round grey', 500);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round black', 500);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round brown', 500);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round blue', 500);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round red', 500);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round green', 500);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Round purple', 500);
+
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted white', 1000);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted grey', 1000);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted black', 1000);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted brown', 1000);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted blue', 1000);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted red', 1000);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted green', 1000);
+INSERT INTO `plantapp`.`flowerpot`(`name`, `price`) VALUES ('Fluted purple', 1000);
 
 
 DELIMITER $$
