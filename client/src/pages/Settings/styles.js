@@ -82,5 +82,9 @@ export const Settings = styled.div`
         &:active {
             scale: 0.99;
         }
+
+        &:active {
+            scale: 0.99;
+        }
     }
 `;

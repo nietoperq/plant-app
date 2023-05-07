@@ -377,12 +377,16 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_flowerpots`(userID INT)
 BEGIN
- SELECT f.flowerpot_id, f.name, f.price, 
+  SELECT f.flowerpot_id, f.name, f.price, 
     IF(uhf.user_id IS NULL, 0, 1) AS is_purchased
   FROM flowerpot f
   LEFT JOIN user_has_flowerpot uhf ON f.flowerpot_id = uhf.flowerpot_id 
     AND uhf.user_id = userID
-  ORDER BY f.price;
+  ORDER BY (
+    SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(name, ' ', -1), ' ', 1)
+    FROM flowerpot
+    WHERE flowerpot_id = f.flowerpot_id
+  ), f.flowerpot_id;
 END$$
 DELIMITER ;
 

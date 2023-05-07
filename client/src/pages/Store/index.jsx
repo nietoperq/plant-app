@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 import Notification from "../../components/Notification";
+import FlowerpotCard from "../../components/FlowerpotCard";
 import Confetti from "react-confetti";
 
 import { HiOutlineTrash } from "react-icons/hi";
@@ -66,16 +67,7 @@ function Store() {
     console.log(error);
 
     const storeItems = flowerpots.map((flowerpot) => (
-        <Styled.StoreCard>
-            {flowerpot.name}
-            {flowerpot.is_purchased ? (
-                <button disabled={true}>owned</button>
-            ) : (
-                <button id={flowerpot.flowerpot_id} onClick={buyFlowerpot}>
-                    {flowerpot.price}
-                </button>
-            )}
-        </Styled.StoreCard>
+        <FlowerpotCard flowerpot={flowerpot} handleClick={buyFlowerpot} />
     ));
 
     return (
@@ -83,6 +75,7 @@ function Store() {
             <Pages.Container>
                 <Sidebar />
                 <Pages.Section>
+                    <h2>Store</h2>
                     <Styled.Error> {error}</Styled.Error>
                     <Pages.WrapSectionElements>
                         {storeItems}
