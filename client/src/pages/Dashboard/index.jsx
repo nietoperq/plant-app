@@ -147,9 +147,9 @@ function Dashboard() {
             <Pages.Container>
                 <Sidebar />
                 <Styled.DashboardGrid>
-                    <Pages.Section style={{ gridArea: "w" }}>
+                    <Styled.WeatherSection style={{ gridArea: "w" }}>
                         <Weather />
-                    </Pages.Section>
+                    </Styled.WeatherSection>
                     <Pages.Section style={{ gridArea: "s" }}>
                         <h2>Your sites </h2>
                         {userSites.length > 0 ? (

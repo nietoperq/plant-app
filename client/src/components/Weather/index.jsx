@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import WeatherIcon from "../WeatherIcon";
+import { WiStrongWind, WiCloudy, WiRaindrop, WiSprinkle } from "react-icons/wi";
+
 import * as Styled from "./styles";
 
 function Weather() {
@@ -36,24 +39,57 @@ function Weather() {
         }
     }, []);
 
+    console.log(data.current);
+
     return (
         <>
             <h2>Weather</h2>
 
             {data.current ? (
                 <Styled.Weather>
-                    <img src={data.current.condition.icon} />
-                    <div>
-                        <p>
-                            Location: {data.location.name},{" "}
-                            {data.location.country}
-                        </p>
-                        <p>{data.current.condition.text}</p>
-                        <p>{data.current.temp_c}°C</p>
-                        <p>Humidity: {data.current.humidity}%</p>
-                        <p>Cloud cover: {data.current.cloud}%</p>
-                        <p>Precipitation amount: {data.current.precip_mm}mm</p>
-                    </div>
+                    <span>
+                        {data.location.name}, {data.location.country}
+                    </span>
+                    <Styled.FlexRow>
+                        <div>
+                            <p id="temp">{data.current.temp_c}°C</p>
+                            <span>{data.current.condition.text}</span>
+                        </div>
+                        <WeatherIcon
+                            weatherCode={data.current.condition.code}
+                            isDay={data.current.is_day}
+                        />
+                    </Styled.FlexRow>
+                    <Styled.FlexRow>
+                        <Styled.WeatherDetails>
+                            <WiStrongWind />
+                            <p>
+                                {Math.round(data.current.wind_kph)}
+                                <sup>km/h</sup>
+                            </p>
+                        </Styled.WeatherDetails>
+                        <Styled.WeatherDetails>
+                            <WiCloudy />
+                            <p>
+                                {data.current.cloud}
+                                <sup>%</sup>
+                            </p>
+                        </Styled.WeatherDetails>
+                        <Styled.WeatherDetails>
+                            <WiRaindrop />
+                            <p>
+                                {data.current.humidity}
+                                <sup>%</sup>
+                            </p>
+                        </Styled.WeatherDetails>
+                        <Styled.WeatherDetails>
+                            <WiSprinkle />
+                            <p>
+                                {data.current.precip_mm}
+                                <sup>mm</sup>
+                            </p>
+                        </Styled.WeatherDetails>
+                    </Styled.FlexRow>
                 </Styled.Weather>
             ) : (
                 <>

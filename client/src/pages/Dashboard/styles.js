@@ -6,12 +6,24 @@ export const DashboardGrid = styled.div`
     grid-template-areas:
         "s w"
         "p p";
+    grid-template-columns: auto minmax(400px, 500px);
     grid-gap: 20px;
 `;
 
 export const DashboardSectionElements = styled.div`
     display: flex;
     flex-wrap: wrap;
+`;
+
+export const WeatherSection = styled.div`
+    background: #fff;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    span {
+        color: ${({ theme }) => theme.colors.primary};
+    }
 `;
 
 export const ClickableSpan = styled.span`

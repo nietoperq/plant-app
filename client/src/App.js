@@ -16,7 +16,7 @@ import Settings from "./pages/Settings";
 const theme = {
     colors: {
         font: "#444",
-        primary: "#b0998f",
+        primary: "#C1A8A7",
         grey: "#777",
         body: "#eeeeee",
     },

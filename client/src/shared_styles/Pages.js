@@ -7,7 +7,7 @@ export const Container = styled.div`
     top: 20px;
     bottom: 20px;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 30px;
     background: #eee;
     overflow: auto;
 
@@ -18,8 +18,8 @@ export const Container = styled.div`
 
 export const Section = styled.div`
     background: #ffffffdd;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 30px;
+    border-radius: 30px;
 
     span {
         color: ${({ theme }) => theme.colors.primary};
