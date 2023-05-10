@@ -502,3 +502,37 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_email_data`()
+BEGIN
+    DECLARE season VARCHAR(10);
+    SET season = (SELECT CASE 
+                    WHEN MONTH(CURDATE()) IN (10,11,12,1,2,3) THEN 'Winter'
+                    ELSE 'Summer' 
+                  END);
+
+    SELECT u.username, u.email, p.primary_name, 'watering' AS notification_type
+    FROM user u
+    JOIN site s ON u.user_id = s.user_id
+    JOIN site_has_plant shp ON s.site_id = shp.site_id
+    JOIN plant p ON shp.plant_id = p.plant_id
+    WHERE 
+        (season = 'Summer' AND shp.last_watered + INTERVAL p.watering_frequency_summer DAY < CURRENT_DATE())
+        OR (season = 'Winter' AND shp.last_watered + INTERVAL p.watering_frequency_winter DAY < CURRENT_DATE())
+
+    UNION ALL
+
+    SELECT u.username, u.email, p.primary_name, 'fertilizing' AS notification_type
+    FROM user u
+    JOIN site s ON u.user_id = s.user_id
+    JOIN site_has_plant shp ON s.site_id = shp.site_id
+    JOIN plant p ON shp.plant_id = p.plant_id
+    WHERE 
+        (season = 'Summer' AND shp.last_fertilized + INTERVAL p.fertilizing_frequency_summer DAY < CURRENT_DATE())
+        OR (season = 'Winter' AND shp.last_fertilized + INTERVAL p.fertilizing_frequency_winter DAY < CURRENT_DATE())
+
+    AND u.email_notifications = 1;
+END$$
+DELIMITER ;
+
+
