@@ -39,8 +39,6 @@ function Weather() {
         }
     }, []);
 
-    console.log(data.current);
-
     return (
         <>
             <h2>Weather</h2>

@@ -17,15 +17,17 @@ function Achievements() {
     ));
 
     return (
-        <Pages.Container>
+        <>
             <Sidebar />
-            <Pages.Section>
-                <h2>Your achievements</h2>
-                <Pages.WrapSectionElements>
-                    {achievementList}
-                </Pages.WrapSectionElements>
-            </Pages.Section>
-        </Pages.Container>
+            <Pages.Container>
+                <Pages.Section>
+                    <h2>Your achievements</h2>
+                    <Pages.WrapSectionElements>
+                        {achievementList}
+                    </Pages.WrapSectionElements>
+                </Pages.Section>
+            </Pages.Container>
+        </>
     );
 }
 

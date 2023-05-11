@@ -12,7 +12,7 @@ import {
     IoSunnyOutline,
     IoSkullOutline,
 } from "react-icons/io5";
-import { RiHazeLine } from "react-icons/ri";
+import { RiHazeLine, RiCheckboxCircleLine } from "react-icons/ri";
 import { TbGrain, TbDroplet, TbPaperBag } from "react-icons/tb";
 
 import * as Styled from "./styles";
@@ -111,7 +111,7 @@ function PlantDetails(props) {
 
     async function setFlowerpot(e) {
         e.preventDefault();
-        const flowerpot_id = e.currentTarget.id;
+        const flowerpot_id = e.target.value;
         try {
             await axios.put("/plants/setflowerpot", {
                 site_has_plant_id,
@@ -132,19 +132,6 @@ function PlantDetails(props) {
         setSection(event.currentTarget.id);
     }
 
-    const flowerpotList = flowerpots?.length
-        ? flowerpots.map((flowerpot) => (
-              <span
-                  style={{ cursor: "pointer" }}
-                  key={flowerpot.flowerpot_id}
-                  id={flowerpot.flowerpot_id}
-                  onClick={setFlowerpot}
-              >
-                  {flowerpot.name}
-              </span>
-          ))
-        : "Empty";
-
     return (
         <Styled.PlantDetails>
             <h1>{primary_name}</h1>
@@ -161,65 +148,104 @@ function PlantDetails(props) {
                 </Canvas>
             </Styled.PlantModel>
             <div>
-                <Styled.WaterButton onClick={waterPlant}>
+                <Styled.Button onClick={waterPlant} disabled={water_next >= 0}>
                     <TbDroplet />
-                    Water
-                </Styled.WaterButton>
-                <Styled.FertilizeButton onClick={fertilizePlant}>
+                    water
+                </Styled.Button>
+                <Styled.Button
+                    onClick={fertilizePlant}
+                    disabled={fertilize_next >= 0}
+                >
                     <TbPaperBag />
-                    Fertilize
-                </Styled.FertilizeButton>
+                    fertilize
+                </Styled.Button>
             </div>
             <div>
-                <Styled.Button onClick={changeSection} id={1}>
+                <Styled.Navigation
+                    onClick={changeSection}
+                    id={1}
+                    className={section == 1 && "active-section"}
+                >
+                    Tasks
+                </Styled.Navigation>
+                <Styled.Navigation
+                    onClick={changeSection}
+                    id={2}
+                    className={section == 2 && "active-section"}
+                >
+                    Care Tips
+                </Styled.Navigation>
+                <Styled.Navigation
+                    onClick={changeSection}
+                    id={3}
+                    className={section == 3 && "active-section"}
+                >
                     Overview
-                </Styled.Button>
-                <Styled.Button onClick={changeSection} id={2}>
-                    Customize
-                </Styled.Button>
-                <Styled.Button onClick={changeSection} id={3}>
-                    Plant info
-                </Styled.Button>
+                </Styled.Navigation>
             </div>
 
             {section == 1 && (
                 <>
                     <Styled.Grid
                         style={{
-                            gridTemplateAreas: '"t t" "w f"',
+                            gridTemplateAreas: '"t t" "u u" "w f"',
                         }}
                     >
                         <Styled.Cell style={{ gridArea: "t" }}>
-                            <h2>Upcoming tasks</h2>
-                            {water_next > 0 && (
-                                <p>
-                                    This plant needs to be watered in{" "}
-                                    {water_next} days.
-                                </p>
-                            )}
+                            <h2>Today's tasks</h2>
                             {water_next == 0 && (
-                                <p>This plant needs to be watered today.</p>
+                                <p>
+                                    <TbDroplet /> This plant needs to be watered
+                                    today.
+                                </p>
                             )}
                             {water_next < 0 && (
                                 <p>
+                                    <TbDroplet />
                                     This plant needs to be watered today.{" "}
                                     {-water_next} days overdue.
                                 </p>
                             )}
-
+                            {fertilize_next == 0 && (
+                                <p>
+                                    <TbPaperBag />
+                                    This plant needs to be fertilized today.
+                                </p>
+                            )}
+                            {fertilize_next < 0 && (
+                                <p>
+                                    <TbPaperBag />
+                                    This plant needs to be fertilized today.{" "}
+                                    {-fertilize_next} days overdue.
+                                </p>
+                            )}
+                            {fertilize_next > 0 && water_next > 0 && (
+                                <p>
+                                    <RiCheckboxCircleLine />
+                                    All tasks completed.
+                                </p>
+                            )}
+                        </Styled.Cell>
+                        <Styled.Cell style={{ gridArea: "u" }}>
+                            <h2>Upcoming tasks</h2>
+                            {water_next > 0 && (
+                                <p>
+                                    <TbDroplet />
+                                    This plant needs to be watered in{" "}
+                                    {water_next} days.
+                                </p>
+                            )}
                             {fertilize_next > 0 && (
                                 <p>
+                                    <TbPaperBag />
                                     This plant needs to be fertilized in{" "}
                                     {fertilize_next} days.
                                 </p>
                             )}
-                            {fertilize_next == 0 && (
-                                <p>This plant needs to be fertilized today.</p>
-                            )}
-                            {fertilize_next < 0 && (
+                            {fertilize_next <= 0 && water_next <= 0 && (
                                 <p>
-                                    This plant needs to be fertilized today.{" "}
-                                    {-fertilize_next} days overdue.
+                                    <RiCheckboxCircleLine />
+                                    No upcoming tasks. Check tasks for today.
                                 </p>
                             )}
                         </Styled.Cell>
@@ -247,8 +273,7 @@ function PlantDetails(props) {
                     </Styled.DeleteButton>
                 </>
             )}
-            {section == 2 && flowerpotList}
-            {section == 3 && (
+            {section == 2 && (
                 <>
                     <Styled.Grid
                         style={{
@@ -257,26 +282,38 @@ function PlantDetails(props) {
                     >
                         <Styled.Cell style={{ gridArea: "l" }}>
                             <h2>Light</h2>
-                            <IoSunnyOutline />
-                            {prefered_light_level}
+                            <p>
+                                <IoSunnyOutline />
+                                {prefered_light_level == 1 && "Low"}
+                                {prefered_light_level == 2 && "Medium"}
+                                {prefered_light_level == 3 && "High"}
+                            </p>
                         </Styled.Cell>
 
                         <Styled.Cell style={{ gridArea: "h" }}>
                             <h2>Humidity</h2>
-                            <IoWaterOutline />
-                            {prefered_humidity}
+                            <p>
+                                <IoWaterOutline />
+                                {prefered_humidity == 1 && "Low"}
+                                {prefered_humidity == 2 && "Medium"}
+                                {prefered_humidity == 3 && "High"}
+                            </p>
                         </Styled.Cell>
 
                         <Styled.Cell style={{ gridArea: "m" }}>
                             <h2>Misting</h2>
-                            <TbGrain />
-                            {likes_misting}
+                            <p>
+                                <TbGrain />
+                                {likes_misting ? "Yes" : "No"}
+                            </p>
                         </Styled.Cell>
 
                         <Styled.Cell style={{ gridArea: "t" }}>
                             <h2>Toxic</h2>
-                            <IoSkullOutline />
-                            {is_toxic}
+                            <p>
+                                <IoSkullOutline />
+                                {is_toxic ? "Toxic" : "Not toxic"}
+                            </p>
                         </Styled.Cell>
 
                         <Styled.Cell style={{ gridArea: "w" }}>
@@ -307,15 +344,50 @@ function PlantDetails(props) {
                             <h2>Ideal temperature</h2>
                             <p>
                                 <RiHazeLine /> {min_temp_summer}°C -{" "}
-                                {max_temp_summer}°C Outdoor: {outdoor_summer}
+                                {max_temp_summer}°C{" ∙ "}
+                                {outdoor_summer
+                                    ? "Can grow outdoors"
+                                    : "Cannot grow outdoors"}
                             </p>
                             <p>
                                 <IoSnowOutline /> {min_temp_winter}°C -{" "}
-                                {max_temp_winter}°C Outdoor: {outdoor_winter}
+                                {max_temp_winter}°C{" ∙ "}
+                                {outdoor_winter
+                                    ? "Can grow outdoors"
+                                    : "Cannot grow outdoors"}
                             </p>
                         </Styled.Cell>
                     </Styled.Grid>
                 </>
+            )}
+            {section == 3 && (
+                <Styled.Grid>
+                    <Styled.Cell>
+                        <h2>Description</h2>
+                        <p>{description}</p>
+                    </Styled.Cell>
+                    <Styled.Cell>
+                        <h2>Your note</h2>
+                        <p>{note ? note : "empty"}</p>
+                    </Styled.Cell>
+                    <Styled.Cell>
+                        <h2>Customize</h2>
+                        {flowerpots?.length ? (
+                            <select onChange={setFlowerpot}>
+                                {flowerpots.map((flowerpot) => (
+                                    <option
+                                        key={flowerpot.flowerpot_id}
+                                        value={flowerpot.flowerpot_id}
+                                    >
+                                        {flowerpot.name}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : (
+                            "Empty"
+                        )}
+                    </Styled.Cell>
+                </Styled.Grid>
             )}
         </Styled.PlantDetails>
     );

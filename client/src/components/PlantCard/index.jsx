@@ -28,8 +28,6 @@ function PlantCard(props) {
         ? name.toLowerCase().replace(/ /g, "_")
         : "default";
 
-    console.log(flowerpot);
-
     useEffect(() => {
         const date_w = new Date(last_watered);
         const date_f = new Date(last_fertilized);

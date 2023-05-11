@@ -11,6 +11,10 @@ export const Container = styled.div`
     background: #eee;
     overflow: auto;
 
+    & > * {
+        animation: transitionIn 1s;
+    }
+
     h2 {
         font-weight: 500;
     }
@@ -20,7 +24,7 @@ export const Section = styled.div`
     background: #ffffffdd;
     padding: 30px;
     border-radius: 30px;
-
+    animation: transitionIn 1s;
     span {
         color: ${({ theme }) => theme.colors.primary};
     }

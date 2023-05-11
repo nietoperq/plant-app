@@ -72,8 +72,8 @@ function Store() {
 
     return (
         <>
+            <Sidebar />
             <Pages.Container>
-                <Sidebar />
                 <Pages.Section>
                     <h2>Store</h2>
                     <Styled.Error> {error}</Styled.Error>

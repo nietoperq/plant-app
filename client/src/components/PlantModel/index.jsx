@@ -10,7 +10,7 @@ function PlantModel(props) {
     const mesh = useRef();
     const { scale } = useSpring({
         scale: hovered ? props.size : 0.9 * props.size,
-        config: config.wobbly,
+        config: config.gentle,
     });
 
     const plant_src = useMemo(() => `./models/plants/${plant}.glb`, [plant]);

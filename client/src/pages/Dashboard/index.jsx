@@ -130,6 +130,7 @@ function Dashboard() {
             siteId={site.site_id}
             name={site.name}
             icon={site.icon}
+            currentSite={currentSite}
             handleClick={selectSite}
         />
     ));
@@ -144,8 +145,9 @@ function Dashboard() {
 
     return (
         <>
+            <Sidebar />
+
             <Pages.Container>
-                <Sidebar />
                 <Styled.DashboardGrid>
                     <Styled.WeatherSection style={{ gridArea: "w" }}>
                         <Weather />
@@ -153,9 +155,9 @@ function Dashboard() {
                     <Pages.Section style={{ gridArea: "s" }}>
                         <h2>Your sites </h2>
                         {userSites.length > 0 ? (
-                            <Styled.DashboardSectionElements>
+                            <Styled.HorizontalScroll>
                                 {siteList}
-                            </Styled.DashboardSectionElements>
+                            </Styled.HorizontalScroll>
                         ) : (
                             <h3 style={{ padding: "20px 0" }}>
                                 You haven't created any site yet

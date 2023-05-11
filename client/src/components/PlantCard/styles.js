@@ -10,6 +10,7 @@ export const PlantCard = styled.div`
     padding: 20px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
+    animation: transitionIn 2s;
 `;
 
 export const PlantModel = styled.div`
@@ -20,6 +21,7 @@ export const PlantModel = styled.div`
     bottom: 40px;
     width: 250px;
     height: 250px;
+    animation: transitionIn 2s;
 `;
 
 export const PlantInfo = styled.div`
@@ -30,8 +32,14 @@ export const PlantInfo = styled.div`
     align-items: flex-end;
     width: 100%;
     height: 100%;
-
     font-weight: 600;
+
+    p {
+        width: 90%; /* the element needs a fixed width (in px, em, %, etc) */
+        overflow: hidden; /* make sure it hides the content that overflows */
+        white-space: nowrap; /* don't break the line */
+        text-overflow: ellipsis; /* give the beautiful '...' effect */
+    }
 `;
 
 export const Icon = styled.div`

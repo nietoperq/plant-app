@@ -2,15 +2,24 @@ import styled from "styled-components";
 
 export const SiteCard = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     background: #fff;
     border-radius: 20px;
-    padding: 20px;
+    height: 150px;
+    width: 150px;
+    font-weight: 600;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
     margin: 20px;
     transition: 0.1s ease;
+
+    svg {
+        color: ${({ theme }) => theme.colors.primary};
+        font-size: 40px;
+    }
 
     &:hover {
         transform: scale(1.05);
@@ -19,10 +28,12 @@ export const SiteCard = styled.div`
     &:active {
         transform: scale(1);
     }
-`;
 
-export const SiteIcon = styled.div`
-    color: ${({ theme }) => theme.colors.primary};
-    font-size: 30px;
-    margin-top: 5px;
+    &.selected {
+        color: #fff;
+        background: ${({ theme }) => theme.colors.primary};
+        svg {
+            color: #fff;
+        }
+    }
 `;

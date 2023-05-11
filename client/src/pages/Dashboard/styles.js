@@ -71,3 +71,10 @@ export const AchievementNotification = styled.div`
         color: ${({ theme }) => theme.colors.primary};
     }
 `;
+
+export const HorizontalScroll = styled.div`
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    scroll-behavior: auto;
+`;

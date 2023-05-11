@@ -33,6 +33,7 @@ span.error-message {
 
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -42,6 +43,15 @@ span.error-message {
 ::-webkit-scrollbar-thumb {
     background: #ddd;
     border-radius: 5px;
+}
+
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 `;

@@ -30,32 +30,30 @@ function ChangePassword() {
         }
     }
 
-    console.log(message);
-
     return (
         <form>
-            <label for="old_password">Old password</label>
             <input
                 type="password"
                 id="old_password"
                 name="old_password"
                 onChange={handleChange}
+                placeholder="Old password"
                 required
             ></input>
-            <label for="new_password">New password</label>
             <input
                 type="password"
                 id="new_password"
                 name="new_password"
                 onChange={handleChange}
+                placeholder="New password"
                 required
             ></input>
-            <label for="confirm_new_password">Confirm password</label>
             <input
                 type="password"
                 id="confirm_new_password"
                 name="confirm_new_password"
                 onChange={handleChange}
+                placeholder="Confirm password"
                 required
             ></input>
             {message && message.type == "error" && (

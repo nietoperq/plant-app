@@ -116,89 +116,94 @@ function Profile() {
     }
 
     return (
-        <Pages.Container>
+        <>
             <Sidebar />
-            <Styled.Grid>
-                <Styled.ProfileSection style={{ gridArea: "p" }}>
-                    <img src={img_src} alt="" />
-                    <Styled.FlexColumn>
-                        <h2>{currentUser.username}</h2>
-                        <span>{currentUser.email}</span>
-                        <Styled.ProfileStats>
-                            <Styled.ProfileStat>
-                                <RiShieldStarLine />
-                                <div>
-                                    <span>{currentUser.lvl}</span>
-                                    <p>LVL</p>
-                                </div>
-                            </Styled.ProfileStat>
-                            <Styled.ProfileStat>
-                                <RiStarLine />
-                                <div>
-                                    <span>{currentUser.xp}</span>
-                                    <p>XP</p>
-                                </div>
-                            </Styled.ProfileStat>
-                            <Styled.ProfileStat>
-                                <RiCopperDiamondLine />
-                                <div>
-                                    <span>{currentUser.currency}</span>
-                                    <p>coins</p>
-                                </div>
-                            </Styled.ProfileStat>
-                            <Styled.ProfileStat>
-                                <RiHome2Line />
-                                <div>
-                                    <span>{currentUser.site_slots}</span>
-                                    <p>site slots</p>
-                                </div>
-                            </Styled.ProfileStat>
-                            <Styled.ProfileStat>
-                                <RiPlantLine />
-                                <div>
-                                    <span>{currentUser.plant_slots}</span>
-                                    <p>plant slots</p>
-                                </div>
-                            </Styled.ProfileStat>
-                        </Styled.ProfileStats>
-                    </Styled.FlexColumn>
-                </Styled.ProfileSection>
-                <Pages.Section style={{ gridArea: "s" }}>
-                    <h2>Stats</h2>
-                    <Styled.FlexRow>
-                        <Styled.StatsCard>
-                            <span>
-                                {achievementsNumber}/{userAchievements.length}
-                            </span>
-                            <p>Achievements unlocked</p>
-                        </Styled.StatsCard>
-                        <Styled.StatsCard>
-                            <span>{totalWateringCounter}</span>
-                            <p>Total watering counter</p>
-                        </Styled.StatsCard>
-                        <Styled.StatsCard>
-                            <span>{totalFertilizingCounter}</span>
-                            <p>Total fertilizing counter</p>
-                        </Styled.StatsCard>
-                        <Styled.StatsCard>
-                            <span>{numberOfSites}</span>
-                            <p>Number of sites</p>
-                        </Styled.StatsCard>
-                        <Styled.StatsCard>
-                            <span>{numberOfPlants}</span>
-                            <p>Number of plants</p>
-                        </Styled.StatsCard>
-                    </Styled.FlexRow>
-                </Pages.Section>
-                <Styled.RewardsSection style={{ gridArea: "r" }}>
-                    <h2>Rewards</h2>
-                    {currentUser.claimed_rewards < currentUser.lvl / 5 && (
-                        <button onClick={claimRewards}>Claim rewards</button>
-                    )}
-                    <Styled.RewardsList>{rewards}</Styled.RewardsList>
-                </Styled.RewardsSection>
-            </Styled.Grid>
-        </Pages.Container>
+            <Pages.Container>
+                <Styled.Grid>
+                    <Styled.ProfileSection style={{ gridArea: "p" }}>
+                        <img src={img_src} alt="" />
+                        <Styled.FlexColumn>
+                            <h2>{currentUser.username}</h2>
+                            <span>{currentUser.email}</span>
+                            <Styled.ProfileStats>
+                                <Styled.ProfileStat>
+                                    <RiShieldStarLine />
+                                    <div>
+                                        <span>{currentUser.lvl}</span>
+                                        <p>LVL</p>
+                                    </div>
+                                </Styled.ProfileStat>
+                                <Styled.ProfileStat>
+                                    <RiStarLine />
+                                    <div>
+                                        <span>{currentUser.xp}</span>
+                                        <p>XP</p>
+                                    </div>
+                                </Styled.ProfileStat>
+                                <Styled.ProfileStat>
+                                    <RiCopperDiamondLine />
+                                    <div>
+                                        <span>{currentUser.currency}</span>
+                                        <p>coins</p>
+                                    </div>
+                                </Styled.ProfileStat>
+                                <Styled.ProfileStat>
+                                    <RiHome2Line />
+                                    <div>
+                                        <span>{currentUser.site_slots}</span>
+                                        <p>site slots</p>
+                                    </div>
+                                </Styled.ProfileStat>
+                                <Styled.ProfileStat>
+                                    <RiPlantLine />
+                                    <div>
+                                        <span>{currentUser.plant_slots}</span>
+                                        <p>plant slots</p>
+                                    </div>
+                                </Styled.ProfileStat>
+                            </Styled.ProfileStats>
+                        </Styled.FlexColumn>
+                    </Styled.ProfileSection>
+                    <Pages.Section style={{ gridArea: "s" }}>
+                        <h2>Stats</h2>
+                        <Styled.FlexRow>
+                            <Styled.StatsCard>
+                                <span>
+                                    {achievementsNumber}/
+                                    {userAchievements.length}
+                                </span>
+                                <p>Achievements unlocked</p>
+                            </Styled.StatsCard>
+                            <Styled.StatsCard>
+                                <span>{totalWateringCounter}</span>
+                                <p>Total watering counter</p>
+                            </Styled.StatsCard>
+                            <Styled.StatsCard>
+                                <span>{totalFertilizingCounter}</span>
+                                <p>Total fertilizing counter</p>
+                            </Styled.StatsCard>
+                            <Styled.StatsCard>
+                                <span>{numberOfSites}</span>
+                                <p>Number of sites</p>
+                            </Styled.StatsCard>
+                            <Styled.StatsCard>
+                                <span>{numberOfPlants}</span>
+                                <p>Number of plants</p>
+                            </Styled.StatsCard>
+                        </Styled.FlexRow>
+                    </Pages.Section>
+                    <Styled.RewardsSection style={{ gridArea: "r" }}>
+                        <h2>Rewards</h2>
+                        {currentUser.claimed_rewards < currentUser.lvl / 5 && (
+                            <button onClick={claimRewards}>
+                                Claim rewards
+                            </button>
+                        )}
+                        <Styled.RewardsList>{rewards}</Styled.RewardsList>
+                    </Styled.RewardsSection>
+                </Styled.Grid>
+            </Pages.Container>
+        </>
     );
 }
 

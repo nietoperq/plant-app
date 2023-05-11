@@ -7,9 +7,15 @@ export const PlantDetails = styled.div`
     gap: 10px;
     align-items: center;
     padding: 30px 50px;
+    height: 80vh;
     h1 {
         font-size: 1.5rem;
         color: ${({ theme }) => theme.colors.primary};
+    }
+    h2 {
+        color: ${({ theme }) => theme.colors.primary};
+        font-size: 16px;
+        font-weight: 500;
     }
     p {
         color: #333;
@@ -31,14 +37,28 @@ export const PlantModel = styled.div`
 
 export const Button = styled.button`
     cursor: pointer;
+    display: inline-flex;
+    gap: 5px;
     border: none;
     font-size: 14px;
     margin: 0 10px;
-    padding: 5px 10px;
-    border-radius: 10px;
-    color: ${({ theme }) => theme.colors.primary};
-    font-weight: 500;
-    background: #b0998f22;
+    padding: 5px 15px;
+    border-radius: 100px;
+    color: #fff;
+    background: ${({ theme }) => theme.colors.primary};
+
+    svg {
+        font-size: 20px;
+    }
+
+    &:not(:disabled):hover {
+        filter: brightness(110%);
+    }
+
+    &:disabled {
+        background-color: #ccc;
+        cursor: auto;
+    }
 `;
 
 export const DeleteButton = styled.button`
@@ -55,48 +75,27 @@ export const DeleteButton = styled.button`
     }
 `;
 
-export const WaterButton = styled(Button)`
-    color: #61b1d4;
+export const Navigation = styled.button`
     background: none;
-    transition: transform 0.2s ease;
+    border: none;
+    color: ${({ theme }) => theme.colors.primary};
+    padding: 0 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.1s ease;
 
-    svg {
-        display: block;
-        margin: auto;
-        font-size: 30px;
-        path {
-            stroke-width: 1.5;
-        }
-    }
     &:hover {
-        transform: translateY(-5px);
+        font-weight: 500;
     }
-`;
 
-export const FertilizeButton = styled(Button)`
-    color: #b2c182;
-    background: none;
-    transition: 0.2s ease;
-    svg {
-        display: block;
-        margin: auto;
-        font-size: 30px;
-        path {
-            stroke-width: 1.5;
-        }
-    }
-    &:hover {
-        transform: translateY(-5px);
+    &.active-section {
+        border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
     }
 `;
 
 export const Grid = styled.div`
     width: 100%;
     display: grid;
-    grid-template-areas:
-        "l h w w "
-        "m t f f "
-        "i i i i  ";
     gap: 20px;
 `;
 
@@ -104,13 +103,31 @@ export const Cell = styled.div`
     display: inline-block;
     width: 100%;
     background: #fff;
-    border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 10px;
-    h2 {
+
+    p {
+        display: flex;
+        gap: 10px;
+    }
+
+    svg {
         color: ${({ theme }) => theme.colors.primary};
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 20px;
+    }
+
+    select {
+        border: none;
+        width: 100%;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        border-radius: 20px;
+        padding: 5px;
+        margin: 5px 0;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
     }
 `;

@@ -42,7 +42,6 @@ export const StatsCard = styled(Card)`
     text-align: center;
     width: 200px;
     height: 200px;
-    margin: 20px;
     p {
         font-size: 16px;
     }
@@ -99,7 +98,7 @@ export const RewardsCard = styled(Card)`
 
 export const RewardsList = styled.div`
     overflow: auto;
-    max-height: 50vh;
+    max-height: 45vh;
     margin-top: 20px;
 `;
 

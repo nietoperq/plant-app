@@ -12,7 +12,7 @@ import {
 import * as Styled from "./styles";
 
 function SiteCard(props) {
-    const { siteId, name, icon, handleClick } = props;
+    const { siteId, name, icon, handleClick, currentSite } = props;
 
     function genIcon(icon) {
         switch (icon) {
@@ -31,12 +31,16 @@ function SiteCard(props) {
         }
     }
 
-    const emoji = genIcon(icon);
+    const site_icon = genIcon(icon);
 
     return (
-        <Styled.SiteCard id={siteId} onClick={handleClick}>
-            <Styled.SiteIcon>{emoji}</Styled.SiteIcon>
-            <h3>{name}</h3>
+        <Styled.SiteCard
+            id={siteId}
+            onClick={handleClick}
+            className={siteId == currentSite && "selected"}
+        >
+            {site_icon}
+            <p>{name}</p>
         </Styled.SiteCard>
     );
 }

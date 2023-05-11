@@ -15,11 +15,11 @@ function ChangeLocation() {
 
     return (
         <form onSubmit={handleLocationSubmit}>
-            <label htmlFor="location">Location</label>
             <input
                 id="location"
                 type="text"
                 value={location}
+                placeholder="Location"
                 onChange={handleLocationChange}
             />
             <div>

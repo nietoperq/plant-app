@@ -9,24 +9,26 @@ import * as Styled from "./styles";
 
 function Settings() {
     return (
-        <Pages.Container>
+        <>
             <Sidebar />
-            <Pages.Section>
-                <h2>Settings</h2>
-                <Styled.Settings>
-                    <h4>Change profile picture</h4>
-                    <ChangeProfilePicture />
-                </Styled.Settings>
-                <Styled.Settings>
-                    <h4>Change password</h4>
-                    <ChangePassword />
-                </Styled.Settings>
-                <Styled.Settings>
-                    <h4>Change location</h4>
-                    <ChangeLocation />
-                </Styled.Settings>
-            </Pages.Section>
-        </Pages.Container>
+            <Pages.Container>
+                <Pages.Section>
+                    <h2>Settings</h2>
+                    <Styled.Settings>
+                        <h4>Change profile picture</h4>
+                        <ChangeProfilePicture />
+                    </Styled.Settings>
+                    <Styled.Settings>
+                        <h4>Change password</h4>
+                        <ChangePassword />
+                    </Styled.Settings>
+                    <Styled.Settings>
+                        <h4>Change location</h4>
+                        <ChangeLocation />
+                    </Styled.Settings>
+                </Pages.Section>
+            </Pages.Container>
+        </>
     );
 }
 
