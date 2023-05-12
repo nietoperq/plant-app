@@ -6,16 +6,26 @@ export const ProfileSection = styled(Section)`
     align-items: center;
     gap: 40px;
     img {
-        width: 240px;
+        width: 200px;
+        margin: 20px;
         align-self: center;
     }
+`;
+
+export const ProfileStats = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
 `;
 
 export const ProfileStat = styled.div`
     display: flex;
     gap: 20px;
     align-items: center;
-    margin: 30px 30px 30px 0;
+    margin-right: 30px;
     svg {
         width: 50px;
         height: 50px;
@@ -100,14 +110,6 @@ export const RewardsList = styled.div`
     overflow: auto;
     max-height: 45vh;
     margin-top: 20px;
-`;
-
-export const ProfileStats = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
 `;
 
 export const FlexColumn = styled.div`

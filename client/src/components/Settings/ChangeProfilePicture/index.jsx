@@ -39,24 +39,30 @@ function ChangeProfilePicture() {
     return (
         <form>
             <div>
-                {pictureList.map((picture) => (
-                    <>
-                        <input
-                            type="radio"
-                            value={picture.name}
-                            id={picture.name}
-                            name="icon"
-                            onChange={handleChange}
-                        ></input>
-                        <label for={picture.name}>
-                            <img
-                                key={picture.name}
-                                src={"/img/profile_pictures/" + picture.name}
-                                alt={picture.name}
-                            />
-                        </label>
-                    </>
-                ))}
+                {pictureList.map(
+                    (picture) =>
+                        picture.name != "default.jpg" && (
+                            <>
+                                <input
+                                    type="radio"
+                                    value={picture.name}
+                                    id={picture.name}
+                                    name="icon"
+                                    onChange={handleChange}
+                                ></input>
+                                <label for={picture.name}>
+                                    <img
+                                        key={picture.name}
+                                        src={
+                                            "/img/profile_pictures/" +
+                                            picture.name
+                                        }
+                                        alt={picture.name}
+                                    />
+                                </label>
+                            </>
+                        )
+                )}
             </div>
             <button onClick={handleSubmit}>Save</button>
         </form>

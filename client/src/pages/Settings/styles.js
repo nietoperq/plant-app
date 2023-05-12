@@ -18,7 +18,7 @@ export const Settings = styled.div`
     }
 
     img {
-        width: 100px;
+        width: 80px;
     }
 
     input {
@@ -48,7 +48,6 @@ export const Settings = styled.div`
         img {
             margin: 10px 20px 10px 0;
             transition: scale 0.5s ease;
-            border-radius: 10px;
         }
 
         &:hover {
@@ -60,8 +59,7 @@ export const Settings = styled.div`
 
     input[type="radio"]:checked + label {
         img {
-            scale: 1.1;
-            outline: 2px solid ${({ theme }) => theme.colors.primary};
+            scale: 1.2;
         }
     }
 
