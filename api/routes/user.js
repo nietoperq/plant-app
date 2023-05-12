@@ -8,6 +8,7 @@ import {
     earnAchievement,
     updateLevel,
     updateProfilePicture,
+    updateEmailPreferences,
     claimRewards,
 } from "../controllers/user.js";
 
@@ -21,6 +22,7 @@ router.post("/buyflowerpot", buyFlowerpot);
 router.post("/earnachievement", earnAchievement);
 router.put("/updatelevel", updateLevel);
 router.put("/updatepfp", updateProfilePicture);
+router.put("/updateemailnotification", updateEmailPreferences);
 router.put("/claimrewards", claimRewards);
 
 export default router;

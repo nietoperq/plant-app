@@ -3,6 +3,7 @@ import Sidebar from "../../components/Sidebar";
 import ChangeProfilePicture from "../../components/Settings/ChangeProfilePicture";
 import ChangePassword from "../../components/Settings/ChangePassword";
 import ChangeLocation from "../../components/Settings/ChangeLocation";
+import ChangeEmailPreferences from "../../components/Settings/ChangeEmailPreferences";
 
 import * as Pages from "../../shared_styles/Pages";
 import * as Styled from "./styles";
@@ -25,6 +26,10 @@ function Settings() {
                     <Styled.Settings>
                         <h4>Change location</h4>
                         <ChangeLocation />
+                    </Styled.Settings>
+                    <Styled.Settings>
+                        <h4>E-mail reminders</h4>
+                        <ChangeEmailPreferences />
                     </Styled.Settings>
                 </Pages.Section>
             </Pages.Container>

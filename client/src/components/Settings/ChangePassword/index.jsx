@@ -56,13 +56,15 @@ function ChangePassword() {
                 placeholder="Confirm password"
                 required
             ></input>
-            {message && message.type == "error" && (
-                <p style={{ color: "red" }}>{message.data}</p>
-            )}
-            {message && message.type == "success" && (
-                <p style={{ color: "green" }}>{message.data}</p>
-            )}
-            <button onClick={handleSubmit}>Save</button>
+            <div>
+                <button onClick={handleSubmit}>Save</button>{" "}
+                {message && message.type == "error" && (
+                    <p style={{ color: "red" }}>{message.data}</p>
+                )}
+                {message && message.type == "success" && (
+                    <p style={{ color: "green" }}>{message.data}</p>
+                )}
+            </div>
         </form>
     );
 }

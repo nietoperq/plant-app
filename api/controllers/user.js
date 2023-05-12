@@ -85,6 +85,17 @@ export function updateProfilePicture(req, res) {
     });
 }
 
+export function updateEmailPreferences(req, res) {
+    const q = "UPDATE user SET email_notifications = ? WHERE user_id = ?";
+
+    const values = [req.body.email_notifications, req.body.user_id];
+
+    db.query(q, values, (err, data) => {
+        if (err) return res.json(err);
+        return res.status(200).json("E-mail preferences updated");
+    });
+}
+
 export function claimRewards(req, res) {
     const q = "CALL claim_rewards(?)";
 
