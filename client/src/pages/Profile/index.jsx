@@ -15,6 +15,7 @@ import {
     RiPlantLine,
     RiLockLine,
     RiCheckboxCircleLine,
+    RiGiftLine,
 } from "react-icons/ri";
 
 function Profile() {
@@ -98,7 +99,9 @@ function Profile() {
             return (
                 <Styled.RewardsCard>
                     {message}
-                    <span>claim now</span>
+                    <span>
+                        <RiGiftLine />
+                    </span>
                 </Styled.RewardsCard>
             );
         }
@@ -114,6 +117,8 @@ function Profile() {
             console.log(err);
         }
     }
+
+    console.log(currentUser.lvl / 5);
 
     return (
         <>
@@ -194,7 +199,8 @@ function Profile() {
                     </Pages.Section>
                     <Styled.RewardsSection style={{ gridArea: "r" }}>
                         <h2>Rewards</h2>
-                        {currentUser.claimed_rewards < currentUser.lvl / 5 && (
+                        {currentUser.claimed_rewards <
+                            Math.floor(currentUser.lvl / 5) && (
                             <button onClick={claimRewards}>
                                 Claim rewards
                             </button>

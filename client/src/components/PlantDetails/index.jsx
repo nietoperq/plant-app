@@ -148,14 +148,11 @@ function PlantDetails(props) {
                 </Canvas>
             </Styled.PlantModel>
             <div>
-                <Styled.Button onClick={waterPlant} disabled={water_next >= 0}>
+                <Styled.Button onClick={waterPlant}>
                     <TbDroplet />
                     water
                 </Styled.Button>
-                <Styled.Button
-                    onClick={fertilizePlant}
-                    disabled={fertilize_next >= 0}
-                >
+                <Styled.Button onClick={fertilizePlant}>
                     <TbPaperBag />
                     fertilize
                 </Styled.Button>

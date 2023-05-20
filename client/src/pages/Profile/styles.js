@@ -88,21 +88,22 @@ export const RewardsSection = styled(Section)`
 `;
 
 export const RewardsCard = styled(Card)`
+    span {
+        float: right;
+    }
+
     svg {
         float: right;
         font-size: 20px;
     }
 
-    span {
-        float: right;
-    }
-
-    &.claimed svg {
-        color: ${({ theme }) => theme.colors.primary};
+    &.claimed {
+        background: ${({ theme }) => theme.colors.primary};
+        color: #fff;
     }
 
     &.locked {
-        color: #aaa;
+        color: #bbb;
     }
 `;
 
