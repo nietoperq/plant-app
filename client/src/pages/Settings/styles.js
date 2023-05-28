@@ -7,6 +7,11 @@ export const Settings = styled.div`
     padding: 20px 0;
     margin: 20px 0;
 
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+    }
+
     p,
     span {
         font-size: 14px;
@@ -15,6 +20,9 @@ export const Settings = styled.div`
 
     h4 {
         color: ${({ theme }) => theme.colors.font};
+        @media (max-width: 1000px) {
+            margin-bottom: 15px;
+        }
     }
 
     form {
@@ -25,6 +33,9 @@ export const Settings = styled.div`
 
     img {
         width: 80px;
+        @media (max-width: 1000px) {
+            width: 65px;
+        }
     }
 
     input {

@@ -11,6 +11,10 @@ export const PlantCard = styled.div`
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
     animation: transitionIn 2s;
+
+    @media (max-width: 1000px) {
+        margin: 20px 20px 20px 20px;
+    }
 `;
 
 export const PlantModel = styled.div`
@@ -22,6 +26,11 @@ export const PlantModel = styled.div`
     width: 250px;
     height: 250px;
     animation: transitionIn 2s;
+
+    @media (max-width: 1000px) {
+        width: 180px;
+        height: 180px;
+    }
 `;
 
 export const PlantInfo = styled.div`

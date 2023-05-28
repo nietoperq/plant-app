@@ -13,7 +13,7 @@ export const SiteCard = styled.div`
     font-weight: 600;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
-    margin: 20px;
+    margin: 20px 20px 20px 5px;
     transition: 0.1s ease;
 
     svg {
@@ -35,5 +35,10 @@ export const SiteCard = styled.div`
         svg {
             color: #fff;
         }
+    }
+
+    @media (max-width: 1000px) {
+        min-width: 100px;
+        height: 100px;
     }
 `;

@@ -71,9 +71,9 @@ function Store() {
     ));
 
     return (
-        <>
+        <Pages.Container>
             <Sidebar />
-            <Pages.Container>
+            <Pages.Content>
                 <Pages.Section>
                     <h2>Store</h2>
                     <Styled.Error> {error}</Styled.Error>
@@ -81,7 +81,7 @@ function Store() {
                         {storeItems}
                     </Pages.WrapSectionElements>
                 </Pages.Section>
-            </Pages.Container>
+            </Pages.Content>
             <Notification show={newAchievement}>
                 <Styled.AchievementNotification>
                     <TbAward />
@@ -101,7 +101,7 @@ function Store() {
                     colors={["#FF8787", "#F8C4B4", "#E5EBB2", "#BCE29E"]}
                 />
             )}
-        </>
+        </Pages.Container>
     );
 }
 

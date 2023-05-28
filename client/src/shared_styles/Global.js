@@ -14,11 +14,8 @@ body {
 
 h1, h2, h3, h4{
     font-weight: 600;
-
 }
 
-h3 {
-}
 
 img {
     max-width: 100%;
@@ -53,6 +50,12 @@ span.error-message {
         opacity: 1;
     }
 }
+
+@media (max-width: 1000px) {
+        h2 {
+            font-size: 20px;
+        }
+    }
 
 `;
 

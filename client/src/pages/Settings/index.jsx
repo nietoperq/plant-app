@@ -10,9 +10,9 @@ import * as Styled from "./styles";
 
 function Settings() {
     return (
-        <>
+        <Pages.Container>
             <Sidebar />
-            <Pages.Container>
+            <Pages.Content>
                 <Pages.Section>
                     <h2>Settings</h2>
                     <Styled.Settings>
@@ -32,8 +32,8 @@ function Settings() {
                         <ChangeEmailPreferences />
                     </Styled.Settings>
                 </Pages.Section>
-            </Pages.Container>
-        </>
+            </Pages.Content>
+        </Pages.Container>
     );
 }
 

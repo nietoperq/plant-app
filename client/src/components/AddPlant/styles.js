@@ -22,7 +22,7 @@ export const AddPlant = styled.div`
     form {
         display: flex;
         flex-direction: column;
-        width: 90%;
+        width: 100%;
 
         input,
         textarea {

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Modal = styled.div`
+    position: relative;
     width: 600px;
     max-height: 80vh;
     overflow: auto;
@@ -9,6 +10,10 @@ export const Modal = styled.div`
     border-radius: 20px;
     &::-webkit-scrollbar {
         display: none;
+    }
+
+    @media (max-width: 1000px) {
+        max-height: 100vh;
     }
 `;
 
@@ -22,4 +27,13 @@ export const Overlay = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const CloseButton = styled.div`
+    position: absolute;
+    font-size: 20px;
+    right: 15px;
+    top: 15px;
+    color: ${({ theme }) => theme.colors.primary};
+    cursor: pointer;
 `;

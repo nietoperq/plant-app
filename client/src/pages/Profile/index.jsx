@@ -121,9 +121,9 @@ function Profile() {
     console.log(currentUser.lvl / 5);
 
     return (
-        <>
+        <Pages.Container>
             <Sidebar />
-            <Pages.Container>
+            <Pages.Content>
                 <Styled.Grid>
                     <Styled.ProfileSection style={{ gridArea: "p" }}>
                         <img src={img_src} alt="" />
@@ -208,8 +208,8 @@ function Profile() {
                         <Styled.RewardsList>{rewards}</Styled.RewardsList>
                     </Styled.RewardsSection>
                 </Styled.Grid>
-            </Pages.Container>
-        </>
+            </Pages.Content>
+        </Pages.Container>
     );
 }
 

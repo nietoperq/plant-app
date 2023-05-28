@@ -1,18 +1,69 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export const Sidebar = styled.div`
+export const Toggle = styled.div`
     position: fixed;
-    top: 20px;
-    bottom: 20px;
-    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: 100;
+    visibility: hidden;
+
+    transition: 0.5s ease;
+
+    svg {
+        width: 60%;
+        height: 60%;
+    }
+
+    &.close {
+        transform: translateX(260px);
+    }
+
+    &.open {
+        transform: translateX(0%);
+    }
+
+    @media (max-width: 750px) {
+        visibility: visible;
+    }
+`;
+
+export const Sidebar = styled.div`
     display: flex;
     flex-direction: column;
-    width: 250px;
-    padding: 20px;
+    min-width: 250px;
+    padding-right: 50px;
+
+    transition: transform 0.5s ease;
 
     & a:last-child {
         margin-top: auto;
+    }
+
+    @media (max-width: 750px) {
+        &.hidden {
+            transform: translateX(-100%);
+        }
+
+        &.visible {
+            transform: translateX(0%);
+        }
+    }
+
+    @media (max-width: 750px) {
+        position: fixed;
+        background: #fff;
+        height: 100vh;
+        z-index: 10;
+        padding: 30px;
     }
 `;
 

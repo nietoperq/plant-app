@@ -21,6 +21,12 @@ export const PlantDetails = styled.div`
         color: #333;
         font-size: 14px;
     }
+
+    @media (max-width: 1000px) {
+        height: auto;
+        padding: 20px;
+        padding-bottom: 70px;
+    }
 `;
 
 export const PlantModel = styled.div`
@@ -97,6 +103,12 @@ export const Grid = styled.div`
     width: 100%;
     display: grid;
     gap: 20px;
+
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 `;
 
 export const Cell = styled.div`

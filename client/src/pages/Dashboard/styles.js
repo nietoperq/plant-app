@@ -8,6 +8,11 @@ export const DashboardGrid = styled.div`
         "p p";
     grid-template-columns: auto minmax(400px, 500px);
     grid-gap: 20px;
+
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 export const DashboardSectionElements = styled.div`
@@ -75,6 +80,5 @@ export const AchievementNotification = styled.div`
 export const HorizontalScroll = styled.div`
     display: flex;
     flex-direction: row;
-    overflow: hidden;
-    scroll-behavior: auto;
+    overflow: scroll;
 `;

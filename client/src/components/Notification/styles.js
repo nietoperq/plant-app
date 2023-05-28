@@ -5,6 +5,7 @@ export const Notification = styled.div`
     bottom: 20px;
     right: 20px;
     width: 400px;
+    max-width: calc(100vw - 40px);
     height: 100px;
     padding: 10px;
     overflow: hidden;

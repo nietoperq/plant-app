@@ -6,6 +6,9 @@ function Modal(props) {
         <Styled.Overlay onClick={props.handleClick}>
             <Styled.Modal onClick={(e) => e.stopPropagation()}>
                 {props.children}
+                <Styled.CloseButton onClick={props.handleClick}>
+                    ✕
+                </Styled.CloseButton>
             </Styled.Modal>
         </Styled.Overlay>
     );

@@ -21,6 +21,7 @@ export const AddSite = styled.div`
     form {
         display: flex;
         flex-direction: column;
+        width: 100%;
         input,
         textarea {
             border: none;

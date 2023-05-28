@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    position: absolute;
-    left: 300px;
-    right: 20px;
-    top: 20px;
-    bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 60px);
+    margin: 30px;
+
+    @media (max-width: 750px) {
+        margin: 0px;
+        height: 100vh;
+    }
+`;
+
+export const Content = styled.div`
     padding: 20px;
     border-radius: 30px;
     background: #eee;
     overflow: auto;
+    width: 100%;
 
     & > * {
         animation: transitionIn 1s;
@@ -17,6 +25,10 @@ export const Container = styled.div`
 
     h2 {
         font-weight: 500;
+    }
+
+    @media (max-width: 750px) {
+        border-radius: 0px;
     }
 `;
 

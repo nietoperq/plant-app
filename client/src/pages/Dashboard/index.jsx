@@ -144,10 +144,10 @@ function Dashboard() {
     ));
 
     return (
-        <>
+        <Pages.Container>
             <Sidebar />
 
-            <Pages.Container>
+            <Pages.Content>
                 <Styled.DashboardGrid>
                     <Styled.WeatherSection style={{ gridArea: "w" }}>
                         <Weather />
@@ -279,7 +279,7 @@ function Dashboard() {
                         </Modal>
                     )}
                 </Styled.DashboardGrid>
-            </Pages.Container>
+            </Pages.Content>
             <Notification show={newAchievement}>
                 <Styled.AchievementNotification>
                     <TbAward />
@@ -299,7 +299,7 @@ function Dashboard() {
                     colors={["#FF8787", "#F8C4B4", "#E5EBB2", "#BCE29E"]}
                 />
             )}
-        </>
+        </Pages.Container>
     );
 }
 

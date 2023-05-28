@@ -10,6 +10,15 @@ export const ProfileSection = styled(Section)`
         margin: 20px;
         align-self: center;
     }
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 0px;
+        img {
+            width: 100px;
+        }
+    }
 `;
 
 export const ProfileStats = styled.div`
@@ -19,6 +28,10 @@ export const ProfileStats = styled.div`
     width: 100%;
     justify-content: space-between;
     margin-top: 20px;
+    @media (max-width: 1000px) {
+        justify-content: center;
+        text-align: start;
+    }
 `;
 
 export const ProfileStat = styled.div`
@@ -42,6 +55,18 @@ export const ProfileStat = styled.div`
         font-size: 20px;
         font-weight: 500;
     }
+
+    @media (max-width: 1000px) {
+        width: 150px;
+        span {
+            font-size: 16px;
+        }
+        svg {
+            width: 40px;
+            height: 40px;
+            padding: 7px;
+        }
+    }
 `;
 
 export const StatsCard = styled(Card)`
@@ -59,6 +84,22 @@ export const StatsCard = styled(Card)`
         color: ${({ theme }) => theme.colors.primary};
         font-size: 30px;
         margin: 10px 0;
+    }
+
+    @media (max-width: 1000px) {
+        width: 120px;
+        height: 120px;
+        margin: 10px;
+        margin-left: 0;
+
+        span {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 14px;
+        }
     }
 `;
 
@@ -88,13 +129,17 @@ export const RewardsSection = styled(Section)`
 `;
 
 export const RewardsCard = styled(Card)`
+    display: flex;
+    align-items: center;
     span {
-        float: right;
+        margin-left: auto;
     }
 
     svg {
-        float: right;
-        font-size: 20px;
+        margin-left: auto;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
     }
 
     &.claimed {
@@ -109,7 +154,7 @@ export const RewardsCard = styled(Card)`
 
 export const RewardsList = styled.div`
     overflow: auto;
-    max-height: 45vh;
+    max-height: 44vh;
     margin-top: 20px;
 `;
 
@@ -132,4 +177,9 @@ export const Grid = styled.div`
         "p p"
         "s r";
     grid-gap: 20px;
+
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+    }
 `;
