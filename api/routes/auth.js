@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);
-router.get("/userdata/:id", userdata);
+router.get("/userdata/:userId", verifyJWT, userdata);
 router.put("/updatepassword", updatePassword);
 
 export default router;

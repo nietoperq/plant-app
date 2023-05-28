@@ -1,4 +1,5 @@
 import express from "express";
+import verifyJWT from "../middleware/verifyJWT.js";
 import {
     getAllPlants,
     getAchievements,
@@ -14,10 +15,10 @@ import {
 
 const router = express.Router();
 
-router.get("/getallplants/:userId", getAllPlants);
-router.get("/getachievements/:userId", getAchievements);
-router.get("/getflowerpots/:userId", getFlowerpots);
-router.get("/getallflowerpots/:userId", getAllFlowerpots);
+router.get("/getallplants/:userId", verifyJWT, getAllPlants);
+router.get("/getachievements/:userId", verifyJWT, getAchievements);
+router.get("/getflowerpots/:userId", verifyJWT, getFlowerpots);
+router.get("/getallflowerpots/:userId", verifyJWT, getAllFlowerpots);
 router.post("/buyflowerpot", buyFlowerpot);
 router.post("/earnachievement", earnAchievement);
 router.put("/updatelevel", updateLevel);

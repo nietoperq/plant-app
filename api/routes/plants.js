@@ -1,4 +1,5 @@
 import express from "express";
+import verifyJWT from "../middleware/verifyJWT.js";
 import {
     getAllPlants,
     getUserSites,
@@ -15,7 +16,7 @@ import {
 const router = express.Router();
 
 router.get("/getall", getAllPlants);
-router.get("/usersites/:userId", getUserSites);
+router.get("/usersites/:userId", verifyJWT, getUserSites);
 router.get("/siteplants/:siteId", getPlantsInSite);
 router.get("/water/:siteHasPlantId", waterPlant);
 router.get("/fertilize/:siteHasPlantId", fertilizePlant);

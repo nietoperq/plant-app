@@ -74,7 +74,7 @@ export function login(req, res) {
         const token = jwt.sign(
             { id: data[0].user_id },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "10s" }
+            { expiresIn: 60 * 20 }
         );
         const { password, ...other } = data[0];
 
@@ -98,7 +98,7 @@ export function logout(req, res) {
 export function userdata(req, res) {
     const q = "SELECT * FROM user WHERE user_id = ?";
 
-    db.query(q, [req.params.id], (err, data) => {
+    db.query(q, [req.params.userId], (err, data) => {
         if (err) return res.json(err);
         if (data.length === 0) return res.status(404).json("User not found!");
 
@@ -107,7 +107,7 @@ export function userdata(req, res) {
         const token = jwt.sign(
             { id: data[0].user_id, ...other },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "10s" }
+            { expiresIn: 60 * 20 }
         );
 
         res.cookie("access_token", token, {
