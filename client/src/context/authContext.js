@@ -29,14 +29,19 @@ function AuthContextProvider({ children }) {
         checkAchievements();
 
         if (currentUser) {
-            const user = await axios.get(
-                `/auth/userdata/${currentUser.user_id}`
-            );
-            setCurrentUser(user.data);
-            const achievements = await axios.get(
-                `/user/getachievements/${currentUser.user_id}`
-            );
-            setUserAchievements(achievements.data);
+            try {
+                const user = await axios.get(
+                    `/auth/userdata/${currentUser.user_id}`
+                );
+                setCurrentUser(user.data);
+                const achievements = await axios.get(
+                    `/user/getachievements/${currentUser.user_id}`
+                );
+                setUserAchievements(achievements.data);
+            } catch (err) {
+                console.log(err);
+                logout();
+            }
         }
     }
 
