@@ -42,7 +42,7 @@ export const Sidebar = styled.div`
     min-width: 250px;
     padding-right: 50px;
 
-    transition: transform 0.5s ease;
+    transition: all 0.5s ease;
 
     & a:last-child {
         margin-top: auto;
@@ -55,6 +55,7 @@ export const Sidebar = styled.div`
 
         &.visible {
             transform: translateX(0%);
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 100px;
         }
     }
 

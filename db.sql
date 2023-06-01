@@ -49,18 +49,6 @@ CREATE TABLE IF NOT EXISTS `plantapp`.`flowerpot` (
 
 CREATE UNIQUE INDEX `name_UNIQUE` ON `plantapp`.`flowerpot` (`name` ASC) ;
 
-
--- -----------------------------------------------------
--- Table `plantapp`.`admin`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `plantapp`.`admin` (
-  `login` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(60) NOT NULL,
-  `mod_level` TINYINT NOT NULL,
-  PRIMARY KEY (`login`))
-;
-
-
 -- -----------------------------------------------------
 -- Table `plantapp`.`site`
 -- -----------------------------------------------------
@@ -108,25 +96,6 @@ CREATE TABLE IF NOT EXISTS `plantapp`.`plant` (
   `is_toxic` TINYINT NULL,
   PRIMARY KEY (`plant_id`))
 ;
-
-
--- -----------------------------------------------------
--- Table `plantapp`.`plant_name`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `plantapp`.`plant_name` (
-  `plant_name_id` INT NOT NULL AUTO_INCREMENT,
-  `plant_id` INT NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`plant_name_id`),
-  CONSTRAINT `fk_plant_name_plant1`
-    FOREIGN KEY (`plant_id`)
-    REFERENCES `plantapp`.`plant` (`plant_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-;
-
-CREATE INDEX `fk_plant_name_plant1_idx` ON `plantapp`.`plant_name` (`plant_id` ASC) ;
-
 
 -- -----------------------------------------------------
 -- Table `plantapp`.`user_has_achievement`
