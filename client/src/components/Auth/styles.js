@@ -8,7 +8,8 @@ export const Auth = styled.div`
     gap: 20px;
     background: #fff;
     border-radius: 20px;
-    padding: 100px;
+    padding: 100px 0;
+    width: 500px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     form {
@@ -53,13 +54,24 @@ export const Auth = styled.div`
     .link {
         color: ${({ theme }) => theme.colors.primary};
     }
+
+    .error-message {
+        max-width: 400px;
+        text-align: center;
+        color: red;
+    }
+
+    @media (max-width: 600px) {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
 `;
 
 export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
 `;
